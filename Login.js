@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, LoginRender, AsyncStorage } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, Button, StyleSheet, LoginRender } from 'react-native'
+import { StackNavigator } from 'react-navigation';
+
+
+import ForgotPassword from './ForgotPassword'
+import Registration from './Registration'
 
 
 class Login extends Component {
    state = {
       email: '',
       password: '',
-      auth: false
+      showPass: false
    }
    handleEmail = (text) => {
       this.setState({ email: text })
@@ -15,40 +20,46 @@ class Login extends Component {
       this.setState({ password: text })
    }
    login = (email, pass) => {
-      fetch("https://api.joinhomewise.com/agent/Login/", {
-        'body': JSON.stringify({
-          'email': email,
-          'password': pass
-        }),
-        'headers': {
-          'content-type': 'application/json'
-        },
-        'method': 'POST'
-      })
-        .then(res => res.json())
-        .then(
-          async (result) => {
-            try {
-              await AsyncStorage.setItem('@HomewiseApp:oAuthToken', result.access_token)
-            } catch (error) {
-              // Error saving data
-              alert('Error in saving token')
-            }
-          }
-        )
-        .then(
-          this.setState({
-            auth: true
-          })
-        );
+      alert('email: ' + email + ' password: ' + pass)
    }
+   logIn(){
+        const {email, password } = this.state
+        if(email == '' || password == ''){
+            alert('All Fields Required')
+        }
+        else{
+            fetch('http://127.0.0.1:8000/agent/Login/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email:email,
+                password:password
+              }),
+            }).then((response) => response.json())
+                .then((responseJson) => {
+                  alert(responseJson.access_token);
+                })
+                .catch((error) => {
+                  console.error(error);
+                });     
+        }
+
+    }
+    static navigationOptions = ({ navigation }) => {
+    return {
+       header: null
+    }
+ }
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          {/*<Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} */}
-              {/*source={require('./Homewise.jpg')}/>*/}
+          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
+              source={require('./Homewise.jpg')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Login</Text>
         </View>
         <View style={{flex:9}}>
@@ -74,23 +85,31 @@ class Login extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    secureTextEntry={this.state.showPass ? false : true}
                     onChangeText = {(text)=> this.setState({password: text})}>
                   </TextInput>
                 </View>
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
-                      () => this.login(this.state.email, this.state.password)
+                      () => this.props.navigation.navigate('AllClients')
                    }>
-                   <Text style = {styles.submitButtonText}> Submit </Text>
+                   <Text style = {styles.submitButtonText}> Log In </Text>
                 </TouchableOpacity>
                 <View style={styles.caption}>
                   <View style={styles.forgotpassword}>
-                  <Text style={styles.captionTextU}> Forgot Password</Text>
+                  <Button
+                    title="Forgot Password"
+                    onPress={
+                      () => this.props.navigation.navigate('ForgotPassword')
+                    }/>
                   </View>
-
                   <View style={styles.newuser}>
-                  <Text style ={styles.captionTextU}>New User?</Text>
+                   <Button
+                    title="New User?"
+                    onPress={
+                      () => this.props.navigation.navigate('Registration')
+                    }/>
                   </View>
                 </View>
               </View>           
@@ -138,17 +157,18 @@ const styles = StyleSheet.create({
   values: {
     marginRight: 35,
     marginLeft: 35,
+
     flex:9.5,
     borderColor: '#D3D3D3',
     borderBottomWidth: 1,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    height: 45,
+    height: 25,
     fontSize: 18,
     paddingRight: 10,
 
     textAlign: 'right',
-    backgroundColor: '#F7F7F5'
+    //backgroundColor: '#F7F7F5'
   },
   forgotpassword: {
     flex: 5,
@@ -178,6 +198,8 @@ const styles = StyleSheet.create({
       color: 'white',
    }
 });
+
+
 
 
 export default Login;

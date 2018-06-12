@@ -14,8 +14,7 @@
   ScrollView,
   Dimensions,
   Image,
-  View,
-  AsyncStorage
+  View
 } from 'react-native';
 
 const {width, height} = Dimensions.get('window')
@@ -32,82 +31,73 @@ class Registration extends Component {
       retypePass:'',
       mls_region: '',
       mls_id:'',
-      auth: false
+    }
+  }
+    login = (email, pass) => {
+      alert('email: ' + email + ' password: ' + pass)
+   }
+   signUp(){
+        const {email, password, users, date, first_name, last_name, retypePass } = this.state
+        
+
+        if(first_name == '' || last_name == '' || email == '' || password == '' || retypePass == '' || date == ''){
+            alert('All Fields Required')
+        }
+        if(!_validateEmail(email)){
+            alert('invalid email')
+        }
+        else if(password != retypePass){
+            alert('Passwords Do Not Match')
+        }
+        else{
+            let email = this.state.email
+            let first_name = this.state.first_name
+            let last_name = this.state.last_name
+            let mls_region = this.state.mls_region
+            let mls_id = this.state.mls_id
+            let password = this.state.password
+
+            console.log(mls_region[0])
+
+            fetch('http://127.0.0.1:8000/agent/Registration/', 
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email:email,
+                first_name:first_name,
+                last_name:last_name,
+                mls_region:mls_region,
+                mls_id:mls_id,
+                password:password
+              }),
+            }).then((response) => response.json())
+                .then((responseJson) => {
+                  alert(responseJson);
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+        }
+
     }
 
-    // Bind event handlers
-    this.login = this.login.bind(this);
-  }
-
-  register = () => {
-      /* Verify passwords match */
-      if (this.state.password != this.state.retypePass) {
-        alert('Passwords must match!');
-        return;
-      }
-
-      fetch("https://api.joinhomewise.com/agent/Registration/", {
-        'body': JSON.stringify({
-          'email': this.state.email,
-          'password': this.state.password,
-          'first_name': this.state.first_name,
-          'last_name': this.state.last_name,
-          'mls_region': this.state.mls_region,
-          'mls_id': this.state.mls_id
-        }),
-        'headers': {
-          'content-type': 'application/json'
-        },
-        'method': 'POST'
-      })
-        .then(res => res.json())
-        .then(
-            (result) => {
-              // Login User
-              this.login(this.state.email, this.state.password);
-            }
-        );
-  }
-
-   login = (email, pass) => {
-      fetch("https://api.joinhomewise.com/agent/Login/", {
-        'body': JSON.stringify({
-          'email': email,
-          'password': pass
-        }),
-        'headers': {
-          'content-type': 'application/json'
-        },
-        'method': 'POST'
-      })
-        .then(res => res.json())
-        .then(
-          async (result) => {
-            try {
-              await AsyncStorage.setItem('@HomewiseApp:oAuthToken', result.access_token)
-            } catch (error) {
-              // Error saving data
-              alert('Error in saving token')
-              alert(error)
-            }
-          }
-        )
-        .then(
-          this.setState({
-            auth: true
-          }, () => {
-            alert('Successfully logged in!');
-          })
-        );
-   }
+    static navigationOptions = ({ navigation }) => {
+    return {
+       header: null
+    }
+ }
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          {/*<Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} */}
-              {/*source={require('./Homewise.jpg')}/> */}
+          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
+              source={require('./Homewise.jpg')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Create an Account</Text>
         </View>
         <View style={{flex:9}}>
@@ -222,7 +212,7 @@ class Registration extends Component {
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
-                      () => this.register()
+                      () => this.login(this.state.email, this.state.password)
                    }>
                    <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
@@ -279,7 +269,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    height: 45,
+    height: 25,
     fontSize: 18,
     paddingRight: 10,
 
