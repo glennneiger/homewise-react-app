@@ -55,6 +55,7 @@ class Login extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
+      <View style ={styles.header}>
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
@@ -98,18 +99,22 @@ class Login extends Component {
                 </TouchableOpacity>
                 <View style={styles.caption}>
                   <View style={styles.forgotpassword}>
-                  <Button
-                    title="Forgot Password"
+                  <TouchableOpacity
+                    style = {styles.fpsize}
                     onPress={
                       () => this.props.navigation.navigate('ForgotPassword')
-                    }/>
+                    }>
+                    <Text style = {styles.ButtonText}> Forgot Password </Text>
+                  </TouchableOpacity>
                   </View>
                   <View style={styles.newuser}>
-                   <Button
-                    title="New User?"
+                   <TouchableOpacity
+                    style = {styles.fpsize}
                     onPress={
                       () => this.props.navigation.navigate('Registration')
-                    }/>
+                    }>
+                    <Text style = {styles.ButtonText}> New User? </Text>
+                    </TouchableOpacity>
                   </View>
                 </View>
               </View>           
@@ -117,6 +122,7 @@ class Login extends Component {
         </View> 
         </View>
         </ScrollView>
+      </View>
       </View>     
     );
   }
@@ -124,6 +130,11 @@ class Login extends Component {
 
 
 const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff'
+  },
   container: {
     flex: 1,
     backgroundColor: 'white'
@@ -173,6 +184,7 @@ const styles = StyleSheet.create({
   forgotpassword: {
     flex: 5,
     paddingTop: 15,
+    alignItems: 'flex-start' 
   },
   newuser: {
     flex:5,
@@ -196,6 +208,12 @@ const styles = StyleSheet.create({
    },
    submitButtonText:{
       color: 'white',
+   },
+   fpsize:{
+    fontSize: 12
+   },
+   ButtonText:{
+    color: 'rgb(65,147,237)'
    }
 });
 

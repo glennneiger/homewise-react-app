@@ -165,8 +165,9 @@ const styles = StyleSheet.create({
   MainContainer :{
     justifyContent: 'center',
     flex:1,
-    margin: 10,
-    paddingTop: (Platform.OS) === 'ios' ? 20 : 0
+    padding: 10,
+    paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
+    backgroundColor: '#fff'
   },
   GridViewBlockStyle: {
     justifyContent: 'center',

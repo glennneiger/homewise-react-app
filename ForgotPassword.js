@@ -15,6 +15,7 @@ class ForgotPassword extends Component {
  }
   render() {
     return (
+      <View style ={styles.header}>
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
@@ -71,6 +72,7 @@ class ForgotPassword extends Component {
         </View> 
         </View>
         </ScrollView>
+      </View>
       </View>     
     );
   }
@@ -78,6 +80,11 @@ class ForgotPassword extends Component {
 
 
 const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff'
+  },
   container: {
     flex: 1,
     backgroundColor: 'white'

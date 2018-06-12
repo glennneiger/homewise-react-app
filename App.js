@@ -19,6 +19,8 @@ import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
 import Steps from './Steps';
+import NewClient from './NewClient'
+import States from './States'
 
 import {Clients, HomeNav} from './Router';
 import {Tabs} from './Router';
@@ -41,7 +43,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <Tabs/>
+        <NewClient />
       </View>
     );
     }
