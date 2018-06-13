@@ -45,50 +45,55 @@ class ForgotPassword extends Component {
         })
     }
 
-
-    render() {
-      return (
-        <View style={{flex:1}}>
-          <ScrollView>
-          <View style={{flex:1, alignItems:'center'}}>
-            <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
-                source={require('./Homewise.jpg')}/>
-            <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Forgot Password</Text>
-          </View>
-          <View style={{flex:9}}>
-          <View style={styles.container}>
-              <View style={styles.body}>
-                <View>
-                  <View style={styles.caption}>
-                    <Text style={styles.captionText}>Email Address</Text>
-                  </View>
-                  <View style={styles.row}>
-                    <TextInput
-                      style={styles.values}
-                      keyboardType = {'default'}
-                      returnKeyType = {'done'}
-                      onChangeText = {(text)=> this.setState({textEmail: text})}>
-                    </TextInput>
-                  </View>
-                  <TouchableOpacity
-                     style = {styles.submitButton}
-                     onPress = {
-                        () => this.forgotPasswordFlow()
-                     }>
-                     <Text style = {styles.submitButtonText}> Submit </Text>
-                  </TouchableOpacity>
-                </View>           
-              </View>
-          </View> 
-          </View>
-          </ScrollView>
-        </View>     
-      );
-    }
+  render() {
+    return (
+      <View style ={styles.header}>
+      <View style={{flex:1}}>
+        <ScrollView>
+        <View style={{flex:1, alignItems:'center'}}>
+          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
+              source={require('./Homewise.jpg')}/>
+          <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Forgot Password</Text>
+        </View>
+        <View style={{flex:9}}>
+        <View style={styles.container}>
+            <View style={styles.body}>
+              <View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Email Address</Text>
+                </View>
+                <View style={styles.row}>
+                  <TextInput
+                    style={styles.values}
+                    keyboardType = {'default'}
+                    returnKeyType = {'done'}
+                    onChangeText = {(text)=> this.setState({textEmail: text})}>
+                  </TextInput>
+                </View>
+                <TouchableOpacity
+                   style = {styles.submitButton}
+                   onPress = {
+                      () => this.forgotPasswordFlow()
+                   }>
+                   <Text style = {styles.submitButtonText}> Submit </Text>
+                </TouchableOpacity>
+              </View>           
+            </View>
+        </View> 
+        </View>
+        </ScrollView>
+      </View>
+      </View>     
+    );
   }
 
 
 const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff'
+  },
   container: {
     flex: 1,
     backgroundColor: 'white'
