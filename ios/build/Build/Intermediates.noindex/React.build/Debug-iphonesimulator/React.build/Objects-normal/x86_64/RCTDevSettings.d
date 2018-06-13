@@ -1,0 +1,23 @@
+dependencies: \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Modules/RCTDevSettings.mm \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Modules/RCTDevSettings.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/Mohit/homewise-react-app/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/Mohit/homewise-react-app/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Modules/RCTJSCSamplingProfiler.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/Mohit/homewise-react-app/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h

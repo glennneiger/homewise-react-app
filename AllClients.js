@@ -7,7 +7,6 @@ import { StackNavigator } from 'react-navigation';
 
 import Steps from './Steps'
 
-
 export default class AllClients extends Component {
  
   constructor(props){
@@ -25,7 +24,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ee8fXFcTaYWIUhWjfKAHJWHX3fL6Eb'
+          'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
         }
       })
       .then((response) => response.json())
@@ -46,7 +45,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ee8fXFcTaYWIUhWjfKAHJWHX3fL6Eb'
+          'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
         }
       })
       .then((response) => response.json())
@@ -67,7 +66,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ee8fXFcTaYWIUhWjfKAHJWHX3fL6Eb'
+          'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
         }
       })
       .then((response) => response.json())
@@ -75,7 +74,7 @@ export default class AllClients extends Component {
 
         this.setState({
           isLoading: false,
-          UpcomingTasks: responseJson,
+          UpcomingTasks: responseJson.splice(2),
         })
 
       })
@@ -107,6 +106,7 @@ export default class AllClients extends Component {
 <View style={styles.MainContainer}>
       <ScrollView>
       <Text style={{color: '#0091FF', fontSize: 20, fontWeight: '600', paddingTop: 15,}} >Upcoming Tasks</Text>
+      <View style = {{flex: 4}}>
       <FlatList
         data = { this.state.UpcomingTasks }
         renderItem={({item}) =>
@@ -121,8 +121,9 @@ export default class AllClients extends Component {
             </TouchableOpacity>
           }
       />
+      </View>
 
-
+      <View style = {{flex:6}}>
       <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 30, paddingBottom: 10}}>
           <TouchableOpacity style={[styles.tabButton, styles.tabButtonLeft, {backgroundColor: '#0091FF',marginRight: -1,}]} >
               <Text style={{color: '#fff', fontSize: 16}}>Buyers</Text>
@@ -132,7 +133,7 @@ export default class AllClients extends Component {
           </TouchableOpacity>
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'center', paddingBottom: 20, paddingTop: 10}}>
-          <TouchableOpacity onPress={() => Actions.info()} style={{flexDirection: 'row'}} >
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('NewClient')} style={{flexDirection: 'row'}} >
               <View style={{width: 16, height: 16, backgroundColor: '#4CD964', paddingLeft: 1, alignItems: 'center', borderRadius: 8, marginRight: 5,}}>
               </View>
               <Text style={{color: '#000', fontSize: 13}}>Add Client</Text>
@@ -153,6 +154,7 @@ export default class AllClients extends Component {
           }
         numColumns={2}
       />
+      </View>
       </ScrollView>
 </View>
            
@@ -165,8 +167,9 @@ const styles = StyleSheet.create({
   MainContainer :{
     justifyContent: 'center',
     flex:1,
-    margin: 10,
-    paddingTop: (Platform.OS) === 'ios' ? 20 : 0
+    padding: 10,
+    paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
+    backgroundColor: '#fff'
   },
   GridViewBlockStyle: {
     justifyContent: 'center',

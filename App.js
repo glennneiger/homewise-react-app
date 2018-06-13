@@ -19,6 +19,7 @@ import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
 import Steps from './Steps';
+import AgentProfile from './AgentProfile'
 
 import {Clients, HomeNav} from './Router';
 import {Tabs} from './Router';

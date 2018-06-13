@@ -16,6 +16,9 @@ import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
 import Steps from './Steps';
+import CalcScreens from './Calculator/CalcScreens'
+import AgentProfile from './AgentProfile'
+
 
 export const Clients = StackNavigator(
 {
@@ -27,10 +30,23 @@ export const Clients = StackNavigator(
   }
 });
 
+export const Calculators = StackNavigator(
+{
+  CalcScreens: {
+    screen: CalcScreens
+  }
+});
+
 
 export const Tabs = TabNavigator({
   Clients: {
     screen: Clients
+  },
+  CalcScreens:{
+    screen: Calculators
+  },
+  Profile:{
+    screen: AgentProfile
   }
 });
 
