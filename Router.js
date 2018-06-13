@@ -16,8 +16,12 @@ import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
 import Steps from './Steps';
+
 import NewClient from './NewClient'
 import States from './States'
+
+import ChangePassword from './ChangePassword';
+
 
 export const Clients = StackNavigator(
 {
@@ -51,7 +55,10 @@ export const HomeNav = StackNavigator(
             screen: Registration,
         },
         ForgotPassword:{
-          screen: ForgotPassword
+          screen: ForgotPassword,
+        },
+        ChangePassword:{
+          screen: ChangePassword,
         }
     }
 );

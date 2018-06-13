@@ -1,18 +1,50 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, LoginRender } from 'react-native'
 
+import { ApiEndpoints } from './AppConfig.js'
 
 class ForgotPassword extends Component {
-   state = {
-      tempPassword: '',
-      password: '',
-      newPassword: ''
-   }
-   static navigationOptions = ({ navigation }) => {
-    return {
-       header: null
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        textEmail: ''
+      }
     }
- }
+    
+    static navigationOptions = ({ navigation }) => {
+      return {
+        header: null
+      }
+    }
+
+    forgotPasswordFlow() {
+      const { textEmail } = this.state;
+
+      // Make request to API
+      const reqURL = ApiEndpoints.url+ApiEndpoints.forgotpasswordPath;
+      const reqBody = {
+        email: textEmail
+      }
+      fetch(reqURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reqBody),
+        })
+        .then((response) => {
+          if (response.ok) {
+            // Successful password reset
+            alert('An email has been sent with a temporary password!');
+            this.props.navigation.navigate('Login');
+          } else {
+            // Handle Errors
+            // TODO
+          }
+        })
+    }
+
   render() {
     return (
       <View style ={styles.header}>
@@ -28,42 +60,20 @@ class ForgotPassword extends Component {
             <View style={styles.body}>
               <View>
                 <View style={styles.caption}>
-                  <Text style={styles.captionText}>Temporary Password</Text>
+                  <Text style={styles.captionText}>Email Address</Text>
                 </View>
                 <View style={styles.row}>
                   <TextInput
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({tempPassword: text})}>
-                  </TextInput>
-                </View>
-                <View style={styles.caption}>
-                  <Text style={styles.captionText}>New Password</Text>
-                </View>
-                <View style={styles.row}>
-                  <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
-                    returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({password: text})}>
-                  </TextInput>
-                </View>
-                <View style={styles.caption}>
-                  <Text style={styles.captionText}>Retype New Password</Text>
-                </View>
-                <View style={styles.row}>
-                  <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
-                    returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({newPassword: text})}>
+                    onChangeText = {(text)=> this.setState({textEmail: text})}>
                   </TextInput>
                 </View>
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
-                      () => this.login(this.state.email, this.state.password)
+                      () => this.forgotPasswordFlow()
                    }>
                    <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
@@ -76,7 +86,6 @@ class ForgotPassword extends Component {
       </View>     
     );
   }
-}
 
 
 const styles = StyleSheet.create({
@@ -124,7 +133,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    height: 25,
+    height: 45,
     fontSize: 18,
     paddingRight: 10,
 
