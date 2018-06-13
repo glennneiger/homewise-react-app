@@ -1,80 +1,91 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, LoginRender } from 'react-native'
 
+import { ApiEndpoints } from './AppConfig.js'
 
 class ForgotPassword extends Component {
-   state = {
-      tempPassword: '',
-      password: '',
-      newPassword: ''
-   }
-   static navigationOptions = ({ navigation }) => {
-    return {
-       header: null
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        textEmail: ''
+      }
     }
- }
-  render() {
-    return (
-      <View style={{flex:1}}>
-        <ScrollView>
-        <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>
-          <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Forgot Password</Text>
-        </View>
-        <View style={{flex:9}}>
-        <View style={styles.container}>
-            <View style={styles.body}>
-              <View>
-                <View style={styles.caption}>
-                  <Text style={styles.captionText}>Temporary Password</Text>
-                </View>
-                <View style={styles.row}>
-                  <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
-                    returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({tempPassword: text})}>
-                  </TextInput>
-                </View>
-                <View style={styles.caption}>
-                  <Text style={styles.captionText}>New Password</Text>
-                </View>
-                <View style={styles.row}>
-                  <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
-                    returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({password: text})}>
-                  </TextInput>
-                </View>
-                <View style={styles.caption}>
-                  <Text style={styles.captionText}>Retype New Password</Text>
-                </View>
-                <View style={styles.row}>
-                  <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
-                    returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({newPassword: text})}>
-                  </TextInput>
-                </View>
-                <TouchableOpacity
-                   style = {styles.submitButton}
-                   onPress = {
-                      () => this.login(this.state.email, this.state.password)
-                   }>
-                   <Text style = {styles.submitButtonText}> Submit </Text>
-                </TouchableOpacity>
-              </View>           
-            </View>
-        </View> 
-        </View>
-        </ScrollView>
-      </View>     
-    );
+    
+    static navigationOptions = ({ navigation }) => {
+      return {
+        header: null
+      }
+    }
+
+    forgotPasswordFlow() {
+      const { textEmail } = this.state;
+
+      // Make request to API
+      const reqURL = ApiEndpoints.url+ApiEndpoints.forgotpasswordPath;
+      const reqBody = {
+        email: textEmail
+      }
+      fetch(reqURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reqBody),
+        })
+        .then((response) => {
+          if (response.ok) {
+            // Successful password reset
+            alert('An email has been sent with a temporary password!');
+            this.props.navigation.navigate('Login');
+          } else {
+            // Handle Errors
+            // TODO
+          }
+        })
+    }
+
+
+    render() {
+      return (
+        <View style={{flex:1}}>
+          <ScrollView>
+          <View style={{flex:1, alignItems:'center'}}>
+            <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
+                source={require('./Homewise.jpg')}/>
+            <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Forgot Password</Text>
+          </View>
+          <View style={{flex:9}}>
+          <View style={styles.container}>
+              <View style={styles.body}>
+                <View>
+                  <View style={styles.caption}>
+                    <Text style={styles.captionText}>Email Address</Text>
+                  </View>
+                  <View style={styles.row}>
+                    <TextInput
+                      style={styles.values}
+                      keyboardType = {'default'}
+                      returnKeyType = {'done'}
+                      onChangeText = {(text)=> this.setState({textEmail: text})}>
+                    </TextInput>
+                  </View>
+                  <TouchableOpacity
+                     style = {styles.submitButton}
+                     onPress = {
+                        () => this.forgotPasswordFlow()
+                     }>
+                     <Text style = {styles.submitButtonText}> Submit </Text>
+                  </TouchableOpacity>
+                </View>           
+              </View>
+          </View> 
+          </View>
+          </ScrollView>
+        </View>     
+      );
+    }
   }
-}
 
 
 const styles = StyleSheet.create({
@@ -117,7 +128,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    height: 25,
+    height: 45,
     fontSize: 18,
     paddingRight: 10,
 

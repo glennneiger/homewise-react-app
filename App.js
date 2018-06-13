@@ -10,7 +10,8 @@
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 import HomeScreen from './HomeScreen';
@@ -22,6 +23,8 @@ import Steps from './Steps';
 
 import {Clients, HomeNav} from './Router';
 import {Tabs} from './Router';
+
+import {StorageKeys} from './AppConfig.js';
 
 export default class App extends Component {
   constructor(props) {
@@ -36,12 +39,37 @@ export default class App extends Component {
       users: '',
       mls_region: '',
       mls_id:'',
+
+      validAuth: false
     }
   }
+
+  componentDidMount() {
+    // Check Auth state
+    async () => {
+      const authToken = await AsyncStorage.getItem(StorageKeys.authToken);
+      if(value !== null) {
+        // Check validity
+        const authExpiry = await AsyncStorage.getItem(StorageKeys.authExpiry);
+        if(value !== null && Date() < Date(value)) {
+          // Valid, unexpired token
+          this.setState({
+            validAuth: true
+          });
+        }
+      }
+    }
+  }
+
   render() {
     return (
       <View style={{flex:1}}>
-        <Tabs/>
+        <HomeNav/>
+        {this.state.validAuth ? (
+          <HomeNav />
+        ) : (
+          <Clients />
+        )}
       </View>
     );
     }
