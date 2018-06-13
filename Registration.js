@@ -33,9 +33,6 @@ class Registration extends Component {
       mls_id:'',
     }
   }
-    login = (email, pass) => {
-      alert('email: ' + email + ' password: ' + pass)
-   }
    signUp(){
         const {email, password, users, date, first_name, last_name, retypePass } = this.state
         
@@ -213,7 +210,7 @@ class Registration extends Component {
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
-                      () => this.login(this.state.email, this.state.password)
+                      () => this.signUp()
                    }>
                    <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>

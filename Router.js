@@ -16,6 +16,8 @@ import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
 import Steps from './Steps';
+import NewClient from './NewClient'
+import States from './States'
 
 export const Clients = StackNavigator(
 {
@@ -24,6 +26,9 @@ export const Clients = StackNavigator(
   },
   Steps:{
     screen: Steps
+  },
+  NewClient:{
+    screen: NewClient
   }
 });
 
