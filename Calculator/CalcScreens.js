@@ -13,7 +13,6 @@ import {
 
 import PropTypes from 'prop-types';
 
-import styles from './stylesFixNFlip';
 
 import ROIScreen from './ROIScreen';
 import MortgageScreen from './MortgageScreen';
@@ -27,6 +26,9 @@ export default class CalcScreens extends Component {
 
     this.state = {
       currentScreen: 'ROIScreen',
+      ROIScreen: true,
+      Mortgage: false,
+      FixNFlip: false
     };
   }
 
@@ -43,15 +45,29 @@ export default class CalcScreens extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.otherStuff}>
-          <View style={styles.info}>
+          
+          {this.state.ROIScreen?
+            <View style={styles.headerTabs1selected}>
+            <TouchableOpacity
+            onPress = {() => {
+              console.log(this.state);
+              this._setROIScreen();}}>
+                <Text style = {{color: '#fff'}}> ROI </Text>
+            </TouchableOpacity> 
+            </View>
+            :
+            <View style={styles.headerTabs1}>
             <TouchableOpacity
             onPress = {() => {
               console.log(this.state);
               this._setROIScreen();}}>
                 <Text style = {styles.submitButtonText}> ROI </Text>
-            </TouchableOpacity>  
-          </View>
-          <View style={styles.info}>
+            </TouchableOpacity> 
+            </View>
+          }
+             
+          
+          <View style={styles.headerTabs2}>
             <TouchableOpacity
             onPress = {() => {
               console.log(this.state);
@@ -59,7 +75,7 @@ export default class CalcScreens extends Component {
                 <Text style = {styles.submitButtonText}> Mortgage </Text>
             </TouchableOpacity>  
           </View>
-          <View style={styles.info}>
+          <View style={styles.headerTabs3}>
             <TouchableOpacity
             onPress = {() => this._setFixNFlipScreen()}>
                 <Text style = {styles.submitButtonText}> Fix&Flip </Text>
@@ -92,6 +108,9 @@ export default class CalcScreens extends Component {
   _setROIScreen(){
     this.setState({
       currentScreen: 'ROIScreen',
+      ROIScreen: true,
+      Mortgage: false,
+      FixNFlip: false
     });
     
   }
@@ -99,14 +118,102 @@ export default class CalcScreens extends Component {
   _setMortgageScreen(){
     this.setState({
       currentScreen: 'MortgageScreen',
+      ROIScreen: false,
+      Mortgage: true,
+      FixNFlip: false
     });
   }
 
   _setFixNFlipScreen(){
     this.setState({
       currentScreen: 'FixNFlipScreen',
+      ROIScreen: false,
+      Mortgage: false,
+      FixNFlip: true
     });
   }
 
 
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  headerTabs1:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomLeftRadius: 4,
+    borderTopLeftRadius: 4,
+  },
+  headerTabs1selected:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomLeftRadius: 4,
+    borderTopLeftRadius: 4,
+    backgroundColor: '#0091FF'
+  },
+  headerTabs2:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingTop:5,
+    paddingBottom:5,
+  },
+  headerTabs3:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomRightRadius: 4,
+    borderTopRightRadius: 4,
+  },
+
+
+
+  otherStuff: {
+    flex:1,
+    flexDirection: 'row'
+  },
+
+
+
+
+});
+

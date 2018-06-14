@@ -9,6 +9,51 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
+  headerTabs1:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomLeftRadius: 4,
+    borderTopLeftRadius: 4,
+  },
+  headerTabs2:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingTop:5,
+    paddingBottom:5,
+  },
+  headerTabs3:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomRightRadius: 4,
+    borderTopRightRadius: 4,
+  },
   initialHeaderText: {
     fontSize: 20,
     color: 'black'
@@ -257,7 +302,7 @@ const styles = StyleSheet.create({
   },
   submitButtonText:{
     color: '#348EF2',
-    fontSize: 20
+    fontSize: 15
   },
 
 
