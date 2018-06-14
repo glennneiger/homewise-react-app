@@ -16,6 +16,9 @@
   Image,
   View
 } from 'react-native';
+import { Dropdown } from 'react-native-material-dropdown';
+
+import MLSRegion from './MLSRegion'
 
 const {width, height} = Dimensions.get('window')
 
@@ -186,14 +189,12 @@ class Registration extends Component {
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>MLS Region</Text>
                 </View>
-                <View style={styles.row}>
-                  <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
-                    returnKeyType = {'done'}
-                    placeholder = 'Charlotte'
+                <View>
+                   <Dropdown
+                    data = {MLSRegion}
+                    containerStyle = {styles.rowmls}
                     onChangeText = {(text)=> this.setState({mls_region: text})}>
-                  </TextInput>
+                  </Dropdown>
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>MLS ID</Text>
@@ -252,6 +253,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingBottom: 0,
     alignItems: 'center'
+  },
+  rowmls: {
+    marginTop: 0,
+    marginBottom: 40,
+    marginLeft: 35,
+    marginRight: 35,
+    height: 20,
+    justifyContent: 'center'
   },
   caption: {
     marginLeft: 35,

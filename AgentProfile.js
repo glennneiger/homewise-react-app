@@ -1,4 +1,4 @@
- import React, { Component } from 'react';
+import React, { Component } from 'react';
  import {
   Platform,
   StyleSheet,
@@ -22,57 +22,47 @@ class AgentProfile extends Component {
       email:'',
       mls_region: '',
       mls_id:'',
-      phone_number: ''
+      phone_number: '',
+      id: ''
     }
   }
-   signUp(){
-        const {email, password, users, date, first_name, last_name, retypePass } = this.state
-        
-
-        if(first_name == '' || last_name == '' || email == '' || phone_number == ''){
-            alert('All Fields Required')
+  
+  componentDidMount(){
+    fetch('http://127.0.0.1:8000/agent/AgentProfile/', 
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
         }
-        if(!_validateEmail(email)){
-            alert('invalid email')
-        }
-        else{
-            let email = this.state.email
-            let first_name = this.state.first_name
-            let last_name = this.state.last_name
-            let mls_region = this.state.mls_region
-            let mls_id = this.state.mls_id
-            let phone_number = this.state.phone_number
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          first_name: responseJson.first_name,
+          last_name: responseJson.last_name,
+          email: responseJson.email,
+          mls_region: responseJson.mls_region,
+          mls_id: responseJson.mls_id,
+          id: responseJson.id,
+          phone_number: responseJson.phone_number
+        })
+      })
+      .catch((error) =>{
+        console.error(error);
+    });
 
 
-            fetch('http://127.0.0.1:8000/agent/Registration/', 
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                email:email,
-                first_name:first_name,
-                last_name:last_name,
-                mls_region:mls_region,
-                mls_id:mls_id,
-                phone_number:phone_number
-              }),
-            }).then((response) => response.json())
-                .then((responseJson) => {
-                  alert(responseJson);
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-        }
+  
+  }
 
-    }
+    
 
-    static navigationOptions = ({ navigation }) => {
-    return {
-       header: null
-    }
+  static navigationOptions = ({ navigation }) => {
+  return {
+     header: null
+  }
+ 
  }
 
   render() {
@@ -96,11 +86,11 @@ class AgentProfile extends Component {
                   <TextInput
                     style={styles.values}
                     editable = {false}
+                    value={this.state.first_name}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'John'
-                    onChangeText = {(text)=> this.setState({first_name: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Last Name</Text>
@@ -109,11 +99,11 @@ class AgentProfile extends Component {
                   <TextInput
                     style={styles.values}
                     editable = {false}
+                    value = {this.state.last_name}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'Doe'
-                    onChangeText = {(text)=> this.setState({last_name: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Email</Text>
@@ -122,11 +112,11 @@ class AgentProfile extends Component {
                   <TextInput
                     style={styles.values}
                     editable = {false}
+                    value={this.state.email}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'john.doe@gmail.com'
-                    onChangeText = {(text)=> this.setState({email: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Phone Number</Text>
@@ -135,11 +125,11 @@ class AgentProfile extends Component {
                   <TextInput
                     style={styles.values}
                     editable = {false}
+                    value={this.state.phone_number}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = '1-800-HomeWise'
-                    onChangeText = {(text)=> this.setState({phone_number: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>MLS Region</Text>
@@ -148,11 +138,11 @@ class AgentProfile extends Component {
                   <TextInput
                     style={styles.values}
                     editable = {false}
+                    value={this.state.mls_region}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'Charlotte'
-                    onChangeText = {(text)=> this.setState({mls_region: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>MLS ID</Text>
@@ -161,11 +151,11 @@ class AgentProfile extends Component {
                   <TextInput
                     style={styles.values}
                     editable = {false}
+                    value={this.state.mls_id}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = '123'
-                    onChangeText = {(text)=> this.setState({mls_id: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <TouchableOpacity
                    style = {styles.submitButton}
