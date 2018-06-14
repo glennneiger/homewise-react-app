@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
   header: {
     flex:2,
-    backgroundColor: '#EFE9F4',
+    backgroundColor: '#fff',
     alignItems: 'center',
     //justifyContent: 'center',
     borderBottomColor: '#348EF2',
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     width: 400,
-    height: 500,
+    height: 100,
+    marginTop: 220
   },
   otherStuffs: {
     flex:1,
@@ -47,7 +48,9 @@ const styles = StyleSheet.create({
   info:{
     flex:3,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#D3D3D3'
   },
   infoText: {
     fontSize: 30
@@ -65,11 +68,19 @@ const styles = StyleSheet.create({
     width: 270,
     height: 270,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   text: {
     fontSize: 20,
+  },
+  headerTabs1:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
   },
 
 //------------------Mortgage Screen-------------------//
@@ -219,10 +230,16 @@ const styles = StyleSheet.create({
   },
   submitButtonText:{
     color: '#348EF2',
-    fontSize: 20
+    fontSize: 15,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderColor: '#0091FF',
+    borderWidth: 0.5,
+    top: 0,
+    borderRadius: 4,
+    right: 15,
+    marginTop: 30 
   },
-
-
 
 
   TouchableOpacityStyle:

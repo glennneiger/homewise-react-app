@@ -55,7 +55,7 @@ export default class Steps extends Component{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
+                'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
             },
             body: JSON.stringify({
                 email: this.props.navigation.getParam('email'),
@@ -94,7 +94,7 @@ export default class Steps extends Component{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
+                'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
             },
             body: JSON.stringify({
                 email: this.props.navigation.getParam('email'),
@@ -175,7 +175,7 @@ export default class Steps extends Component{
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer e0UM0z8j305CUyuJigyYjklXLyDxmA'
+                'Authorization': 'Bearer uyoFUhXyT788ycMdvixJ3Wx793eSdI'
               },
               body: JSON.stringify({
                 steps:steps,
@@ -206,7 +206,7 @@ export default class Steps extends Component{
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer e0UM0z8j305CUyuJigyYjklXLyDxmA'
+                'Authorization': 'Bearer uyoFUhXyT788ycMdvixJ3Wx793eSdI'
               },
               body: JSON.stringify({
                 id: id,

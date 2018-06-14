@@ -155,8 +155,8 @@ class ROIScreen extends Component {
 
           <View style={styles.container}>
             <ScrollView ref='_scrollView'>
-              <View style={{backgroundColor: '#EFE9F4',flexDirection: 'row', justifyContent: 'flex-end'}}>
-                <TouchableOpacity
+              <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
+               <TouchableOpacity
                   onPress = {
                   () => this._reset()
                   }>
@@ -170,13 +170,15 @@ class ROIScreen extends Component {
                   fill={Number.parseInt(this.state.roi, 10)}
                   rotation={90}
                   cropDegree={180}
-                  tintColor="#4682b4"
-                  backgroundColor="#b0c4de"
+                  tintColor="#0091FF"
+                  backgroundColor= '#FAFAFA'
                   stroke={[2, 2]} 
                   strokeCap="circle">
-                  <View style={styles.textView}>
-                    <Text style={styles.roiText}>{this.state.roi}%</Text>
-                    <Text>ROI</Text>
+                  <View style = {styles.textView}>
+                  <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 100,height: 31, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
+                    <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
+                  </View>
+                  <Text style = {{color:'black'}}>ROI</Text>
                   </View>
                 </AnimatedGaugeProgress>
                 <View style={styles.otherStuff}>

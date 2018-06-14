@@ -67,11 +67,10 @@ export default class App extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <HomeNav/>
         {this.state.validAuth ? (
-          <HomeNav />
+          <HomeNav/>
         ) : (
-          <Clients />
+          <Tabs/>
         )}
       </View>
     );
