@@ -87,6 +87,7 @@ class ForgotPassword extends Component {
     );
   }
 
+}
 
 const styles = StyleSheet.create({
   header: {
