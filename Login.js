@@ -57,7 +57,9 @@ class Login extends Component {
                           alert("Error: " + err);
                         } else {
                           // Auth is valid
-                          // TODO
+                          // Go back to auth loading screen
+                          alert('Valid Auth!');
+                          this.props.navigation.navigate('App');
                         }
                       }
                       )
