@@ -67,9 +67,11 @@ class NewClient extends Component {
         if(first_name == '' || last_name == '' || email == '' || phone_number == '' || street_address == '' || city == '' || states == '' || zip_code == '' || est_house_commish == '' || commission == ''){
             alert('All Fields Required')
         }
+
         /*if(!_validateEmail(email)){
             alert('invalid email')
         }*/
+
         else{
             let email = this.state.email
             let first_name = this.state.first_name
@@ -87,7 +89,7 @@ class NewClient extends Component {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer e0UM0z8j305CUyuJigyYjklXLyDxmA'
+                'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
               },
               body: JSON.stringify({
                 email:email,

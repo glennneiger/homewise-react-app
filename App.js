@@ -20,6 +20,7 @@ import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
 import Steps from './Steps';
+import AgentProfile from './AgentProfile'
 import NewClient from './NewClient'
 import States from './States'
 

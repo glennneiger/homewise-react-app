@@ -24,7 +24,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer e0UM0z8j305CUyuJigyYjklXLyDxmA'
+          'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
         }
       })
       .then((response) => response.json())
@@ -45,7 +45,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer e0UM0z8j305CUyuJigyYjklXLyDxmA'
+          'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
         }
       })
       .then((response) => response.json())
@@ -66,7 +66,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer e0UM0z8j305CUyuJigyYjklXLyDxmA'
+          'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
         }
       })
       .then((response) => response.json())
