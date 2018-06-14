@@ -1,36 +1,94 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, StyleSheet, LoginRender } from 'react-native'
 
+import { ApiEndpoints } from './AppConfig.js'
 
 class ChangePassword extends Component {
-   state = {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       textCurrentPassword: '',
       textNewPassword: '',
       textNewPasswordConfirm: '',
-      success: false
-   }
+      agentEmail: '',
+      success: false  
+    }
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const currentPassword = navigation.getParam('currentPassword', '');
+    const currentEmail = navigation.getParam('currentEmail', '');
+    this.setState({
+      agentEmail: currentEmail,
+      textCurrentPassword: currentPassword
+    });
+  }
+
+  changePasswordFlow() {
+    /*
+      Requires:
+        email
+        current_password
+        new_password
+    */
+
+    // Check that password boxes match
+    // TODO
+
+    // Make request to API
+    const { agentEmail, textCurrentPassword, textNewPassword } = this.state;
+    const reqURL = ApiEndpoints.url+ApiEndpoints.changepasswordPath;
+    const reqBody = {
+      email: agentEmail,
+      current_password: textCurrentPassword,
+      new_password: textNewPassword
+    }
+    fetch(reqURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reqBody),
+      })
+      .then((response) => {
+        if (response.ok) {
+          // All ok
+          alert('Password successfully changed.');
+          // Go to login screen
+          this.props.navigation.navigate('Login');
+        } else {
+          // Handle errors
+          // TODO
+        }
+      })
+  }
+
   render() {
+
     return (
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          {/*<Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>*/}
-          <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Forgot Password</Text>
+          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
+              source={require('./Homewise.jpg')}/>
+          <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Change Password</Text>
         </View>
         <View style={{flex:9}}>
         <View style={styles.container}>
             <View style={styles.body}>
               <View>
                 <View style={styles.caption}>
-                  <Text style={styles.captionText}>Temporary Password</Text>
+                  <Text style={styles.captionText}>Current Password</Text>
                 </View>
                 <View style={styles.row}>
                   <TextInput
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({tempPassword: text})}>
+                    onChangeText = {(text)=> this.setState({textCurrentPassword: text})}
+                    value = {this.state.textCurrentPassword}>
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
@@ -41,7 +99,7 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({password: text})}>
+                    onChangeText = {(text)=> this.setState({textNewPassword: text})}>
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
@@ -52,13 +110,13 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    onChangeText = {(text)=> this.setState({newPassword: text})}>
+                    onChangeText = {(text)=> this.setState({textNewPasswordConfirm: text})}>
                   </TextInput>
                 </View>
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
-                      () => this.login(this.state.email, this.state.password)
+                      () => this.changePasswordFlow()
                    }>
                    <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
@@ -113,7 +171,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    height: 25,
+    height: 45,
     fontSize: 18,
     paddingRight: 10,
 

@@ -20,6 +20,12 @@ import CalcScreens from './Calculator/CalcScreens'
 import AgentProfile from './AgentProfile'
 
 
+import NewClient from './NewClient'
+import States from './States'
+
+import ChangePassword from './ChangePassword';
+
+
 export const Clients = StackNavigator(
 {
   AllClients: {
@@ -27,6 +33,9 @@ export const Clients = StackNavigator(
   },
   Steps:{
     screen: Steps
+  },
+  NewClient:{
+    screen: NewClient
   }
 });
 
@@ -62,7 +71,10 @@ export const HomeNav = StackNavigator(
             screen: Registration,
         },
         ForgotPassword:{
-          screen: ForgotPassword
+          screen: ForgotPassword,
+        },
+        ChangePassword:{
+          screen: ChangePassword,
         }
     }
 );

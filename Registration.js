@@ -33,9 +33,6 @@ class Registration extends Component {
       mls_id:'',
     }
   }
-    login = (email, pass) => {
-      alert('email: ' + email + ' password: ' + pass)
-   }
    signUp(){
         const {email, password, users, date, first_name, last_name, retypePass } = this.state
         
@@ -93,6 +90,7 @@ class Registration extends Component {
   render() {
     const { navigation } = this.props;
     return (
+      <View style ={styles.header}>
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
@@ -212,7 +210,7 @@ class Registration extends Component {
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
-                      () => this.login(this.state.email, this.state.password)
+                      () => this.signUp()
                    }>
                    <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
@@ -221,16 +219,22 @@ class Registration extends Component {
         </View> 
         </View>
         </ScrollView>
-      </View>     
+      </View> 
+      </View>    
     );
   }
 }
 
 
 const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff'
+  },
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#fff'
   },
   body: {
     flex:8,
