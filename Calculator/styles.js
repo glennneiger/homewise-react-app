@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     //justifyContent: 'center',
-    borderBottomColor: '#348EF2',
+    borderBottomColor: '#D3D3D3',
     borderBottomWidth: 0.5,
     paddingTop: 10,
     paddingBottom: 10,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row'
   },
-  otherStuff: {
+  roiheadervalues: {
     flex:1,
     flexDirection: 'row',
     position: 'absolute',
@@ -38,22 +38,16 @@ const styles = StyleSheet.create({
     height: 100,
     marginTop: 220
   },
-  otherStuffs: {
-    flex:1,
-    flexDirection: 'row',
-    position: 'absolute',
-    width: 400,
-    height: 700,
-  },
   info:{
     flex:3,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: '#D3D3D3'
   },
   infoText: {
-    fontSize: 30
+    fontSize: 30,
+    fontWeight: 'bold'
   },
   roiText: {
     fontSize: 50,
@@ -104,16 +98,40 @@ const styles = StyleSheet.create({
 
   headerFixNFlip: {
     flex:3,
-    backgroundColor: '#EFE9F4',
+    backgroundColor: '#fff',
     alignItems: 'center',
     //justifyContent: 'center',
     borderBottomColor: '#348EF2',
-    borderBottomWidth: 0.5,
     paddingTop: 10,
-    paddingBottom: 80,
+  },
+  fnfheaderval1: {
+    flex:1,
+    flexDirection: 'row',
+    position: 'absolute',
+    width: 400,
+    height: 110,
+    marginTop: 200,
+  },
+  fnfheaderval2: {
+    flex:1,
+    flexDirection: 'row',
+    position: 'relative',
+    width: 400,
+    height: 100,
+  },
+  fnfinfo:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 0.5,
+    borderColor: '#D3D3D3'
   },
   infoTextFixNFlip: {
-    fontSize: 25
+    fontSize: 25,
+    fontWeight: 'bold'
+  },
+  subTextFixNFlip: {
+    color: '#8a8a8a'
   },
 
 ////////////////////////////////////////////////////////
@@ -126,15 +144,16 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     height: 32,
-    backgroundColor: '#348EF2',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
-
-  },
+    marginTop: 10,
+    marginBottom: 10
+  
+  }, 
   headerRowText: {
-    color: 'white',
-    fontSize: 18
+    color: '#348EF2',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 
   row: {
@@ -234,12 +253,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderColor: '#0091FF',
-    borderWidth: 0.5,
+    borderWidth: 1,
     top: 0,
     borderRadius: 4,
     right: 15,
-    marginTop: 30 
+    marginTop: 15 
   },
+  submitButton2: {
+    marginRight: 40,
+    marginLeft: 40,
+    margin: 15,
+    borderColor: '#D3D3D3',
+    height: 35,
+    borderWidth: 1,
+    borderRadius: 5,
+    fontSize: 18,
+    paddingRight: 10,
+    backgroundColor: 'rgb(65,147,237)',
+    justifyContent:'center', 
+    alignItems:'center'
+   },
+   submitButtonText2:{
+      color: 'white',
+   },
 
 
   TouchableOpacityStyle:

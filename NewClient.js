@@ -114,11 +114,13 @@ class NewClient extends Component {
 
     }
 
-  static navigationOptions = ({ navigation }) => {
-    return {
-       header: null
-    }
- }
+  static navigationOptions = {
+        title: 'Clients',
+        headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
+        headerStyle:{
+            backgroundColor:'#0091FF',
+        },
+    };
 
   render() {
     const { navigation } = this.props;

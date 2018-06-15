@@ -132,7 +132,7 @@ class MortgageScreen extends Component {
     return (
       <View style={styles.container}>
         <ScrollView ref='_scrollView'>
-          <View style={{backgroundColor: '#EFE9F4',flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
             <TouchableOpacity
               onPress = {
               () => this._reset()
@@ -251,11 +251,11 @@ class MortgageScreen extends Component {
             <Row caption="Rehab Costs" sign='$' value={Numeral((this.state.rehabCosts).toString()).format('0,0')} update={(rehabCosts) => this.setState({rehabCosts})}/>
           </View>
           <TouchableOpacity
-            style = {styles.submitButton}
-            onPress = {
-              () => this._calculateMortgage(Numeral(this.state.listPrice).value())
-            }>
-            <Text style = {styles.submitButtonText}> Calculate </Text>
+                   style = {styles.submitButton2}
+                   onPress = {
+                      () => this._calculateMortgage(Numeral(this.state.listPrice).value())
+                   }>
+                   <Text style = {styles.submitButtonText2}> Calculate </Text>
           </TouchableOpacity>
         </ScrollView>
       </View>

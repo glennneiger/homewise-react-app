@@ -37,7 +37,7 @@ class ROIScreen extends Component {
       roi: 0,
       monthlyCashFlow: 0,
       capRate: 0,
-      capRateColor: {fontSize: 30, color: 'black'},
+      capRateColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
       monthlyMortgage: 0,
 
       listPrice: 0,
@@ -171,31 +171,31 @@ class ROIScreen extends Component {
                   rotation={90}
                   cropDegree={180}
                   tintColor="#0091FF"
-                  backgroundColor= '#FAFAFA'
+                  backgroundColor= '#e7e7e7'
                   stroke={[2, 2]} 
                   strokeCap="circle">
                   <View style = {styles.textView}>
-                  <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 100,height: 31, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
+                  <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
                     <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
                   </View>
-                  <Text style = {{color:'black'}}>ROI</Text>
+                  <Text style = {{color:'black', fontSize: 18}}>ROI</Text>
                   </View>
                 </AnimatedGaugeProgress>
-                <View style={styles.otherStuff}>
+                <View style={styles.roiheadervalues}>
                   <View style={styles.info}>
                     <Text style={styles.infoText}>${this.state.monthlyMortgage}</Text>
-                    <Text>Monthly</Text>
-                    <Text>Mortgage</Text>
+                    <Text style={styles.subTextFixNFlip}>Monthly</Text>
+                    <Text style={styles.subTextFixNFlip}>Mortgage</Text>
                   </View>
                   <View style={styles.info}>
                     <Text style={this.state.capRateColor}>{this.state.capRate*100}%</Text>
-                    <Text>Cap Rate</Text>
+                    <Text style={styles.subTextFixNFlip}>Cap Rate</Text>
                     <Text> </Text>
                   </View>
                   <View style={styles.info}>
                     <Text style={styles.infoText}>${this.state.monthlyCashFlow}</Text>
-                    <Text>Monthly</Text>
-                    <Text>Cash Flow</Text>
+                    <Text style={styles.subTextFixNFlip}>Monthly</Text>
+                    <Text style={styles.subTextFixNFlip}>Cash Flow</Text>
                   </View>                
                 </View>
               </View>
@@ -374,13 +374,12 @@ class ROIScreen extends Component {
                 <Row caption="Monthly Maintenance" sign='$' value={Numeral((this.state.maintenance).toString()).format('0,0')} update={(maintenance) => this.setState({maintenance})}/>
               </View>
               <TouchableOpacity
-                style = {styles.submitButton}
-                onPress = {
-                () => this._calculateROI(Numeral(this.state.listPrice).value(), Numeral(this.state.rent).value())
-                //() => this._onClick(this.state.listPrice)
-                }>
-                <Text style = {styles.submitButtonText}> Calculate </Text>
-              </TouchableOpacity>
+                   style = {styles.submitButton2}
+                   onPress = {
+                      () => this._calculateROI(Numeral(this.state.listPrice).value(), Numeral(this.state.rent).value())
+                   }>
+                   <Text style = {styles.submitButtonText2}> Calculate </Text>
+                </TouchableOpacity>
             </ScrollView>
           </View>
         
@@ -562,24 +561,24 @@ class ROIScreen extends Component {
     let capRate = (monthlyCashFlow * 12)/Number.parseFloat(listPrice);
     console.log('cap rate ' + capRate);
 
-    let capRateColor = {fontSize: 30, color: 'black'};
+    let capRateColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
     if(capRate >= 8){
-      capRateColor = {fontSize: 30, color: '#006400'};
+      capRateColor = {fontSize: 30, color: '#006400', fontWeight: 'bold'};
     }
     else if(capRate >= 6 && capRate < 8){
-      capRateColor = {fontSize: 30, color: '#32CD32'};
+      capRateColor = {fontSize: 30, color: '#32CD32', fontWeight: 'bold'};
     }
     else if(capRate >= 4 && capRate < 6){
-      capRateColor = {fontSize: 30, color: '#FFFF00'};
+      capRateColor = {fontSize: 30, color: '#FFFF00', fontWeight: 'bold'};
     }
     else if(capRate > 0 && capRate < 4){
-      capRateColor = {fontSize: 30, color: '#FFA500'};
+      capRateColor = {fontSize: 30, color: '#FFA500', fontWeight: 'bold'};
     }
     else if(capRate <= 0){
-      capRateColor = {fontSize: 30, color: '#FF0000'};
+      capRateColor = {fontSize: 30, color: '#FF0000', fontWeight: 'bold'};
     }
     else{
-      capRateColor = {fontSize: 30, color: 'black'};
+      capRateColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
     }
 
     let roi = ((monthlyCashFlow * 12)/(downPayment + closingCosts + rehabCosts)) * 100;

@@ -55,7 +55,7 @@ export default class Steps extends Component{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
+                'Authorization': 'Bearer T4WVWr0iW5ICFMrAKPj3HqvmYzebka'
             },
             body: JSON.stringify({
                 email: this.props.navigation.getParam('email'),
@@ -94,7 +94,7 @@ export default class Steps extends Component{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
+                'Authorization': 'Bearer T4WVWr0iW5ICFMrAKPj3HqvmYzebka'
             },
             body: JSON.stringify({
                 email: this.props.navigation.getParam('email'),

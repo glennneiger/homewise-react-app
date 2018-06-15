@@ -41,7 +41,9 @@ export default class CalcScreens extends Component {
     };
 
 
+
   render () {
+    console.disableYellowBox = true;
     return (
       <View style={styles.container}>
         <View style={styles.otherStuff}>
@@ -61,28 +63,50 @@ export default class CalcScreens extends Component {
             onPress = {() => {
               console.log(this.state);
               this._setROIScreen();}}>
-                <Text style = {styles.submitButtonText}> ROI </Text>
+                <Text style = {{color: '#0091FF'}}> ROI </Text>
             </TouchableOpacity> 
             </View>
           }
-             
-          
-          <View style={styles.headerTabs2}>
+          {this.state.Mortgage?
+            <View style={styles.headerTabs2selected}>
             <TouchableOpacity
             onPress = {() => {
               console.log(this.state);
               this._setMortgageScreen();}}>
-                <Text style = {styles.submitButtonText}> Mortgage </Text>
-            </TouchableOpacity>  
-          </View>
-          <View style={styles.headerTabs3}>
+                <Text style = {{color: '#fff'}}> Mortgage </Text>
+            </TouchableOpacity> 
+            </View>
+            :
+            <View style={styles.headerTabs2}>
             <TouchableOpacity
-            onPress = {() => this._setFixNFlipScreen()}>
-                <Text style = {styles.submitButtonText}> Fix&Flip </Text>
-            </TouchableOpacity>  
-          </View>
+            onPress = {() => {
+              console.log(this.state);
+              this._setMortgageScreen();}}>
+                <Text style = {{color: '#0091FF'}}> Mortgage </Text>
+            </TouchableOpacity> 
+            </View>
+          }
+          {this.state.FixNFlip?
+            <View style={styles.headerTabs3selected}>
+            <TouchableOpacity
+            onPress = {() => {
+              console.log(this.state);
+              this._setFixNFlipScreen();}}>
+                <Text style = {{color: '#fff'}}> Fix & Flip </Text>
+            </TouchableOpacity> 
+            </View>
+            :
+            <View style={styles.headerTabs3}>
+            <TouchableOpacity
+            onPress = {() => {
+              console.log(this.state);
+              this._setFixNFlipScreen();}}>
+                <Text style = {{color: '#0091FF'}}> Fix & Flip </Text>
+            </TouchableOpacity> 
+            </View>
+          }
         </View>
-        <View style={{flex: 9}}>
+        <View style={{flex: 9.2}}>
           {this.calcDisplay()}
         </View>
       </View>
@@ -188,6 +212,20 @@ const styles = StyleSheet.create({
     paddingTop:5,
     paddingBottom:5,
   },
+   headerTabs2selected:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    backgroundColor: '#0091FF'
+  },
   headerTabs3:{
     flex:3,
     alignItems: 'center',
@@ -204,11 +242,28 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 4,
     borderTopRightRadius: 4,
   },
+  headerTabs3selected:{
+    flex:3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomRightRadius: 4,
+    borderTopRightRadius: 4,
+    backgroundColor: '#0091FF'
+  },
 
 
 
   otherStuff: {
-    flex:1,
+    flex:0.8,
     flexDirection: 'row'
   },
 
