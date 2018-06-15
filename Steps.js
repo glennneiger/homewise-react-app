@@ -264,8 +264,25 @@ export default class Steps extends Component{
     }
 
     back(){
+        // Save current completion state for tasks
+        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
+        let postBody = {
+            steps:this.state.steps,
+            id: this.state.id,
+            steps_complete: this.state.steps_complete,
+            steps_percentage: this.state.steps_percentage,
+            steps_deleted: this.state.steps_deleted,
+            total_steps: this.state.total_steps
+        };
+        let stateTransition = function(parent, data) {
+            parent.setState({
+                steps_deleted: []
+            })
+        }
+        this.pushStatetoWeb(postURL, postBody, stateTransition);
+
         //navigate
-        this.props.navigation.goBack();
+        this.props.navigation.navigate('AllClients');
     }
 
     changeCurrentChecked(id) {
