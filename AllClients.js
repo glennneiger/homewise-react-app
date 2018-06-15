@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, FlatList, Text, View, Alert, Platform, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native';
 import PercentageCircle from 'react-native-percentage-circle';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import { StackNavigator } from 'react-navigation';
 
 import Steps from './Steps'
@@ -141,6 +142,14 @@ export default class AllClients extends Component {
         client_type: client_type
     })
   }
+
+  toggleClientType() {
+    let client_type = !this.state.client_type;
+    this.setState({
+      client_type: client_type
+    });
+  }
+
   static navigationOptions = {
         title: 'Clients',
         headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
