@@ -7,7 +7,7 @@ import React, { Component } from 'react';
   View
 } from 'react-native';
 import {
-  StackNavigator, TabNavigator
+  StackNavigator, TabNavigator, createSwitchNavigator
 } from 'react-navigation';
 
 import HomeScreen from './HomeScreen';
@@ -20,10 +20,13 @@ import CalcScreens from './Calculator/CalcScreens'
 import AgentProfile from './AgentProfile'
 
 
+
 import NewClient from './NewClient'
 import States from './States'
 
 import ChangePassword from './ChangePassword';
+
+import AuthLoadingScreen from './AuthLoadingScreen'
 
 
 export const Clients = StackNavigator(
@@ -77,4 +80,15 @@ export const HomeNav = StackNavigator(
           screen: ChangePassword,
         }
     }
+);
+
+export const AuthNav = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: Tabs,
+    Auth: HomeNav,  
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  }
 );

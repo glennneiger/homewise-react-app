@@ -1,7 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * HomeWise Agent App
+ * Built with React-Native
  */
 
  import React, { Component } from 'react';
@@ -27,6 +26,8 @@ import States from './States'
 import {Clients, HomeNav} from './Router';
 import {Tabs} from './Router';
 
+import {AuthNav} from './Router';
+
 import {StorageKeys} from './AppConfig.js';
 
 export default class App extends Component {
@@ -48,30 +49,13 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // Check Auth state
-    async () => {
-      const authToken = await AsyncStorage.getItem(StorageKeys.authToken);
-      if(value !== null) {
-        // Check validity
-        const authExpiry = await AsyncStorage.getItem(StorageKeys.authExpiry);
-        if(value !== null && Date() < Date(value)) {
-          // Valid, unexpired token
-          this.setState({
-            validAuth: true
-          });
-        }
-      }
-    }
+
   }
 
   render() {
     return (
       <View style={{flex:1}}>
-        {this.state.validAuth ? (
-          <HomeNav/>
-        ) : (
-          <Tabs/>
-        )}
+        <AuthNav />
       </View>
     );
     }
