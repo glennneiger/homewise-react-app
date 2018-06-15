@@ -8,7 +8,8 @@ import {
   View,
   ScrollView,
   FlatList,
-  Platform
+  Platform,
+  AsyncStorage
 } from 'react-native';
 //import { Actions } from 'react-native-router-flux';
 //import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,6 +17,8 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import PercentageCircle from 'react-native-percentage-circle';
 import DatePicker from 'react-native-datepicker';
 import Numeral from 'numeral';
+
+import { ApiEndpoints, StorageKeys } from './AppConfig'
 
 export default class Steps extends Component{
     constructor() {
@@ -53,13 +56,126 @@ export default class Steps extends Component{
 
             currentChecked: -1,
 
-            refresh: true
+            refresh: true,
+
             
         }
     }
+
+  getTokenFromStorage = async () => {
+    const token = await AsyncStorage.getItem(StorageKeys.authToken);
+    return token;
+  }
+
+  // Async function to fetch web data and set state
+  fetchWebtoState = async (url, stateField) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'GET',
+      'headers': headerData
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        alert('Error in response')
+      } else {
+        response.json().then((data) => {
+          // Set corresponding state field
+          this.setState({
+            [stateField]: data
+          })
+        })
+      }
+    });
+  }
+
+    // Reused transition functions
+
+    getClientStateTransition = function(parent, responseJson) {
+        parent.setState({
+            id: responseJson[0].id,
+            first_name: responseJson[0].first_name,
+            last_name: responseJson[0].last_name,
+            email: responseJson[0].email,
+            client_type: responseJson[0].client_type,
+            phone_number: responseJson[0].phone_number,
+            address: responseJson[0].address,
+            city: responseJson[0].city,
+            state: responseJson[0].state,
+            zipcode: responseJson[0].zipcode,
+            steps_percentage: responseJson[0].steps_percentage,
+            total_steps: responseJson[0].total_steps,
+            steps_complete: responseJson[0].steps_complete,
+            commission_val: responseJson[0].commission_val,
+            total_steps_copy: responseJson[0].total_steps,
+            steps_complete_copy: responseJson[0].steps_complete,
+        });
+    }
+
+    clientStepsStateTransition = function(parent, responseJson) {
+        parent.setState({
+            steps: responseJson,
+            stepscopy: responseJson
+        });
+    }
+
+    // Build URLs for fetch calls
+    getClientURL = ApiEndpoints.url + ApiEndpoints.getclientPath;
+    clientStepsURL = ApiEndpoints.url + ApiEndpoints.clientstepsPath;
+
+  // Async function to POST web data from state, and subsequently set state
+  pushStatetoWeb = async (url, bodyData, callback) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'POST',
+      'headers': headerData,
+      'body': JSON.stringify(bodyData)
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        alert('Error in response')
+        alert(response.status);
+        alert(response.statusText)
+      } else {
+        response.json().then((data) => {
+            // Go to callback function
+            callback(this, data);
+        })
+      }
+    });
+  }
+
     componentDidMount(){
-        
-        fetch('http://127.0.0.1:8000/agent/GetClient/', 
+        // Prepare fetch call arguments
+        let getClientBody = {
+            email: this.props.navigation.getParam('email'),
+            client_type: this.props.navigation.getParam('client_type')
+        };
+        let clientStepsBody = {
+            email: this.props.navigation.getParam('email'),
+            client_type: this.props.navigation.getParam('client_type')
+        };
+
+        // Make async fetch calls
+        this.pushStatetoWeb(this.getClientURL, getClientBody, this.getClientStateTransition);
+        this.pushStatetoWeb(this.clientStepsURL, clientStepsBody, this.clientStepsStateTransition);
+
+        /*fetch('http://127.0.0.1:8000/agent/GetClient/', 
             {
             method: 'POST',
             headers: {
@@ -121,7 +237,7 @@ export default class Steps extends Component{
           })
           .catch((error) =>{
             console.error(error);
-        });
+        });*/
         console.log('stepscopy')
         console.log(this.state.stepscopy)
         console.log(this.state.steps)
@@ -149,6 +265,7 @@ export default class Steps extends Component{
 
     back(){
         //navigate
+        this.props.navigation.goBack();
     }
 
     changeCurrentChecked(id) {
@@ -203,8 +320,24 @@ export default class Steps extends Component{
             addStepButton: false
         })
 
+        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
+        let postBody = {
+            steps:steps,
+            id: id,
+            steps_complete: steps_complete,
+            steps_percentage: steps_percentage,
+            steps_deleted: steps_deleted,
+            total_steps: total_steps
+        };
+        let stateTransition = function(parent, data) {
+            parent.setState({
+                steps_deleted: []
+            })
+        }
+        this.pushStatetoWeb(postURL, postBody, stateTransition);
 
-        fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
+
+        /*fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
             {
               method: 'POST',
               headers: {
@@ -227,7 +360,7 @@ export default class Steps extends Component{
                 })
                 .catch((error) => {
                   console.error(error);
-                });
+                });*/
 
     }
 
@@ -239,7 +372,33 @@ export default class Steps extends Component{
         let total_steps = this.state.total_steps + 1
         let steps_percentage = Math.round(((this.state.steps_complete)/total_steps) * 100)
 
-        fetch('http://127.0.0.1:8000/agent/AddStep/', 
+        let postURL = ApiEndpoints.url + ApiEndpoints.addstepPath;
+        let postBody = {
+            id: id,
+            newStepName: newStepName,
+            newStepDate: newStepDate,
+            total_steps: total_steps,
+            steps_percentage: steps_percentage      
+        };
+
+        let stateTransition = function(parent, data) {
+            // Prepare fetch call arguments
+            let refreshPostBody = {
+                email: parent.state.email,
+                client_type: parent.state.client_type
+            };
+
+            // Refresh clients
+            parent.pushStatetoWeb(parent.getClientURL, refreshPostBody, parent.getClientStateTransition);
+
+            // Refresh steps
+            parent.pushStatetoWeb(parent.clientStepsURL, refreshPostBody, parent.clientStepsStateTransition);
+
+        }
+
+        this.pushStatetoWeb(postURL, postBody, stateTransition);
+
+        /*fetch('http://127.0.0.1:8000/agent/AddStep/', 
             {
               method: 'POST',
               headers: {
@@ -320,7 +479,7 @@ export default class Steps extends Component{
                 })
                 .catch((error) => {
                   console.error(error);
-                });
+                });*/
         
 
         
@@ -364,7 +523,24 @@ export default class Steps extends Component{
 
         })
 
-        fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
+        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
+        let postBody = {
+            steps:steps,
+            id: id,
+            steps_complete: steps_complete,
+            steps_percentage: steps_percentage,
+            steps_deleted: steps_deleted,
+            total_steps: total_steps
+        }
+        let stateTransition = function(parent, data) {
+            parent.setState({
+                steps_deleted: []
+            });
+        }
+
+        this.pushStatetoWeb(postURL, postBody, stateTransition);
+
+        /*fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
             {
               method: 'POST',
               headers: {
@@ -387,7 +563,7 @@ export default class Steps extends Component{
                 })
                 .catch((error) => {
                   console.error(error);
-                });
+                });*/
     };
 
     editModeChangeName(index, name){
@@ -459,7 +635,33 @@ export default class Steps extends Component{
         console.log('deletedSteps')
         console.log(steps_deleted)
 
-        fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
+        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
+        let postBody = {
+            steps: newSteps,
+            steps_deleted: steps_deleted,
+            id: id,
+            steps_complete: steps_complete_copy,
+            total_steps: total_steps_copy,
+            steps_percentage: steps_percentage    
+        };
+        let stateTransition = function(parent, data) {
+            // Prepare fetch call arguments
+            let refreshPostBody = {
+                email: parent.state.email,
+                client_type: parent.state.client_type
+            };
+
+            // Refresh clients
+            parent.pushStatetoWeb(parent.getClientURL, refreshPostBody, parent.getClientStateTransition);
+
+            // Refresh steps
+            parent.pushStatetoWeb(parent.clientStepsURL, refreshPostBody, parent.clientStepsStateTransition);
+
+        }
+
+        this.pushStatetoWeb(postURL, postBody, stateTransition);
+
+        /*fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
             {
               method: 'POST',
               headers: {
@@ -542,7 +744,7 @@ export default class Steps extends Component{
                 })
                 .catch((error) => {
                   console.error(error);
-                });
+                });*/
 
         
 
