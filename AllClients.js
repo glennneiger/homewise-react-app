@@ -15,13 +15,14 @@ export default class AllClients extends Component {
   constructor(props){
     super(props);
 
-      this.state = { 
-        //true = Buyer, false = Listings
-        client_type: true,
-        BuyingClients: [],
-        SellingClients: [],
-        UpcomingTasks: []
-      }
+    //true = Buyer, false = Listings
+
+    this.state = { 
+      client_type: true,
+      BuyingClients: [],
+      SellingClients: [],
+      UpcomingTasks: [],
+    }
   }
 
   getTokenFromStorage = async () => {
@@ -30,9 +31,9 @@ export default class AllClients extends Component {
   }
 
   // Async function to fetch web data and set state
-  fetchWebtoState = async (url, stateField) => {
+  fetchWebtoState = async (url, stateField, split = false) => {
     // Get Bearer Token
-    const bearerToken = await getTokenFromStorage();
+    const bearerToken = await this.getTokenFromStorage();
     // Build fetch arguments
     let headerData = {
       'Content-Type': 'application/json',
@@ -46,11 +47,15 @@ export default class AllClients extends Component {
     .then((response) => {
       if (!response.ok) {
         // Handle error
+        alert('Error in response')
       } else {
         response.json().then((data) => {
           // Set corresponding state field
+          if (split) {
+            data = data.slice(0, Math.min(data.length, 3))
+          }
           this.setState({
-            stateField: data
+            [stateField]: data
           })
         })
       }
@@ -64,11 +69,11 @@ export default class AllClients extends Component {
     let fetchTasksURL = ApiEndpoints.url + ApiEndpoints.upcomingstepsPath;
 
     // Make async fetch calls
-    /*fetchWebtoState(fetchBuyClientsURL, 'BuyingClients');
-    fetchWebtoState(fetchSellClientsURL, 'SellingClients');
-    fetchWebtoState(fetchTasksURL, 'UpcomingTasks');*/
+    this.fetchWebtoState(fetchBuyClientsURL, 'BuyingClients');
+    this.fetchWebtoState(fetchSellClientsURL, 'SellingClients');
+    this.fetchWebtoState(fetchTasksURL, 'UpcomingTasks', true);
 
-    fetch('http://127.0.0.1:8000/agent/Clients/?client_type=B', 
+    /*fetch('http://127.0.0.1:8000/agent/Clients/?client_type=B', 
       {
         method: 'GET',
         headers: {
@@ -129,7 +134,7 @@ export default class AllClients extends Component {
       })
       .catch((error) =>{
         console.error(error);
-    });  
+    });  */
 
     
     return true;
@@ -169,6 +174,7 @@ export default class AllClients extends Component {
       <View style = {{flex: 4}}>
       <FlatList
         data = { this.state.UpcomingTasks }
+        ListEmptyComponent = { <Text> No tasks </Text> }
         renderItem={({item}) =>
           //<View style={styles.GridViewBlockStyle}>
             <TouchableOpacity onPress={this.GetGridViewItem.bind(this, item.client.email, item.client.client_type)} style={styles.touchbutton1}>
@@ -211,21 +217,41 @@ export default class AllClients extends Component {
                 <Text style={{color: '#000', fontSize: 13}}>Add Client</Text>
             </TouchableOpacity>
         </View> 
-        <FlatList
-           data={ this.state.BuyingClients }
-           renderItem={({item}) =>
-            //<View style={styles.GridViewBlockStyle}>
-              <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
-                <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 15, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
-                <Text style={{marginTop: 5,}} >{item.first_name} {item.last_name}</Text>
-                <Text style={{marginTop: 5,fontSize: 8,color: '#666'}} >Commission</Text>
-                <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
-                    <Text style={{color: '#fff'}}>${item.commission_val}</Text>
-                </View>
-              </TouchableOpacity>
-            }
-          numColumns={2}
-        />
+        {this.state.client_type ?
+          <FlatList
+             data={ this.state.BuyingClients }
+             ListEmptyComponent = { <Text> No Clients </Text> }
+             renderItem={({item}) =>
+              //<View style={styles.GridViewBlockStyle}>
+                <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
+                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 15, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
+                  <Text style={{marginTop: 5,}} >{item.first_name} {item.last_name}</Text>
+                  <Text style={{marginTop: 5,fontSize: 8,color: '#666'}} >Commission</Text>
+                  <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
+                      <Text style={{color: '#fff'}}>${item.commission_val}</Text>
+                  </View>
+                </TouchableOpacity>
+              }
+            numColumns={2}
+          />
+          :
+          <FlatList
+             data={ this.state.SellingClients }
+             ListEmptyComponent = { <Text> No Clients </Text> }
+             renderItem={({item}) =>
+              //<View style={styles.GridViewBlockStyle}>
+                <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
+                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 15, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
+                  <Text style={{marginTop: 5,}} >{item.first_name} {item.last_name}</Text>
+                  <Text style={{marginTop: 5,fontSize: 8,color: '#666'}} >Commission</Text>
+                  <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
+                      <Text style={{color: '#fff'}}>${item.commission_val}</Text>
+                  </View>
+                </TouchableOpacity>
+              }
+            numColumns={2}
+          />
+        }
       </View>
     </ScrollView>
   </View>
