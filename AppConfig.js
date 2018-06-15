@@ -13,7 +13,8 @@ export let ApiEndpoints = {
 	'clientPath': '/agent/Client/',
 	'clientlistPath': '/agent/Clients/',
 	'agentPath': '/agent/Agent/',
-	'agentlistPath': '/agent/Agents/'
+	'agentlistPath': '/agent/Agents/',
+	'upcomingstepsPath': '/agent/UpcomingSteps/'
 }
 
 export let StorageKeys = {

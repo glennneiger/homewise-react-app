@@ -16,7 +16,6 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import PercentageCircle from 'react-native-percentage-circle';
 import DatePicker from 'react-native-datepicker';
 import Numeral from 'numeral';
-import Swipeout from 'react-native-swipeout';
 
 export default class Steps extends Component{
     constructor() {

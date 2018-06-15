@@ -1,26 +1,72 @@
 import React, { Component } from 'react';
 
-import { AppRegistry, StyleSheet, FlatList, Text, View, Alert, Platform, TouchableOpacity, ScrollView } from 'react-native';
+import { AppRegistry, StyleSheet, FlatList, Text, View, Alert, Platform, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native';
 import PercentageCircle from 'react-native-percentage-circle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackNavigator } from 'react-navigation';
 
 import Steps from './Steps'
 
+import { ApiEndpoints, StorageKeys } from './AppConfig'
+
 export default class AllClients extends Component {
  
   constructor(props){
     super(props);
 
-    this.state = { 
-      //true = Buyer, false = Listings
-      client_type: true,
-      BuyingClients: [],
-      SellingClients: [],
-      UpcomingTasks: []
-    }
+      this.state = { 
+        //true = Buyer, false = Listings
+        client_type: true,
+        BuyingClients: [],
+        SellingClients: [],
+        UpcomingTasks: []
+      }
   }
+
+  getTokenFromStorage = async () => {
+    const token = await AsyncStorage.getItem(StorageKeys.authToken);
+    return token;
+  }
+
+  // Async function to fetch web data and set state
+  fetchWebtoState = async (url, stateField) => {
+    // Get Bearer Token
+    const bearerToken = await getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'GET',
+      'headers': headerData
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+      } else {
+        response.json().then((data) => {
+          // Set corresponding state field
+          this.setState({
+            stateField: data
+          })
+        })
+      }
+    });
+  }
+
   componentDidMount(){
+    // Build URLs for fetch calls
+    let fetchBuyClientsURL = ApiEndpoints.url + ApiEndpoints.clientlistPath + '?client_type=B';
+    let fetchSellClientsURL = ApiEndpoints.url + ApiEndpoints.clientlistPath + '?client_type=S';
+    let fetchTasksURL = ApiEndpoints.url + ApiEndpoints.upcomingstepsPath;
+
+    // Make async fetch calls
+    /*fetchWebtoState(fetchBuyClientsURL, 'BuyingClients');
+    fetchWebtoState(fetchSellClientsURL, 'SellingClients');
+    fetchWebtoState(fetchTasksURL, 'UpcomingTasks');*/
+
     fetch('http://127.0.0.1:8000/agent/Clients/?client_type=B', 
       {
         method: 'GET',
@@ -83,8 +129,11 @@ export default class AllClients extends Component {
       .catch((error) =>{
         console.error(error);
     });  
+
+    
     return true;
   }
+
 
   GetGridViewItem (email, client_type) {
     this.props.navigation.navigate('Steps', {
