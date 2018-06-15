@@ -153,6 +153,9 @@ export default class Steps extends Component{
         alert(response.statusText)
       } else {
         response.json().then((data) => {
+            // Trigger refresh hook
+            hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
+            hook();
             // Go to callback function
             callback(this, data);
         })

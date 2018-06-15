@@ -22,7 +22,10 @@ export default class AllClients extends Component {
       BuyingClients: [],
       SellingClients: [],
       UpcomingTasks: [],
+      needToRefresh: true
     }
+
+    this.refreshData = this.refreshData.bind(this);
   }
 
   getTokenFromStorage = async () => {
@@ -72,6 +75,10 @@ export default class AllClients extends Component {
     this.fetchWebtoState(fetchBuyClientsURL, 'BuyingClients');
     this.fetchWebtoState(fetchSellClientsURL, 'SellingClients');
     this.fetchWebtoState(fetchTasksURL, 'UpcomingTasks', true);
+
+    this.setState({
+      needToRefresh: false
+    });
 
     /*fetch('http://127.0.0.1:8000/agent/Clients/?client_type=B', 
       {
@@ -140,11 +147,18 @@ export default class AllClients extends Component {
     return true;
   }
 
+  refreshData () {
+    this.setState({
+      needToRefresh: true
+    });
+  } 
+
 
   GetGridViewItem (email, client_type) {
     this.props.navigation.navigate('Steps', {
         email: email,
-        client_type: client_type
+        client_type: client_type,
+        refresh_hook: this.refreshData
     })
   }
 
@@ -166,6 +180,22 @@ export default class AllClients extends Component {
 
 
  render() {
+  if(this.state.needToRefresh) {
+    // Build URLs for fetch calls
+    let fetchBuyClientsURL = ApiEndpoints.url + ApiEndpoints.clientlistPath + '?client_type=B';
+    let fetchSellClientsURL = ApiEndpoints.url + ApiEndpoints.clientlistPath + '?client_type=S';
+    let fetchTasksURL = ApiEndpoints.url + ApiEndpoints.upcomingstepsPath;
+
+    // Make async fetch calls
+    this.fetchWebtoState(fetchBuyClientsURL, 'BuyingClients');
+    this.fetchWebtoState(fetchSellClientsURL, 'SellingClients');
+    this.fetchWebtoState(fetchTasksURL, 'UpcomingTasks', true);
+
+    this.setState({
+      needToRefresh: false
+    })
+  }
+
    return (
 
     <View style={styles.MainContainer}>
