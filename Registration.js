@@ -14,7 +14,8 @@
   ScrollView,
   Dimensions,
   Image,
-  View
+  View,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 
@@ -38,13 +39,17 @@ class Registration extends Component {
   }
    signUp(){
         const {email, password, users, date, first_name, last_name, retypePass } = this.state
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
         
 
         if(first_name == '' || last_name == '' || email == '' || password == '' || retypePass == '' || date == ''){
             alert('All Fields Required')
         }
-        if(!_validateEmail(email)){
-            alert('invalid email')
+        else if(password.length <= 8){
+          alert('Password Must Be at Least 8 Characters Long')
+        }
+        else if(reg.test(email) === false){
+          alert('Invalid Email')
         }
         else if(password != retypePass){
             alert('Passwords Do Not Match')
@@ -75,7 +80,7 @@ class Registration extends Component {
               }),
             }).then((response) => response.json())
                 .then((responseJson) => {
-                  alert(responseJson);
+                  alert('test');
                 })
                 .catch((error) => {
                   console.error(error);
@@ -95,11 +100,12 @@ class Registration extends Component {
     return (
       <View style ={styles.header}>
       <View style={{flex:1}}>
+      <KeyboardAvoidingView behavior="position" enabled>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
+          <Image style={{width: 70, height: 70, marginTop: 40, paddingBottom: 0}} 
               source={require('./Homewise.jpg')}/>
-          <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Create an Account</Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 45}}>Create an Account</Text>
         </View>
         <View style={{flex:9}}>
         <View style={styles.container}>
@@ -109,7 +115,8 @@ class Registration extends Component {
                   <Text style={styles.captionText}>First Name</Text>
                 </View>
                 <View style={styles.row}>
-                  <TextInput
+                  <TextInput 
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
@@ -122,6 +129,7 @@ class Registration extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
@@ -134,6 +142,7 @@ class Registration extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
@@ -150,7 +159,7 @@ class Registration extends Component {
                             date={this.state.date}
                             showIcon= {false}
                             mode="date"
-                            placeholder="select date"
+                            placeholder="Birthday"
                             format="MM/DD/YYYY"
                             minDate="1900-01-01"
                             maxDate="2017-12-31"
@@ -169,6 +178,7 @@ class Registration extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
@@ -180,6 +190,7 @@ class Registration extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
@@ -202,7 +213,7 @@ class Registration extends Component {
                 <View style={styles.row}>
                   <TextInput
                     style={styles.values}
-                    keyboardType = {'default'}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '123'
                     onChangeText = {(text)=> this.setState({mls_id: text})}>
@@ -220,8 +231,9 @@ class Registration extends Component {
         </View> 
         </View>
         </ScrollView>
+        </KeyboardAvoidingView>
       </View> 
-      </View>    
+      </View>  
     );
   }
 }
@@ -235,7 +247,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
     flex:8,
@@ -287,11 +300,24 @@ const styles = StyleSheet.create({
     paddingRight: 10,
 
     textAlign: 'right',
+    marginRight: 20,
+    flex:7,
+    borderColor: '#D3D3D3',
+    borderBottomWidth: 1,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    height: 40,
+    fontSize: 20,
+    paddingRight: 10,
+
+    textAlign: 'right',
     //backgroundColor: '#F7F7F5'
   },
   submitButton: {
     marginRight: 35,
     marginLeft: 35,
+    marginTop: 15,
+    marginBottom: 15, 
 
     flex:9.5,
     borderColor: '#D3D3D3',

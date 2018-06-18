@@ -8,11 +8,13 @@ import {
   ScrollView,
   Dimensions,
   Image,
-  View
+  View,
+  KeyboardAvoidingView
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import States from './States'
 import ClientType from './ClientType'
+import Numeral from 'numeral';
 
 const {width, height} = Dimensions.get('window')
 
@@ -62,15 +64,22 @@ class NewClient extends Component {
 
   signUp(){
         const {email, phone_number, street_address, city, first_name, last_name, states, zip_code, est_house_commish, commission } = this.state
-        
-
-        if(first_name == '' || last_name == '' || email == '' || phone_number == '' || street_address == '' || city == '' || states == '' || zip_code == '' || est_house_commish == '' || commission == ''){
+         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+        if(client_type === 'B'){
+          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_house_commish == '' || commission == ''){
+            alert('All Field Required')
+          }
+          else if(reg.test(email) === false){
+            alert('Invalid Email')
+          } 
+        } else if(client_type === 'S') {
+          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || street_address == '' || city == '' || states == '' || zip_code == '' || est_house_commish == '' || commission == ''){
             alert('All Fields Required')
+          }
+          else if(reg.test(email) === false){
+            alert('Invalid Email')
+          }
         }
-
-        /*if(!_validateEmail(email)){
-            alert('invalid email')
-        }*/
 
         else{
             let email = this.state.email
@@ -89,7 +98,7 @@ class NewClient extends Component {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 2ORr1lpiLqlaFjHlBjX4qnsstGhn6S'
+                'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
               },
               body: JSON.stringify({
                 email:email,
@@ -127,6 +136,7 @@ class NewClient extends Component {
     return (
       <View style ={styles.header}>
       <View style={{flex:1}}>
+      <KeyboardAvoidingView behavior="position" enabled>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
           <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
@@ -194,9 +204,10 @@ class NewClient extends Component {
                 <View style={styles.row}>
                   <TextInput
                     style={styles.values}
-                    keyboardType = {'default'}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '1-800-HomeWise'
+                    maxLength = {10}
                     onChangeText = {(text)=> this.setState({phone_number: text})}>
                   </TextInput>
                 </View>
@@ -240,21 +251,29 @@ class NewClient extends Component {
                 <View style={styles.row}>
                   <TextInput
                     style={styles.values}
-                    keyboardType = {'default'}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '00000'
+                    maxLength = {5}
                     onChangeText = {(text)=> this.setState({zip_code: text})}>
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
-                  <Text style={styles.captionText}>Estimated House Commission</Text>
+                  <Text style={styles.captionText}>Estimated House Value</Text>
                 </View>
                 <View style={styles.row}>
                   <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
+                    style={styles.dollaSign}
+                    keyboardType = {'numeric'}
+                    value = '$'
+                    editable={false}>
+                  </TextInput>
+                  <TextInput
+                    style={styles.valuescom}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '000000'
+                    value = {Numeral((this.state.est_house_commish).toString()).format('0,0')}
                     onChangeText = {(text)=> this.setState({est_house_commish: text})}>
                   </TextInput>
                 </View>
@@ -263,10 +282,17 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
+                    style={styles.percentSign}
+                    keyboardType = {'numeric'}
+                    value = '%'
+                    editable={false}>
+                  </TextInput>
+                  <TextInput
+                    style={styles.valuescom}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
-                    placeholder = '00000'
+                    maxLength = {2}
+                    placeholder = '15'
                     onChangeText = {(text)=> this.setState({commission: text})}>
                   </TextInput>
                 </View>
@@ -322,9 +348,10 @@ class NewClient extends Component {
                 <View style={styles.row}>
                   <TextInput
                     style={styles.values}
-                    keyboardType = {'default'}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '1-800-HomeWise'
+                    maxLength = {10}
                     onChangeText = {(text)=> this.setState({phone_number: text})}>
                   </TextInput>
                 </View>
@@ -333,10 +360,17 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
+                    style={styles.dollaSign}
+                    keyboardType = {'numeric'}
+                    value = '$'
+                    editable={false}>
+                  </TextInput>
+                  <TextInput
+                    style={styles.valuescom}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '000000'
+                    value = {Numeral((this.state.est_house_commish).toString()).format('0,0')}
                     onChangeText = {(text)=> this.setState({est_house_commish: text})}>
                   </TextInput>
                 </View>
@@ -345,10 +379,17 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
-                    style={styles.values}
-                    keyboardType = {'default'}
+                    style={styles.percentSign}
+                    keyboardType = {'numeric'}
+                    value = '%'
+                    editable={false}>
+                  </TextInput>
+                  <TextInput
+                    style={styles.valuescom}
+                    keyboardType = {'numeric'}
                     returnKeyType = {'done'}
-                    placeholder = '00000'
+                    maxLength = {2}
+                    placeholder = '15'
                     onChangeText = {(text)=> this.setState({commission: text})}>
                   </TextInput>
                 </View>
@@ -369,8 +410,9 @@ class NewClient extends Component {
         </View> 
         </View>
         </ScrollView>
+        </KeyboardAvoidingView>
       </View> 
-      </View>    
+      </View>   
     );
   }
 }
@@ -430,6 +472,47 @@ const styles = StyleSheet.create({
 
     textAlign: 'right',
     //backgroundColor: '#F7F7F5'
+  },
+  valuescom: {
+    marginRight: 35,
+    flex:7,
+    borderColor: '#D3D3D3',
+    borderBottomWidth: 1,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    height: 40,
+    fontSize: 20,
+    paddingRight: 10,
+
+    textAlign: 'right',
+    //backgroundColor: '#F7F7F5'
+  },
+  dollaSign: {
+    marginLeft: 35,
+    flex:0.5,
+    borderColor: '#D3D3D3',
+    borderBottomWidth: 1,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    height: 40,
+    fontSize: 20,
+
+    paddingLeft: 5,
+    textAlign: 'left',
+    //backgroundColor: '#F7F7F5'
+  },
+  percentSign: {
+    marginLeft: 35,
+    flex:0.5,
+    borderColor: '#D3D3D3',
+    borderBottomWidth: 1,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    height: 40,
+    fontSize: 20,
+
+    paddingLeft: 5,
+    textAlign: 'left',
   },
   submitButton: {
     marginRight: 35,

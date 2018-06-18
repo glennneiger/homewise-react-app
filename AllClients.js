@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { AppRegistry, StyleSheet, FlatList, Text, View, Alert, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import PercentageCircle from 'react-native-percentage-circle';
-import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackNavigator } from 'react-navigation';
 
@@ -26,7 +25,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer T4WVWr0iW5ICFMrAKPj3HqvmYzebka'
+          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
         }
       })
       .then((response) => response.json())
@@ -47,7 +46,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer T4WVWr0iW5ICFMrAKPj3HqvmYzebka'
+          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
         }
       })
       .then((response) => response.json())
@@ -68,7 +67,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer T4WVWr0iW5ICFMrAKPj3HqvmYzebka'
+          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
         }
       })
       .then((response) => response.json())

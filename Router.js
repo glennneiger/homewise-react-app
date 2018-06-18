@@ -38,7 +38,10 @@ export const Clients = StackNavigator(
     screen: Steps
   },
   NewClient:{
-    screen: NewClient
+    screen: NewClient,
+    navigationOptions: {
+      headerTintColor: 'white'
+    }
   }
 });
 

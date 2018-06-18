@@ -8,7 +8,8 @@ import {
   LayoutAnimation, 
   UIManager, 
   Platform,
-  ART
+  ART,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -45,7 +46,7 @@ export default class CalcScreens extends Component {
   render () {
     console.disableYellowBox = true;
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <View style={styles.otherStuff}>
           
           {this.state.ROIScreen?
@@ -109,7 +110,7 @@ export default class CalcScreens extends Component {
         <View style={{flex: 9.2}}>
           {this.calcDisplay()}
         </View>
-      </View>
+      </KeyboardAvoidingView>
 
     );
   }
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 10,
-    paddingTop:5,
+    paddingTop: 5,
     paddingBottom:5,
     borderBottomLeftRadius: 4,
     borderTopLeftRadius: 4,
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
 
 
   otherStuff: {
-    flex:0.8,
+    flex:0.9,
     flexDirection: 'row'
   },
 

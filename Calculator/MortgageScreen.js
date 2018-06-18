@@ -8,7 +8,8 @@ import {
   TouchableOpacity, 
   LayoutAnimation, 
   UIManager, 
-  Platform
+  Platform,
+  KeyboardAvoidingView
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -130,7 +131,7 @@ class MortgageScreen extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <ScrollView ref='_scrollView'>
           <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
             <TouchableOpacity
@@ -258,7 +259,7 @@ class MortgageScreen extends Component {
                    <Text style = {styles.submitButtonText2}> Calculate </Text>
           </TouchableOpacity>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 

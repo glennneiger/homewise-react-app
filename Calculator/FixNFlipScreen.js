@@ -9,7 +9,8 @@ import {
   LayoutAnimation, 
   UIManager, 
   Platform,
-  ART
+  ART,
+  KeyboardAvoidingView
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { AnimatedGaugeProgress, GaugeProgress } from 'react-native-simple-gauge';
@@ -163,7 +164,7 @@ class FixNFlipScreen extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
         <ScrollView ref='_scrollView'>
           <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
@@ -389,7 +390,7 @@ class FixNFlipScreen extends Component {
                    <Text style = {styles.submitButtonText2}> Calculate </Text>
           </TouchableOpacity>
         </ScrollView>        
-      </View>      
+      </KeyboardAvoidingView>      
     );
   }
 

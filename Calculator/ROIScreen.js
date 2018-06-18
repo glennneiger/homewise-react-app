@@ -9,7 +9,8 @@ import {
   LayoutAnimation, 
   UIManager, 
   Platform,
-  ART
+  ART,
+  KeyboardAvoidingView
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { AnimatedGaugeProgress, GaugeProgress } from 'react-native-simple-gauge';
@@ -151,7 +152,7 @@ class ROIScreen extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
           <View style={styles.container}>
             <ScrollView ref='_scrollView'>
@@ -385,7 +386,7 @@ class ROIScreen extends Component {
         
 
 
-      </View>      
+      </KeyboardAvoidingView>      
     );
   }
 
