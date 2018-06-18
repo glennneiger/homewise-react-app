@@ -29,11 +29,11 @@ class NewClient extends Component {
       last_name:'',
       email:'',
       phone_number:'',
-      street_address:'',
+      address:'',
       city: '',
-      states:'',
-      zip_code:'',
-      est_house_commish: 0,
+      state:'',
+      zipcode:'',
+      est_price: 0,
       commission: 0,
       client_type: '',
       display_form: false
@@ -136,17 +136,17 @@ class NewClient extends Component {
   }
 
   signUp(){
-        const {email, phone_number, street_address, city, first_name, last_name, states, zip_code, est_house_commish, commission } = this.state
+        const {email, phone_number, address, city, first_name, last_name, state, zipcode, est_price, commission } = this.state
          let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
         if(client_type === 'B'){
-          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_house_commish == '' || commission == ''){
+          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_price == '' || commission == ''){
             alert('All Field Required')
           }
           else if(reg.test(email) === false){
             alert('Invalid Email')
           } 
         } else if(client_type === 'S') {
-          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || street_address == '' || city == '' || states == '' || zip_code == '' || est_house_commish == '' || commission == ''){
+          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || address == '' || city == '' || state == '' || zipcode == '' || est_price == '' || commission == ''){
             alert('All Fields Required')
           }
           else if(reg.test(email) === false){
@@ -155,15 +155,16 @@ class NewClient extends Component {
         }
 
         else{
+            let client_type = this.state.client_type
             let email = this.state.email
             let first_name = this.state.first_name
             let last_name = this.state.last_name
             let phone_number = this.state.phone_number
-            let street_address = this.state.street_address
+            let address = this.state.address
             let city = this.state.city
-            let states = this.state.states
-            let zip_code = this.state.zip_code
-            let est_house_commish = this.state.est_house_commish
+            let state = this.state.state
+            let zipcode = this.state.zipcode
+            let est_price = this.state.est_price
             let commission = this.state.commission
 
             // Build URL
@@ -175,12 +176,13 @@ class NewClient extends Component {
                 first_name:first_name,
                 last_name:last_name,
                 phone_number:phone_number,
-                street_address:street_address,
+                address:address,
                 city:city,
-                states:states, 
-                zip_code:zip_code,
-                est_house_commish: est_house_commish,
-                commission: commission              
+                state:state, 
+                zipcode:zipcode,
+                est_price: est_price,
+                commission: commission,
+                client_type: client_type              
               };
 
             // Prepare callback after POST request
@@ -204,11 +206,11 @@ class NewClient extends Component {
                 first_name:first_name,
                 last_name:last_name,
                 phone_number:phone_number,
-                street_address:street_address,
+                address:address,
                 city:city,
-                states:states, 
-                zip_code:zip_code,
-                est_house_commish: est_house_commish,
+                state:state, 
+                zipcode:zipcode,
+                est_price: est_price,
                 commission: commission
               }),
             }).then((response) => response.json())
@@ -270,6 +272,7 @@ class NewClient extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'John'
+                    maxLength = {99}
                     onChangeText = {(text)=> this.setState({first_name: text})}>
                   </TextInput>
                 </View>
@@ -282,6 +285,7 @@ class NewClient extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'Doe'
+                    maxLength = {99}
                     onChangeText = {(text)=> this.setState({last_name: text})}>
                   </TextInput>
                 </View>
@@ -293,6 +297,8 @@ class NewClient extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    autoCapitalize = 'none'
+                    maxLength = {253}
                     placeholder = 'john.doe@gmail.com'
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
@@ -319,7 +325,8 @@ class NewClient extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = '24 Quiet Road'
-                    onChangeText = {(text)=> this.setState({street_address: text})}>
+                    maxLength = {99}
+                    onChangeText = {(text)=> this.setState({address: text})}>
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
@@ -331,6 +338,7 @@ class NewClient extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'Charlotte'
+                    maxLength = {29}
                     onChangeText = {(text)=> this.setState({city: text})}>
                   </TextInput>
                 </View>
@@ -341,7 +349,7 @@ class NewClient extends Component {
                   <Dropdown
                     data = {States}
                     containerStyle = {styles.rowdate}
-                    onChangeText = {(text)=> this.setState({states: text})}>
+                    onChangeText = {(text)=> this.setState({state: text})}>
                   </Dropdown>
                 </View>
                 <View style={styles.caption}>
@@ -354,7 +362,7 @@ class NewClient extends Component {
                     returnKeyType = {'done'}
                     placeholder = '00000'
                     maxLength = {5}
-                    onChangeText = {(text)=> this.setState({zip_code: text})}>
+                    onChangeText = {(text)=> this.setState({zipcode: text})}>
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
@@ -372,8 +380,8 @@ class NewClient extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '000000'
-                    value = {Numeral((this.state.est_house_commish).toString()).format('0,0')}
-                    onChangeText = {(text)=> this.setState({est_house_commish: text})}>
+                    //value = {Numeral((this.state.est_price).toString()).format('0,0')}
+                    onChangeText = {(text)=> this.setState({est_price: text})}>
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
@@ -414,6 +422,7 @@ class NewClient extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'John'
+                    maxLength = {99}
                     onChangeText = {(text)=> this.setState({first_name: text})}>
                   </TextInput>
                 </View>
@@ -426,6 +435,7 @@ class NewClient extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'Doe'
+                    maxLength = {99}
                     onChangeText = {(text)=> this.setState({last_name: text})}>
                   </TextInput>
                 </View>
@@ -437,7 +447,9 @@ class NewClient extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    autoCapitalize = 'none'
                     placeholder = 'john.doe@gmail.com'
+                    maxLength = {253}
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
                 </View>
@@ -469,8 +481,8 @@ class NewClient extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '000000'
-                    value = {Numeral((this.state.est_house_commish).toString()).format('0,0')}
-                    onChangeText = {(text)=> this.setState({est_house_commish: text})}>
+                    //value = {Numeral((this.state.est_price).toString()).format('0,0')}
+                    onChangeText = {(text)=> this.setState({est_price: text})}>
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
@@ -525,7 +537,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
     flex:8,

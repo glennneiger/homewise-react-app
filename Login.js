@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, ScrollView, Image, TextInput, Button, StyleSheet, LoginRender, AsyncStorage } from 'react-native'
+import { Platform, View, Text, TouchableOpacity, ScrollView, Image, TextInput, Button, StyleSheet, LoginRender, AsyncStorage } from 'react-native'
 import { StackNavigator } from 'react-navigation';
 
 
@@ -123,6 +123,7 @@ class Login extends Component {
                   <TextInput
                     style={styles.values}
                     keyboardType = {'default'}
+                    autoCapitalize = 'none'
                     returnKeyType = {'done'}
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
@@ -187,7 +188,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
     flex:8,

@@ -911,6 +911,7 @@ export default class Steps extends Component{
                                                 value={item.name}
                                                 keyboardType = {'default'}
                                                 returnKeyType = {'done'}
+                                                maxLength = {60}
                                                 onChangeText = {(name)=> this.editModeChangeName(index, name)}
                                             >
                                             </TextInput>
