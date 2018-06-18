@@ -7,7 +7,7 @@ import React, { Component } from 'react';
   View
 } from 'react-native';
 import {
-  StackNavigator, TabNavigator
+  StackNavigator, TabNavigator, createSwitchNavigator
 } from 'react-navigation';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 
@@ -23,10 +23,13 @@ import AgentProfile from './AgentProfile'
 import CompsPreview from './CompsPreview'
 
 
+
 import NewClient from './NewClient'
 import States from './States'
 
 import ChangePassword from './ChangePassword';
+
+import AuthLoadingScreen from './AuthLoadingScreen'
 
 
 export const Clients = StackNavigator(
@@ -102,4 +105,15 @@ export const HomeNav = StackNavigator(
           screen: ChangePassword,
         }
     }
+);
+
+export const AuthNav = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: Tabs,
+    Auth: HomeNav,  
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  }
 );
