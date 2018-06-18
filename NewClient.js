@@ -8,11 +8,13 @@ import {
   ScrollView,
   Dimensions,
   Image,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import States from './States'
 import ClientType from './ClientType'
+import { ApiEndpoints, StorageKeys } from './AppConfig'
 
 const {width, height} = Dimensions.get('window')
 
@@ -60,6 +62,74 @@ class NewClient extends Component {
     }
   }
 
+  getTokenFromStorage = async () => {
+    const token = await AsyncStorage.getItem(StorageKeys.authToken);
+    return token;
+  }
+
+  // Async function to fetch web data and set state
+  fetchWebtoState = async (url, stateField) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'GET',
+      'headers': headerData
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        alert('Error in response')
+      } else {
+        response.json().then((data) => {
+          // Set corresponding state field
+          this.setState({
+            [stateField]: data
+          })
+        })
+      }
+    });
+  }
+
+  // Async function to POST web data from state, and subsequently set state
+  pushStatetoWeb = async (url, bodyData, callback) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'POST',
+      'headers': headerData,
+      'body': JSON.stringify(bodyData)
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        alert('Error in response')
+        alert(response.status);
+        alert(response.statusText)
+      } else {
+        response.json().then((data) => {
+            // Trigger refresh hook
+            //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
+            //hook();
+            this.props.navigation.state.params.refresh();
+            // Go to callback function
+            callback(this, data);
+        })
+      }
+    });
+  }
+
   signUp(){
         const {email, phone_number, street_address, city, first_name, last_name, states, zip_code, est_house_commish, commission } = this.state
         
@@ -84,7 +154,32 @@ class NewClient extends Component {
             let est_house_commish = this.state.est_house_commish
             let commission = this.state.commission
 
-            fetch('http://127.0.0.1:8000/agent/AddClient/', 
+            // Build URL
+            let addclientURL = ApiEndpoints.url + ApiEndpoints.addclientPath;
+
+            // Prepare fetch call arguments
+            let addclientBody = {
+                email:email,
+                first_name:first_name,
+                last_name:last_name,
+                phone_number:phone_number,
+                street_address:street_address,
+                city:city,
+                states:states, 
+                zip_code:zip_code,
+                est_house_commish: est_house_commish,
+                commission: commission              
+              };
+
+            // Prepare callback after POST request
+            let stateTransition = function(parent, data) {
+              parent.props.navigation.navigate('AllClients');
+            }
+
+            // Make fetch call
+            this.pushStatetoWeb(addclientURL, addclientBody, stateTransition);
+
+            /*fetch('http://127.0.0.1:8000/agent/AddClient/', 
             {
               method: 'POST',
               headers: {
@@ -109,7 +204,7 @@ class NewClient extends Component {
                 })
                 .catch((error) => {
                   console.error(error);
-                });
+                });*/
         }
 
     }
@@ -422,7 +517,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    height: 25,
+    height: 45,
     fontSize: 18,
     paddingRight: 10,
 
