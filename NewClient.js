@@ -9,7 +9,7 @@ import {
   Dimensions,
   Image,
   View,
-  AsyncStorage
+  AsyncStorage,
   KeyboardAvoidingView
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -129,6 +129,9 @@ class NewClient extends Component {
             callback(this, data);
         })
       }
+    })
+    .catch((error) => {
+      alert(error);
     });
   }
 
@@ -182,6 +185,7 @@ class NewClient extends Component {
 
             // Prepare callback after POST request
             let stateTransition = function(parent, data) {
+              alert('Saved in backend!');
               parent.props.navigation.navigate('AllClients');
             }
 
