@@ -120,6 +120,7 @@ class Registration extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    maxLength = {99}
                     placeholder = 'John'
                     onChangeText = {(text)=> this.setState({first_name: text})}>
                   </TextInput>
@@ -133,6 +134,7 @@ class Registration extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    maxLength = {99}
                     placeholder = 'Doe'
                     onChangeText = {(text)=> this.setState({last_name: text})}>
                   </TextInput>
@@ -145,7 +147,9 @@ class Registration extends Component {
                     autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
+                    autoCapitalize = 'none'
                     returnKeyType = {'done'}
+                    maxLength = {253}
                     placeholder = 'john.doe@gmail.com'
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
@@ -216,6 +220,7 @@ class Registration extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '123'
+                    maxLength = {99}
                     onChangeText = {(text)=> this.setState({mls_id: text})}>
                   </TextInput>
                 </View>

@@ -178,7 +178,8 @@ class AgentProfile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
     flex:8,
