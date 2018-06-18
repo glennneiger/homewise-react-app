@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import { StackNavigator } from 'react-navigation';
 
+
 import Steps from './Steps'
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
@@ -85,7 +86,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
+          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
         }
       })
       .then((response) => response.json())
@@ -106,7 +107,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
+          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
         }
       })
       .then((response) => response.json())
@@ -127,7 +128,7 @@ export default class AllClients extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
+          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
         }
       })
       .then((response) => response.json())
@@ -135,7 +136,7 @@ export default class AllClients extends Component {
 
         this.setState({
           isLoading: false,
-          UpcomingTasks: responseJson.splice(2),
+          UpcomingTasks: responseJson.splice(0, 2),
         })
 
       })

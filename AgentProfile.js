@@ -33,7 +33,7 @@ class AgentProfile extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer f4ugvyVQxamd5ftLu4S0TtTV09Q5FZ'
+          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
         }
       })
       .then((response) => response.json())

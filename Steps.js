@@ -179,69 +179,6 @@ export default class Steps extends Component{
         this.pushStatetoWeb(this.getClientURL, getClientBody, this.getClientStateTransition);
         this.pushStatetoWeb(this.clientStepsURL, clientStepsBody, this.clientStepsStateTransition);
 
-        /*fetch('http://127.0.0.1:8000/agent/GetClient/', 
-            {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-            },
-            body: JSON.stringify({
-                email: this.props.navigation.getParam('email'),
-                client_type: this.props.navigation.getParam('client_type')
-            }),
-        }).then((response) => response.json())
-          .then((responseJson) => {
-            console.log('hi')
-            console.log(responseJson[0])
-            console.log(responseJson[0].total_steps)
-            this.setState({
-                id: responseJson[0].id,
-                first_name: responseJson[0].first_name,
-                last_name: responseJson[0].last_name,
-                email: responseJson[0].email,
-                client_type: responseJson[0].client_type,
-                phone_number: responseJson[0].phone_number,
-                address: responseJson[0].address,
-                city: responseJson[0].city,
-                state: responseJson[0].state,
-                zipcode: responseJson[0].zipcode,
-                steps_percentage: responseJson[0].steps_percentage,
-                total_steps: responseJson[0].total_steps,
-                steps_complete: responseJson[0].steps_complete,
-                commission_val: responseJson[0].commission_val,
-                total_steps_copy: responseJson[0].total_steps,
-                steps_complete_copy: responseJson[0].steps_complete,
-            })
-
-          })
-          .catch((error) =>{
-            console.error(error);
-        });
-
-        fetch('http://127.0.0.1:8000/agent/ClientSteps/', 
-            {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-            },
-            body: JSON.stringify({
-                email: this.props.navigation.getParam('email'),
-                client_type: this.props.navigation.getParam('client_type')
-            }),
-        }).then((response) => response.json())
-          .then((responseJson) => {
-            console.log(responseJson[0])
-            this.setState({
-                steps: responseJson,
-                stepscopy: responseJson
-            })
-
-          })
-          .catch((error) =>{
-            console.error(error);
-        });*/
         console.log('stepscopy')
         console.log(this.state.stepscopy)
         console.log(this.state.steps)

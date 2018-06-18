@@ -9,6 +9,8 @@ import React, { Component } from 'react';
 import {
   StackNavigator, TabNavigator, createSwitchNavigator
 } from 'react-navigation';
+import Icon2 from 'react-native-vector-icons/Ionicons';
+
 
 import HomeScreen from './HomeScreen';
 import Login from './Login';
@@ -18,6 +20,7 @@ import AllClients from './AllClients';
 import Steps from './Steps';
 import CalcScreens from './Calculator/CalcScreens'
 import AgentProfile from './AgentProfile'
+import CompsPreview from './CompsPreview'
 
 
 
@@ -38,7 +41,10 @@ export const Clients = StackNavigator(
     screen: Steps
   },
   NewClient:{
-    screen: NewClient
+    screen: NewClient,
+    navigationOptions: {
+      headerTintColor: 'white'
+    }
   }
 });
 
@@ -52,13 +58,32 @@ export const Calculators = StackNavigator(
 
 export const Tabs = TabNavigator({
   Clients: {
-    screen: Clients
+    screen: Clients,
+    navigationOptions: {
+      tabBarLabel: 'Clients',
+      tabBarIcon: ({ tintColor }) => <Icon2 name="md-contacts" size= {35} color ={tintColor}></Icon2>,
+    }
   },
   CalcScreens:{
-    screen: Calculators
+    screen: Calculators,
+    navigationOptions: {
+      tabBarLabel: 'Calculators',
+      tabBarIcon: ({ tintColor }) => <Icon2 name="md-calculator" size= {35} color ={tintColor}></Icon2>,
+    },
+  },
+   CompsPreview: {
+    screen: CompsPreview,
+    navigationOptions: {
+      tabBarLabel: 'Comps',
+      tabBarIcon: ({ tintColor }) => <Icon2 name="md-build" size= {35} color = {tintColor}></Icon2>, 
+    },
   },
   Profile:{
-    screen: AgentProfile
+    screen: AgentProfile,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({ tintColor }) => <Icon2 name="md-contact" size= {35} color = {tintColor}></Icon2>,
+    }
   }
 });
 

@@ -22,6 +22,7 @@ import Steps from './Steps';
 import AgentProfile from './AgentProfile'
 import NewClient from './NewClient'
 import States from './States'
+import CompsPreview from './CompsPreview'
 
 import {Clients, HomeNav} from './Router';
 import {Tabs} from './Router';

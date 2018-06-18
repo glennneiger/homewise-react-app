@@ -9,7 +9,8 @@ import {
   LayoutAnimation, 
   UIManager, 
   Platform,
-  ART
+  ART,
+  KeyboardAvoidingView
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { AnimatedGaugeProgress, GaugeProgress } from 'react-native-simple-gauge';
@@ -163,10 +164,10 @@ class FixNFlipScreen extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
         <ScrollView ref='_scrollView'>
-          <View style={{backgroundColor: '#EFE9F4',flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
             <TouchableOpacity
               onPress = {
               () => this._reset()
@@ -181,47 +182,49 @@ class FixNFlipScreen extends Component {
                 fill={Number.parseInt(this.state.roi, 10)}
                 rotation={90}
                 cropDegree={180}
-                tintColor="#4682b4"
-                backgroundColor="#b0c4de"
+                tintColor="#0091FF"
+                backgroundColor="#e7e7e7"
                 stroke={[2, 2]} 
                 strokeCap="circle">
                 <View style={styles.textView}>
-                  <Text style={styles.roiText}>{this.state.roi}%</Text>
-                  <Text>ROI</Text>
-                </View>
+                  <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
+                    <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
+                  </View>
+                  <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>ROI</Text>
+                  </View>
               </AnimatedGaugeProgress>
-              <View style={styles.otherStuff}>
-                <View style={styles.info}>
+              <View style={styles.fnfheaderval1}>
+                <View style={styles.fnfinfo}>
                   <Text style={styles.infoTextFixNFlip}>{this.state.roiAnnualized}%</Text>
-                  <Text>ROI</Text>
-                  <Text>Annualized</Text>
+                  <Text style={styles.subTextFixNFlip}>ROI</Text>
+                  <Text style={styles.subTextFixNFlip}>Annualized</Text>
                 </View>
-                <View style={styles.info}>
+                <View style={styles.fnfinfo}>
                   <Text style={styles.infoTextFixNFlip}>${this.state.totalCashInvested}</Text>
-                  <Text>Total Cash</Text>
-                  <Text>Invested</Text>
+                  <Text style={styles.subTextFixNFlip}>Total Cash</Text>
+                  <Text style={styles.subTextFixNFlip}>Invested</Text>
                 </View>
-                <View style={styles.info}>
+                <View style={styles.fnfinfo}>
                   <Text style={styles.infoTextFixNFlip}>${this.state.monthlyHoldingCosts}</Text>
-                  <Text>Monthly</Text>
-                  <Text>Holding Costs</Text>
+                  <Text style={styles.subTextFixNFlip}>Monthly</Text>
+                  <Text style={styles.subTextFixNFlip}>Holding Costs</Text>
                 </View>                
               </View>
-              <View style={styles.otherStuffs}>
-                <View style={styles.info}>
+              <View style={styles.fnfheaderval2}>
+                <View style={styles.fnfinfo}>
                   <Text style={styles.infoTextFixNFlip}>${this.state.totalProjectedPreTaxProfitsHalf}</Text>
-                  <Text>Profits</Text>
-                  <Text>{this.state.halfDaysHeld} Days</Text>
+                  <Text style={styles.subTextFixNFlip}>Profits</Text>
+                  <Text style={styles.subTextFixNFlip}>{this.state.halfDaysHeld} Days</Text>
                 </View>
-                <View style={styles.info}>
+                <View style={styles.fnfinfo}>
                   <Text style={styles.infoTextFixNFlip}>${this.state.totalProjectedPreTaxProfits}</Text>
-                  <Text>Profits</Text>
-                  <Text>{this.state.numberOfDaysHeld} Days</Text>
+                  <Text style={styles.subTextFixNFlip}>Profits</Text>
+                  <Text style={styles.subTextFixNFlip}>{this.state.numberOfDaysHeld} Days</Text>
                 </View>
-                <View style={styles.info}>
+                <View style={styles.fnfinfo}>
                   <Text style={styles.infoTextFixNFlip}>${this.state.totalProjectedPreTaxProfitsDouble}</Text>
-                  <Text>Profits</Text>
-                  <Text>{this.state.doubleDaysHeld} Days</Text>
+                  <Text style={styles.subTextFixNFlip}>Profits</Text>
+                  <Text style={styles.subTextFixNFlip}>{this.state.doubleDaysHeld} Days</Text>
                 </View>                
               </View>
             </View>
@@ -380,15 +383,14 @@ class FixNFlipScreen extends Component {
             <Row caption="Number of Days Held (Days)" sign='' value={Numeral((this.state.numberOfDaysHeld).toString()).format('0,0')} update={(numberOfDaysHeld) => this.setState({numberOfDaysHeld})}/>
           </View>
           <TouchableOpacity
-            style = {styles.submitButton}
-            onPress = {
-            //() => this._calculateROI(this.state.listPrice, this.state.rent)
-            () => this._calculate()
-            }>
-            <Text style = {styles.submitButtonText}> Calculate </Text>
+                   style = {styles.submitButton2}
+                   onPress = {
+                      () => this._calculate()
+                   }>
+                   <Text style = {styles.submitButtonText2}> Calculate </Text>
           </TouchableOpacity>
         </ScrollView>        
-      </View>      
+      </KeyboardAvoidingView>      
     );
   }
 
