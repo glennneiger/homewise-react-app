@@ -148,6 +148,7 @@ export default class AllClients extends Component {
   }
 
   refreshData () {
+    alert('Refreshing data');
     this.setState({
       needToRefresh: true
     });
@@ -158,7 +159,7 @@ export default class AllClients extends Component {
     this.props.navigation.navigate('Steps', {
         email: email,
         client_type: client_type,
-        refresh_hook: this.refreshData
+        refresh: this.refreshData
     })
   }
 
