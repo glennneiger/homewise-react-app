@@ -229,7 +229,7 @@ class AgentProfile extends Component {
                    <Text style = {styles.submitButtonText}> Change Password </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                   style = {styles.submitButton}
+                   style = {styles.submitButton2}
                    onPress = {
                       () => this.logout()
                    }>
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'row',
     marginBottom: 20,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   rowdate: {
     flex:1,
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
   },
   captionText: {
     fontSize: 16,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   values: {
     marginRight: 35,
@@ -311,7 +311,22 @@ const styles = StyleSheet.create({
    },
    submitButtonText:{
       color: 'white',
-   }
+   },
+   submitButton2: {
+    marginRight: 35,
+    marginLeft: 35,
+    marginTop: 20,
+    marginBottom: 20,
+
+    flex:9.5,
+    borderColor: '#D3D3D3',
+    height: 40,
+    fontSize: 18,
+    paddingRight: 10,
+    backgroundColor: 'rgb(65,147,237)',
+    justifyContent:'center', 
+    alignItems:'center'
+   },
 });
 
 
