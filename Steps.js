@@ -50,7 +50,7 @@ export default class Steps extends Component{
 
 
             newStepName: '',
-            newStepDate: '',
+            newStepDate: '01/01/2018',
 
             icon: true,
 
@@ -457,7 +457,9 @@ export default class Steps extends Component{
         this.setState({
             addStep: false,
             addStepButton: true,
-            steps_deleted: []
+            steps_deleted: [],
+            newStepDate: '01/01/2018',
+            newStepName: ''
         })   
     }
 
