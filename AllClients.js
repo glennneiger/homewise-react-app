@@ -215,6 +215,7 @@ export default class AllClients extends Component {
                     <Text>{item.name} ({item.client.first_name} {item.client.last_name})</Text>
                 </View>
                 <View style={{width: 20, alignItems: 'center', justifyContent: 'center'}} >
+                  <Icon name="angle-right" style={{fontSize: 20}} />
                 </View>
             </TouchableOpacity>
           }
