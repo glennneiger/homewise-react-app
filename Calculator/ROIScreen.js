@@ -151,6 +151,8 @@ class ROIScreen extends Component {
 
   render() {
 
+    let roiString = this.state.roi.toString() + '%';
+
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
@@ -175,10 +177,10 @@ class ROIScreen extends Component {
                   backgroundColor= '#e7e7e7'
                   stroke={[2, 2]} 
                   strokeCap="circle">
-                  <View style = {styles.textView}>
-                  <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
-                    <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
-                  </View>
+                  <View style = {styles.textView}> 
+                    <View style={styles.ROIViewStyle}>
+                      <Text style={styles.ROITextStyle}>{this.state.roi}%</Text>
+                    </View>
                   <Text style = {{color:'black', fontSize: 18}}>ROI</Text>
                   </View>
                 </AnimatedGaugeProgress>

@@ -297,7 +297,11 @@ const styles = StyleSheet.create({
       fontSize: 16,
       color: '#000',
       padding: 12
-  }
+  },
+
+  ROIViewStyle: {backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12},
+
+  ROITextStyle: {color: '#fff', fontSize: 17},
 
 });
 
