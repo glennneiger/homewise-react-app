@@ -109,6 +109,16 @@ class AgentProfile extends Component {
   
   }
 
+  logout() {
+    // Logout user
+    AsyncStorage.removeItem(StorageKeys.authToken)
+      .then(() => {
+        alert("Succesfully logged out.");
+        // Navigate to login flow
+        this.props.navigation.navigate('Auth');
+      });
+  }
+
     
 
   static navigationOptions = ({ navigation }) => {
@@ -217,6 +227,13 @@ class AgentProfile extends Component {
                       () => this.signUp()
                    }>
                    <Text style = {styles.submitButtonText}> Change Password </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                   style = {styles.submitButton}
+                   onPress = {
+                      () => this.logout()
+                   }>
+                   <Text style = {styles.submitButtonText}> Sign Out </Text>
                 </TouchableOpacity>
               </View>           
             </View>
