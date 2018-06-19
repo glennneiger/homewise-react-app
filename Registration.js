@@ -122,6 +122,7 @@ class Registration extends Component {
                     returnKeyType = {'done'}
                     maxLength = {99}
                     placeholder = 'John'
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({first_name: text})}>
                   </TextInput>
                 </View>
@@ -136,6 +137,7 @@ class Registration extends Component {
                     returnKeyType = {'done'}
                     maxLength = {99}
                     placeholder = 'Doe'
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({last_name: text})}>
                   </TextInput>
                 </View>
@@ -151,6 +153,7 @@ class Registration extends Component {
                     returnKeyType = {'done'}
                     maxLength = {253}
                     placeholder = 'john.doe@gmail.com'
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
                 </View>
@@ -186,6 +189,7 @@ class Registration extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({password: text})}>
                   </TextInput>
                 </View>
@@ -198,6 +202,7 @@ class Registration extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({retypePass: text})}>
                   </TextInput>
                 </View>
@@ -221,6 +226,7 @@ class Registration extends Component {
                     returnKeyType = {'done'}
                     placeholder = '123'
                     maxLength = {99}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({mls_id: text})}>
                   </TextInput>
                 </View>

@@ -221,6 +221,7 @@ class ROIScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {Numeral((this.state.listPrice).toString()).format('0,0')}
                     onChangeText={(listPrice) => this._listPriceOnChangeText(listPrice)}>
                   </TextInput>
@@ -239,6 +240,7 @@ class ROIScreen extends Component {
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                   <TextInput
@@ -246,6 +248,7 @@ class ROIScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {Numeral((this.state.downPayment).toString()).format('0,0')}
                     onChangeText={(downPayment) => this._downPaymentOnChangeText(downPayment)}>
                   </TextInput>
@@ -253,6 +256,7 @@ class ROIScreen extends Component {
                     style={styles.percentValue}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {(this.state.downPaymentPercent).toString()}
                     onChangeText={(downPaymentPercent) => this._downPaymentPercentOnChangeText(downPaymentPercent)}>
                   </TextInput>
@@ -260,6 +264,7 @@ class ROIScreen extends Component {
                     style={styles.percentSign}
                     keyboardType = {'numeric'}
                     value = '%'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                 </View>
@@ -273,6 +278,7 @@ class ROIScreen extends Component {
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                   <TextInput
@@ -280,6 +286,7 @@ class ROIScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {Numeral((this.state.closingCosts).toString()).format('0,0')}
                     onChangeText={(closingCosts) => this._closingCostsOnChangeText(closingCosts)}>
                   </TextInput>
@@ -287,6 +294,7 @@ class ROIScreen extends Component {
                     style={styles.percentValue}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {(this.state.closingCostsPercent).toString()}
                     onChangeText={(closingCostsPercent) => this._closingCostsPercentOnChangeText(closingCostsPercent)}>
                   </TextInput>
@@ -294,6 +302,7 @@ class ROIScreen extends Component {
                     style={styles.percentSign}
                     keyboardType = {'numeric'}
                     value = '%'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                 </View>                
@@ -317,6 +326,7 @@ class ROIScreen extends Component {
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                   <TextInput
@@ -324,6 +334,7 @@ class ROIScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {Numeral((this.state.rent).toString()).format('0,0')}
                     onChangeText={(rent) => this._rentOnChangeText(rent)}>
                   </TextInput>
@@ -343,6 +354,7 @@ class ROIScreen extends Component {
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                   <TextInput
@@ -350,6 +362,7 @@ class ROIScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {Numeral((this.state.managementFee).toString()).format('0,0')}
                     onChangeText={(managementFee) => this._managementFeeOnChangeText(managementFee)}>
                   </TextInput>
@@ -357,6 +370,7 @@ class ROIScreen extends Component {
                     style={styles.percentValue}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {(this.state.managementFeePercent).toString()}
                     onChangeText={(managementFeePercent) => this._managementFeePercentOnChangeText(managementFeePercent)}>
                   </TextInput>
@@ -364,6 +378,7 @@ class ROIScreen extends Component {
                     style={styles.percentSign}
                     keyboardType = {'numeric'}
                     value = '%'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                 </View>  

@@ -67,6 +67,7 @@ class ForgotPassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textEmail: text})}>
                   </TextInput>
                 </View>
