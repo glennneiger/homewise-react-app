@@ -8,8 +8,11 @@ import React, { Component } from 'react';
   ScrollView,
   Dimensions,
   Image,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
+
+import { ApiEndpoints, StorageKeys } from './AppConfig.js';
 
 const {width, height} = Dimensions.get('window')
 
@@ -26,9 +29,59 @@ class AgentProfile extends Component {
       id: ''
     }
   }
+
+  getTokenFromStorage = async () => {
+    const token = await AsyncStorage.getItem(StorageKeys.authToken);
+    return token;
+  }
+
+  // Async function to fetch web data and set state via callback
+  fetchWebtoState = async (url, callback) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'GET',
+      'headers': headerData
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        alert('Error in response');
+        alert(response.status);
+      } else {
+        response.json().then((data) => {
+          callback(this, data);
+        })
+      }
+    });
+  }
+
   
   componentDidMount(){
-    fetch('http://127.0.0.1:8000/agent/AgentProfile/', 
+
+    let getURL = ApiEndpoints.url + ApiEndpoints.agentProfile;
+
+    let stateTransition = function(parent, responseJson) {
+      parent.setState({
+        first_name: responseJson.first_name,
+        last_name: responseJson.last_name,
+        email: responseJson.email,
+        mls_region: responseJson.mls_region,
+        mls_id: responseJson.mls_id,
+        id: responseJson.id,
+        phone_number: responseJson.phone_number
+      })
+    }
+
+    this.fetchWebtoState(getURL, stateTransition);
+
+    /*fetch('http://127.0.0.1:8000/agent/AgentProfile/', 
       {
         method: 'GET',
         headers: {
@@ -50,7 +103,7 @@ class AgentProfile extends Component {
       })
       .catch((error) =>{
         console.error(error);
-    });
+    });*/
 
 
   
@@ -69,6 +122,7 @@ class AgentProfile extends Component {
     const { navigation } = this.props;
     return (
       <View style={{flex:1}}>
+        <Text>{this.state.first_name}</Text>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
           <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
@@ -218,7 +272,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
-    height: 25,
+    height: 45,
     fontSize: 18,
     paddingRight: 10,
 

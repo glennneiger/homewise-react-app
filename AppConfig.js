@@ -20,6 +20,7 @@ export let ApiEndpoints = {
 	'updatestepsPath': '/agent/UpdateSteps/',
 	'addstepPath': '/agent/AddStep/',
 	'addclientPath': '/agent/AddClient/',
+	'agentProfile': '/agent/AgentProfile/',
 
 }
 
