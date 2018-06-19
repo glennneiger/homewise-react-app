@@ -132,7 +132,6 @@ class AgentProfile extends Component {
     const { navigation } = this.props;
     return (
       <View style={{flex:1}}>
-        <Text>{this.state.first_name}</Text>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
           <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
