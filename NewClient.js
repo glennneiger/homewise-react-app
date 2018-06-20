@@ -17,6 +17,7 @@ import States from './States'
 import ClientType from './ClientType'
 import { ApiEndpoints, StorageKeys } from './AppConfig'
 import Numeral from 'numeral';
+import { TextInputMask } from 'react-native-masked-text';
 
 const {width, height} = Dimensions.get('window')
 
@@ -36,7 +37,8 @@ class NewClient extends Component {
       est_price: 0,
       commission: 0,
       client_type: '',
-      display_form: false
+      display_form: false,
+      phoneNumberFormat: ''
     }
   }
 
@@ -135,93 +137,115 @@ class NewClient extends Component {
     });
   }
 
+  test(){
+    if(this.state.client_type === 'B'){
+      alert(this.state.client_type)
+    }
+    else if(this.state.client_type === 'S'){
+      alert(this.state.client_type)
+    }
+    else{
+      alert('hi')
+    }
+  }
+
+
   signUp(){
-        const {email, phone_number, address, city, first_name, last_name, state, zipcode, est_price, commission } = this.state
-         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+        const {email, phone_number, address, city, client_type, first_name, last_name, state, zipcode, est_price, commission } = this.state
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+        let submit = true;
         if(client_type === 'B'){
           if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_price == '' || commission == ''){
-            alert('All Field Required')
+            alert('All Field Required');
+            submit = false;
           }
           else if(reg.test(email) === false){
-            alert('Invalid Email')
+            alert('Invalid Email');
+            submit = false;
           } 
         } else if(client_type === 'S') {
           if(first_name == '' || last_name == '' || email == '' || phone_number == '' || address == '' || city == '' || state == '' || zipcode == '' || est_price == '' || commission == ''){
             alert('All Fields Required')
+            submit = false;
           }
           else if(reg.test(email) === false){
             alert('Invalid Email')
+            submit = false;
           }
         }
 
-        else{
-            let client_type = this.state.client_type
-            let email = this.state.email
-            let first_name = this.state.first_name
-            let last_name = this.state.last_name
-            let phone_number = this.state.phone_number
-            let address = this.state.address
-            let city = this.state.city
-            let state = this.state.state
-            let zipcode = this.state.zipcode
-            let est_price = this.state.est_price
-            let commission = this.state.commission
 
-            // Build URL
-            let addclientURL = ApiEndpoints.url + ApiEndpoints.addclientPath;
+      if(submit){
+          let client_type = this.state.client_type
+          let email = this.state.email
+          let first_name = this.state.first_name
+          let last_name = this.state.last_name
+          let phone_number = this.state.phone_number
+          let address = this.state.address
+          let city = this.state.city
+          let state = this.state.state
+          let zipcode = this.state.zipcode
+          let est_price = Numeral(this.state.est_price).value();
+          let commission = this.state.commission
 
-            // Prepare fetch call arguments
-            let addclientBody = {
-                email:email,
-                first_name:first_name,
-                last_name:last_name,
-                phone_number:phone_number,
-                address:address,
-                city:city,
-                state:state, 
-                zipcode:zipcode,
-                est_price: est_price,
-                commission: commission,
-                client_type: client_type              
-              };
+          // Build URL
+          let addclientURL = ApiEndpoints.url + ApiEndpoints.addclientPath;
 
-            // Prepare callback after POST request
-            let stateTransition = function(parent, data) {
-              parent.props.navigation.navigate('AllClients');
-            }
+          // Prepare fetch call arguments
+          let addclientBody = {
+              email:email,
+              first_name:first_name,
+              last_name:last_name,
+              phone_number:phone_number,
+              address:address,
+              city:city,
+              state:state, 
+              zipcode:zipcode,
+              est_price: est_price,
+              commission: commission,
+              client_type: client_type              
+            };
 
-            // Make fetch call
-            this.pushStatetoWeb(addclientURL, addclientBody, stateTransition);
+          // Prepare callback after POST request
+          let stateTransition = function(parent, data) {
+            parent.props.navigation.navigate('AllClients');
+          }
 
-            /*fetch('http://127.0.0.1:8000/agent/AddClient/', 
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
-              },
-              body: JSON.stringify({
-                email:email,
-                first_name:first_name,
-                last_name:last_name,
-                phone_number:phone_number,
-                address:address,
-                city:city,
-                state:state, 
-                zipcode:zipcode,
-                est_price: est_price,
-                commission: commission
-              }),
-            }).then((response) => response.json())
-                .then((responseJson) => {
-                  this.props.navigation.navigate('AllClients');
-                })
-                .catch((error) => {
-                  console.error(error);
-                });*/
-        }
+          // Make fetch call
+          this.pushStatetoWeb(addclientURL, addclientBody, stateTransition);
+
+          /*fetch('http://127.0.0.1:8000/agent/AddClient/', 
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
+            },
+            body: JSON.stringify({
+              email:email,
+              first_name:first_name,
+              last_name:last_name,
+              phone_number:phone_number,
+              address:address,
+              city:city,
+              state:state, 
+              zipcode:zipcode,
+              est_price: est_price,
+              commission: commission
+            }),
+          }).then((response) => response.json())
+              .then((responseJson) => {
+                this.props.navigation.navigate('AllClients');
+              })
+              .catch((error) => {
+                console.error(error);
+              });*/
+      }
+        
 
     }
+
+    
 
   static navigationOptions = {
         title: 'Clients',
@@ -267,10 +291,11 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    placeholder = 'John'
+                    placeholder = 'Michael'
                     maxLength = {99}
                     onChangeText = {(text)=> this.setState({first_name: text})}>
                   </TextInput>
@@ -280,10 +305,11 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    placeholder = 'Doe'
+                    placeholder = 'Scott'
                     maxLength = {99}
                     onChangeText = {(text)=> this.setState({last_name: text})}>
                   </TextInput>
@@ -293,12 +319,13 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     autoCapitalize = 'none'
                     maxLength = {253}
-                    placeholder = 'john.doe@gmail.com'
+                    placeholder = 'm.scott@dundermifflin.com'
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
                 </View>
@@ -306,24 +333,36 @@ class NewClient extends Component {
                   <Text style={styles.captionText}>Phone Number</Text>
                 </View>
                 <View style={styles.row}>
-                  <TextInput
+                  <TextInputMask
+                    value={this.state.phone_number}
+                    onChangeText={(phone_number) => {
+                        this.setState({phone_number: phone_number})
+                    }}
+                    type={'cel-phone'}
+                    maxLength={this.state.phone_number.toString().startsWith("1") ? 14 : 14}
+                    options={
+                        this.state.phone_number.startsWith("1") ?
+                            {
+                                dddMask: '(999) 999-'
+                            } : {
+                                dddMask: '(999) 999-'
+                            }
+                    }
                     style={styles.values}
-                    keyboardType = {'numeric'}
+                    placeholder='(555) 555-5555'
                     returnKeyType = {'done'}
-                    placeholder = '1-800-HomeWise'
-                    maxLength = {10}
-                    onChangeText = {(text)=> this.setState({phone_number: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Street Address</Text>
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    placeholder = '24 Quiet Road'
+                    placeholder = '126 Kellum Court'
                     maxLength = {99}
                     onChangeText = {(text)=> this.setState({address: text})}>
                   </TextInput>
@@ -333,10 +372,11 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    placeholder = 'Charlotte'
+                    placeholder = 'Scranton'
                     maxLength = {29}
                     onChangeText = {(text)=> this.setState({city: text})}>
                   </TextInput>
@@ -356,10 +396,11 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
-                    placeholder = '00000'
+                    placeholder = '18510'
                     maxLength = {5}
                     onChangeText = {(text)=> this.setState({zipcode: text})}>
                   </TextInput>
@@ -369,17 +410,19 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
                     editable={false}>
                   </TextInput>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.valuescom}
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
-                    placeholder = '000000'
-                    //value = {Numeral((this.state.est_price).toString()).format('0,0')}
+                    placeholder = '300,000'
+                    value = {Numeral((this.state.est_price).toString()).format('0,0')}
                     onChangeText = {(text)=> this.setState({est_price: text})}>
                   </TextInput>
                 </View>
@@ -388,17 +431,19 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.percentSign}
                     keyboardType = {'numeric'}
                     value = '%'
                     editable={false}>
                   </TextInput>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.valuescom}
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     maxLength = {2}
-                    placeholder = '15'
+                    placeholder = '3'
                     onChangeText = {(text)=> this.setState({commission: text})}>
                   </TextInput>
                 </View>
@@ -417,10 +462,11 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    placeholder = 'John'
+                    placeholder = 'Michael'
                     maxLength = {99}
                     onChangeText = {(text)=> this.setState({first_name: text})}>
                   </TextInput>
@@ -430,10 +476,11 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
-                    placeholder = 'Doe'
+                    placeholder = 'Scott'
                     maxLength = {99}
                     onChangeText = {(text)=> this.setState({last_name: text})}>
                   </TextInput>
@@ -443,11 +490,12 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     autoCapitalize = 'none'
-                    placeholder = 'john.doe@gmail.com'
+                    placeholder = 'm.scott@dundermifflin.com'
                     maxLength = {253}
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
@@ -456,31 +504,44 @@ class NewClient extends Component {
                   <Text style={styles.captionText}>Phone Number</Text>
                 </View>
                 <View style={styles.row}>
-                  <TextInput
+                  <TextInputMask
+                    value={this.state.phone_number}
+                    onChangeText={(phone_number) => {
+                        this.setState({phone_number: phone_number})
+                    }}
+                    type={'cel-phone'}
+                    maxLength={this.state.phone_number.toString().startsWith("1") ? 14 : 14}
+                    options={
+                        this.state.phone_number.startsWith("1") ?
+                            {
+                                dddMask: '(999) 999-'
+                            } : {
+                                dddMask: '(999) 999-'
+                            }
+                    }
                     style={styles.values}
-                    keyboardType = {'numeric'}
+                    placeholder='(555) 555-5555'
                     returnKeyType = {'done'}
-                    placeholder = '1-800-HomeWise'
-                    maxLength = {10}
-                    onChangeText = {(text)=> this.setState({phone_number: text})}>
-                  </TextInput>
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Estimated House Value</Text>
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
                     editable={false}>
                   </TextInput>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.valuescom}
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
-                    placeholder = '000000'
-                    //value = {Numeral((this.state.est_price).toString()).format('0,0')}
+                    placeholder = '300,000'
+                    value = {Numeral((this.state.est_price).toString()).format('0,0')}
                     onChangeText = {(text)=> this.setState({est_price: text})}>
                   </TextInput>
                 </View>
@@ -489,17 +550,19 @@ class NewClient extends Component {
                 </View>
                 <View style={styles.row}>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.percentSign}
                     keyboardType = {'numeric'}
                     value = '%'
                     editable={false}>
                   </TextInput>
                   <TextInput
+                    autoCorrect={false}
                     style={styles.valuescom}
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     maxLength = {2}
-                    placeholder = '15'
+                    placeholder = '3'
                     onChangeText = {(text)=> this.setState({commission: text})}>
                   </TextInput>
                 </View>
