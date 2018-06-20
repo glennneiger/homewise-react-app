@@ -1,5 +1,6 @@
 import {
   View,
+   Platform,
     StyleSheet
 } from 'react-native';
 
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 30,
+    color: 'black',
     fontWeight: 'bold'
   },
   roiText: {
@@ -168,6 +170,8 @@ const styles = StyleSheet.create({
     flex:3,
     flexDirection: 'row',
     paddingBottom: 0,
+    marginBottom: 10,
+    marginTop: 10
     //alignItems: 'flex-end'
   },
   captionText: {
@@ -256,7 +260,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     top: 0,
     borderRadius: 4,
-    right: 15,
+    right: 10, 
     marginTop: 15 
   },
   submitButton2: {

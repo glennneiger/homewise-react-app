@@ -125,6 +125,7 @@ class Login extends Component {
                     keyboardType = {'default'}
                     autoCapitalize = 'none'
                     returnKeyType = {'done'}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
                 </View>
@@ -137,6 +138,7 @@ class Login extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     secureTextEntry={this.state.showPass ? false : true}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({password: text})}>
                   </TextInput>
                 </View>

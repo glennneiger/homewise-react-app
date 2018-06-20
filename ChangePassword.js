@@ -87,6 +87,7 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textCurrentPassword: text})}
                     value = {this.state.textCurrentPassword}>
                   </TextInput>
@@ -99,6 +100,7 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textNewPassword: text})}>
                   </TextInput>
                 </View>
@@ -110,6 +112,7 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textNewPasswordConfirm: text})}>
                   </TextInput>
                 </View>
