@@ -187,7 +187,6 @@ class NewClient extends Component {
 
             // Prepare callback after POST request
             let stateTransition = function(parent, data) {
-              alert('Saved in backend!');
               parent.props.navigation.navigate('AllClients');
             }
 

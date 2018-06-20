@@ -149,7 +149,7 @@ export default class AllClients extends Component {
   }
 
   refreshData () {
-    alert('Refreshing data');
+    // alert('Refreshing data');
     this.setState({
       needToRefresh: true
     });
@@ -215,6 +215,7 @@ export default class AllClients extends Component {
                     <Text>{item.name} ({item.client.first_name} {item.client.last_name})</Text>
                 </View>
                 <View style={{width: 20, alignItems: 'center', justifyContent: 'center'}} >
+                  <Icon name="angle-right" style={{fontSize: 20}} />
                 </View>
             </TouchableOpacity>
           }
@@ -242,7 +243,7 @@ export default class AllClients extends Component {
           </View>
         }
         <View style={{flexDirection: 'row', justifyContent: 'center', paddingBottom: 20, paddingTop: 10}}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('NewClient')} style={{flexDirection: 'row'}} >
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('NewClient', {refresh: this.refreshData})} style={{flexDirection: 'row'}} >
                 <View style={{width: 16, height: 16, backgroundColor: '#4CD964', paddingLeft: 1, alignItems: 'center', borderRadius: 8, marginRight: 5,}}>
                     <Icon2 name="md-add" style={{fontSize: 17, color: '#fff', marginTop: -0.5}} />
                 </View>

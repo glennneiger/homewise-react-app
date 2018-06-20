@@ -16,10 +16,13 @@
   Image,
   View,
   KeyboardAvoidingView,
+  AsyncStorage,
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 
 import MLSRegion from './MLSRegion'
+
+import { ApiEndpoints, StorageKeys } from './AppConfig'
 
 const {width, height} = Dimensions.get('window')
 
@@ -36,7 +39,46 @@ class Registration extends Component {
       mls_region: '',
       mls_id:'',
     }
+
+    // this.getTokenFromStorage = this.getTokenFromStorage.bind(this);
+    this.pushStatetoWeb = this.pushStatetoWeb.bind(this);
   }
+
+/*getTokenFromStorage = async () => {
+  const token = await AsyncStorage.getItem(StorageKeys.authToken);
+  return token;
+}*/
+
+// Async function to POST web data from state, and subsequently set state
+pushStatetoWeb = async (url, bodyData, callback) => {
+  // Get Bearer Token
+  // const bearerToken = await this.getTokenFromStorage();
+  // Build fetch arguments
+  let headerData = {
+    'Content-Type': 'application/json',
+    // 'Authorization': 'Bearer ' + bearerToken 
+  };
+  // Fetch data
+  fetch(url, {
+    'method': 'POST',
+    'headers': headerData,
+    'body': JSON.stringify(bodyData)
+  })
+  .then((response) => {
+    if (!response.ok) {
+      // Handle error
+      alert('Error in response')
+      alert(response.status);
+      alert(response.statusText)
+    } else {
+      response.json().then((data) => {
+          // Go to callback function
+          callback(this, data);
+      })
+    }
+  });
+}
+
    signUp(){
         const {email, password, users, date, first_name, last_name, retypePass } = this.state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
@@ -64,7 +106,26 @@ class Registration extends Component {
 
             console.log(mls_region[0])
 
-            fetch('http://127.0.0.1:8000/agent/Registration/', 
+            let postURL = ApiEndpoints.url + ApiEndpoints.registrationPath;
+
+            let postBody = {
+              email:email,
+              first_name:first_name,
+              last_name:last_name,
+              mls_region:mls_region,
+              mls_id:mls_id,
+              password:password
+            }
+
+            let stateTransition = function(parent, data) {
+              alert('Registration successful.')
+              // Navigate to login
+              this.props.navigation.navigate('Login')
+            }
+
+            // this.pushStatetoWeb(postURL, postBody, stateTransition);
+
+            fetch(postURL, 
             {
               method: 'POST',
               headers: {
@@ -76,13 +137,17 @@ class Registration extends Component {
                 last_name:last_name,
                 mls_region:mls_region,
                 mls_id:mls_id,
-                password:password
+                password:password,
+                birthday:this.state.date,
               }),
             }).then((response) => response.json())
                 .then((responseJson) => {
-                  alert('test');
+                  alert('Registration successful.');
+                  // Navigate to login
+                  this.props.navigation.navigate('Login')
                 })
                 .catch((error) => {
+                  alert('Error while registering. Try again later.')
                   console.error(error);
                 });
         }
