@@ -25,7 +25,6 @@ class AgentProfile extends Component {
       email:'',
       mls_region: '',
       mls_id:'',
-      phone_number: '',
       id: ''
     }
   }
@@ -74,8 +73,7 @@ class AgentProfile extends Component {
         email: responseJson.email,
         mls_region: responseJson.mls_region,
         mls_id: responseJson.mls_id,
-        id: responseJson.id,
-        phone_number: responseJson.phone_number
+        id: responseJson.id
       })
     }
 
@@ -179,19 +177,6 @@ class AgentProfile extends Component {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     placeholder = 'john.doe@gmail.com'
-                  />
-                </View>
-                <View style={styles.caption}>
-                  <Text style={styles.captionText}>Phone Number</Text>
-                </View>
-                <View style={styles.row}>
-                  <TextInput
-                    style={styles.values}
-                    editable = {false}
-                    value={this.state.phone_number}
-                    keyboardType = {'default'}
-                    returnKeyType = {'done'}
-                    placeholder = '1-800-HomeWise'
                   />
                 </View>
                 <View style={styles.caption}>

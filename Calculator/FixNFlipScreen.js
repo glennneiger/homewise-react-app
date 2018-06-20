@@ -49,7 +49,7 @@ class FixNFlipScreen extends Component {
       downPayment: 0,
       downPaymentPercent: 20,
       loanTerm: 30,
-      interestRate: 4,
+      interestRate: 4.25,
       annualPropertyTaxes: 0,
       purchaseClosingCosts: 0,
       purchaseClosingCostsPercent: 3,
@@ -69,6 +69,7 @@ class FixNFlipScreen extends Component {
 
       arv: 0,
       realEstateAgentFee: 0,
+      realEstateAgentFeePercent: 6,
       otherMiscClosingCosts: 0,
       numberOfDaysHeld: 0,
       halfDaysHeld: 0,
@@ -188,14 +189,14 @@ class FixNFlipScreen extends Component {
                 strokeCap="circle">
                 <View style={styles.textView}>
                   <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
-                    <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
+                    <Text style={{color: '#fff', fontSize: 17}}>{Numeral((this.state.roi).toString()).format('0,0')}%</Text>
                   </View>
                   <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>ROI</Text>
                   </View>
               </AnimatedGaugeProgress>
               <View style={styles.fnfheaderval1}>
                 <View style={styles.fnfinfo}>
-                  <Text style={styles.infoTextFixNFlip}>{this.state.roiAnnualized}%</Text>
+                  <Text style={styles.infoTextFixNFlip}>{Numeral((this.state.roiAnnualized).toString()).format('0,0')}%</Text>
                   <Text style={styles.subTextFixNFlip}>ROI</Text>
                   <Text style={styles.subTextFixNFlip}>Annualized</Text>
                 </View>
@@ -273,7 +274,7 @@ class FixNFlipScreen extends Component {
                 keyboardType = {'numeric'}
                 returnKeyType = {'done'}
                 placeholder = '0'
-                value = {Numeral((this.state.downPayment).toString()).format('0,0')}
+                value = {(this.state.downPayment).toString()}
                 onChangeText={(downPayment) => this._downPaymentOnChangeText(downPayment)}>
               </TextInput>
               <TextInput
@@ -290,6 +291,39 @@ class FixNFlipScreen extends Component {
                 editable={false}>
               </TextInput>
             </View>
+
+            <View style={styles.caption}>
+              <Text style={styles.captionText}>Purchase Closing Costs</Text>
+            </View>
+            <View style={styles.row}>
+              <TextInput
+                style={styles.dollaSign}
+                keyboardType = {'numeric'}
+                value = '$'
+                editable={false}>
+              </TextInput>
+              <TextInput
+                style={styles.values}
+                keyboardType = {'numeric'}
+                returnKeyType = {'done'}
+                placeholder = '0'
+                value = {(this.state.purchaseClosingCosts).toString()}
+                onChangeText={(purchaseClosingCosts) => this._closingCostsOnChangeText(purchaseClosingCosts)}>
+              </TextInput>
+              <TextInput
+                style={styles.percentValue}
+                returnKeyType = {'done'}
+                placeholder = '0'
+                value = {(this.state.purchaseClosingCostsPercent).toString()}
+                onChangeText={(purchaseClosingCostsPercent) => this._closingCostsPercentOnChangeText(purchaseClosingCostsPercent)}>
+              </TextInput>
+              <TextInput
+                style={styles.percentSign}
+                keyboardType = {'numeric'}
+                value = '%'
+                editable={false}>
+              </TextInput>
+            </View>  
 
 
             <Row caption="Interest Rate" sign='%' value={(this.state.interestRate).toString()} update={(interestRate) => this.setState({interestRate})}/>
@@ -317,11 +351,35 @@ class FixNFlipScreen extends Component {
                 style={styles.percentPlace}
                 editable={false}>
               </TextInput>
+            </View> 
+
+
+
+            <View style={styles.headerRow}>
+              <Text style={styles.headerRowText}>Estimated Repair Costs</Text>
             </View>
+            <Row caption="Exterior Repairs" sign='$' value={Numeral((this.state.exteriorRepairs).toString()).format('0,0')} update={(exteriorRepairs) => this.setState({exteriorRepairs})}/>
+            <Row caption="Interior Repairs" sign='$' value={Numeral((this.state.interiorRepairs).toString()).format('0,0')} update={(interiorRepairs) => this.setState({interiorRepairs})}/>
 
+            <View style={styles.headerRow}>
+              <Text style={styles.headerRowText}>Estimated Repair Costs</Text>
+            </View>
+            <Row caption="Electric" sign='$' value={Numeral((this.state.electric).toString()).format('0,0')} update={(electric) => this.setState({electric})}/>
+            <Row caption="Gas" sign='$' value={Numeral((this.state.gas).toString()).format('0,0')} update={(gas) => this.setState({gas})}/>
+            <Row caption="Water" sign='$' value={Numeral((this.state.water).toString()).format('0,0')} update={(water) => this.setState({water})}/>
+            <Row caption="Sewer" sign='$' value={Numeral((this.state.sewer).toString()).format('0,0')} update={(sewer) => this.setState({sewer})}/>
+            <Row caption="Garbage" sign='$' value={Numeral((this.state.garbage).toString()).format('0,0')} update={(garbage) => this.setState({garbage})}/>
+            <Row caption="HOA" sign='$' value={Numeral((this.state.hoa).toString()).format('0,0')} update={(hoa) => this.setState({hoa})}/>
+            <Row caption="Insurance" sign='$' value={Numeral((this.state.insurance).toString()).format('0,0')} update={(insurance) => this.setState({insurance})}/>
+            <Row caption="Other" sign='$' value={Numeral((this.state.other).toString()).format('0,0')} update={(other) => this.setState({other})}/>
+            <Row caption="Monthly Property Tax" sign='$' value={Numeral((this.state.monthlyPropertyTaxes).toString()).format('0,0')} editable = {false} update={(monthlyPropertyTaxes) => this.setState({monthlyPropertyTaxes})}/>
 
+            <View style={styles.headerRow}>
+              <Text style={styles.headerRowText}>Sale Details</Text>
+            </View>
+            <Row caption="Sales Price After Fix Up (ARV)" sign='$' value={Numeral((this.state.arv).toString()).format('0,0')} update={(arv) => this.setState({arv})}/>
             <View style={styles.caption}>
-              <Text style={styles.captionText}>Purchase Closing Costs</Text>
+              <Text style={styles.captionText}>Real Estate Agent Fee</Text>
             </View>
             <View style={styles.row}>
               <TextInput
@@ -335,15 +393,15 @@ class FixNFlipScreen extends Component {
                 keyboardType = {'numeric'}
                 returnKeyType = {'done'}
                 placeholder = '0'
-                value = {Numeral((this.state.purchaseClosingCosts).toString()).format('0,0')}
-                onChangeText={(purchaseClosingCosts) => this._closingCostsOnChangeText(purchaseClosingCosts)}>
+                value = {Numeral((this.state.realEstateAgentFee).toString()).format('0,0')}
+                onChangeText={(realEstateAgentFee) => this.setState({realEstateAgentFee})}>
               </TextInput>
               <TextInput
                 style={styles.percentValue}
                 returnKeyType = {'done'}
                 placeholder = '0'
-                value = {(this.state.purchaseClosingCostsPercent).toString()}
-                onChangeText={(purchaseClosingCostsPercent) => this._closingCostsPercentOnChangeText(purchaseClosingCostsPercent)}>
+                value = {(this.state.realEstateAgentFeePercent).toString()}
+                onChangeText={(realEstateAgentFeePercent) => this.setState({realEstateAgentFeePercent})}>
               </TextInput>
               <TextInput
                 style={styles.percentSign}
@@ -351,34 +409,7 @@ class FixNFlipScreen extends Component {
                 value = '%'
                 editable={false}>
               </TextInput>
-            </View>   
-
-
-
-            <View style={styles.headerRow}>
-              <Text style={styles.headerRowText}>Estimated Repair Costs</Text>
-            </View>
-            <Row caption="Exterior Repairs" sign='$' value={Numeral((this.state.exteriorRepairs).toString()).format('0,0')} update={(exteriorRepairs) => this.setState({exteriorRepairs})}/>
-            <Row caption="Interior Repairs" sign='$' value={Numeral((this.state.interiorRepairs).toString()).format('0,0')} update={(interiorRepairs) => this.setState({interiorRepairs})}/>
-
-            <View style={styles.headerRow}>
-              <Text style={styles.headerRowText}>Estimated Repair Costs</Text>
-            </View>
-            <Row caption="Electric" sign='$' value={(this.state.electric).toString()} update={(electric) => this.setState({electric})}/>
-            <Row caption="Gas" sign='$' value={(this.state.gas).toString()} update={(gas) => this.setState({gas})}/>
-            <Row caption="Water" sign='$' value={(this.state.water).toString()} update={(water) => this.setState({water})}/>
-            <Row caption="Sewer" sign='$' value={(this.state.sewer).toString()} update={(sewer) => this.setState({sewer})}/>
-            <Row caption="Garbage" sign='$' value={(this.state.garbage).toString()} update={(garbage) => this.setState({garbage})}/>
-            <Row caption="HOA" sign='$' value={(this.state.hoa).toString()} update={(hoa) => this.setState({hoa})}/>
-            <Row caption="Insurance" sign='$' value={(this.state.insurance).toString()} update={(insurance) => this.setState({insurance})}/>
-            <Row caption="Other" sign='$' value={(this.state.other).toString()} update={(other) => this.setState({other})}/>
-            <Row caption="Monthly Property Tax" sign='$' value={(this.state.monthlyPropertyTaxes).toString()} update={(monthlyPropertyTaxes) => this.setState({monthlyPropertyTaxes})}/>
-
-            <View style={styles.headerRow}>
-              <Text style={styles.headerRowText}>Sale Details</Text>
-            </View>
-            <Row caption="Sales Price After Fix Up (ARV)" sign='$' value={Numeral((this.state.arv).toString()).format('0,0')} update={(arv) => this.setState({arv})}/>
-            <Row caption="Real Estate Agent Fee" sign='$' value={Numeral((this.state.realEstateAgentFee).toString()).format('0,0')} update={(realEstateAgentFee) => this.setState({realEstateAgentFee})}/>
+            </View>  
             <Row caption="Other Miscellaneous Closing Costs" sign='$' value={Numeral((this.state.otherMiscClosingCosts).toString()).format('0,0')} update={(otherMiscClosingCosts) => this.setState({otherMiscClosingCosts})}/>
             <Row caption="Number of Days Held (Days)" sign='' value={Numeral((this.state.numberOfDaysHeld).toString()).format('0,0')} update={(numberOfDaysHeld) => this.setState({numberOfDaysHeld})}/>
           </View>
@@ -451,9 +482,9 @@ class FixNFlipScreen extends Component {
     purchaseClosingCosts = Numeral(listPrice).value() * (Number.parseFloat(this.state.purchaseClosingCostsPercent)/100);
 
     this.setState({
-      listPrice: listPrice,
-      downPayment: downPayment,
-      purchaseClosingCosts: purchaseClosingCosts,
+      listPrice: Numeral((listPrice).toString()).format('0,0.0'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
+      purchaseClosingCosts: Numeral((purchaseClosingCosts).toString()).format('0,0.00'),
 
       introScreen: false,
     }); 
@@ -571,8 +602,8 @@ class FixNFlipScreen extends Component {
 
 
     this.setState({
-      roi: +(roi.toFixed(2)),
-      roiAnnualized: +(roiAnnualized.toFixed(2)),
+      roi: +(roi.toFixed(1)),
+      roiAnnualized: +(roiAnnualized.toFixed(1)),
       monthlyExpenses: Numeral((Math.round(monthlyExpenses)).toString()).format('0,0'),
       totalProjectedPreTaxProfits: Numeral((Math.round(totalProjectedPreTaxProfits)).toString()).format('0,0'),
       totalCashInvested: Numeral((Math.round(totalCashInvested)).toString()).format('0,0'),

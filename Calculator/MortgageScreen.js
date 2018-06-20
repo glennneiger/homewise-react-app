@@ -41,7 +41,7 @@ class MortgageScreen extends Component {
       closingCosts: 0,
       closingCostsPercent: 3,
       loanTerm: 30,
-      interestRate: 4,
+      interestRate: 4.25,
       rehabCosts: 0,
 
       // textLayoutHeightUpfront: 0,
@@ -195,7 +195,7 @@ class MortgageScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
-                    value = {Numeral((this.state.downPayment).toString()).format('0,0')}
+                    value = {(this.state.downPayment).toString()}
                     onChangeText={(downPayment) => this._downPaymentOnChangeText(downPayment)}>
                   </TextInput>
                   <TextInput
@@ -229,7 +229,7 @@ class MortgageScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
-                    value = {Numeral((this.state.closingCosts).toString()).format('0,0')}
+                    value = {(this.state.closingCosts).toString()}
                     onChangeText={(closingCosts) => this._closingCostsOnChangeText(closingCosts)}>
                   </TextInput>
                   <TextInput
@@ -292,9 +292,9 @@ class MortgageScreen extends Component {
     closingCosts = Numeral(listPrice).value() * (Number.parseFloat(this.state.closingCostsPercent)/100);
 
     this.setState({
-      listPrice: listPrice,
-      downPayment: downPayment,
-      closingCosts: closingCosts,
+      listPrice: Numeral((listPrice).toString()).format('0,0.0'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
 
       introScreen: false,
     }); 

@@ -251,6 +251,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    secureTextEntry={this.state.showPass ? false : true}
                     onChangeText = {(text)=> this.setState({password: text})}>
                   </TextInput>
                 </View>
@@ -263,6 +264,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    secureTextEntry={this.state.showPass ? false : true}
                     onChangeText = {(text)=> this.setState({retypePass: text})}>
                   </TextInput>
                 </View>
