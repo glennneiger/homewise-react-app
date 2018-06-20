@@ -81,7 +81,8 @@ class Login extends Component {
                           alert(responseJson.message);
                           this.props.navigation.navigate('ChangePassword', {
                             currentEmail: email,
-                            currentPassword: password
+                            currentPassword: password,
+                            refresh: true,
                           });
                         }
                       })

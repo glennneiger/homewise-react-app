@@ -12,18 +12,33 @@ class ChangePassword extends Component {
       textNewPassword: '',
       textNewPasswordConfirm: '',
       agentEmail: '',
-      success: false  
+      success: false,
+      backToProfile: false,
+      refresh: true,
     }
+
+    this.loadData = this.loadData.bind(this);
   }
 
-  componentDidMount() {
+  loadData = function() {
     const { navigation } = this.props;
+
+    if (navigation.getParam('fromProfile', false)) {
+      this.setState({
+        backToProfile: true
+      });
+    }
+
     const currentPassword = navigation.getParam('currentPassword', '');
     const currentEmail = navigation.getParam('currentEmail', '');
     this.setState({
       agentEmail: currentEmail,
       textCurrentPassword: currentPassword
     });
+  }
+
+  componentDidMount() {
+
   }
 
   changePasswordFlow() {
@@ -56,16 +71,29 @@ class ChangePassword extends Component {
         if (response.ok) {
           // All ok
           alert('Password successfully changed.');
-          // Go to login screen
-          this.props.navigation.navigate('Login');
+          // Go to login screen or agent profile screen
+          if (this.state.backToProfile) {
+            this.props.navigation.navigate('Profile');
+          } else {
+            this.props.navigation.navigate('Login');
+          }
         } else {
           // Handle errors
           // TODO
+          alert('Error in changing password!');
+          alert(response.status);
         }
       })
   }
 
   render() {
+
+    if(this.state.refresh) {
+      this.loadData();
+      this.setState({
+        refresh: false,
+      })
+    }
 
     return (
       <View style={{flex:1}}>
@@ -87,6 +115,7 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    secureTextEntry = {true}
                     underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textCurrentPassword: text})}
                     value = {this.state.textCurrentPassword}>
@@ -100,6 +129,7 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    secureTextEntry = {true}
                     underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textNewPassword: text})}>
                   </TextInput>
@@ -112,6 +142,7 @@ class ChangePassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                    secureTextEntry = {true}
                     underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textNewPasswordConfirm: text})}>
                   </TextInput>
