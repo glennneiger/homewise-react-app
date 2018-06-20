@@ -8,6 +8,7 @@ import { StackNavigator } from 'react-navigation';
 
 
 import Steps from './Steps'
+import Numeral from 'numeral';
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
 
@@ -171,6 +172,21 @@ export default class AllClients extends Component {
     });
   }
 
+  percentColor(percentage){
+    if(percentage <= 25){
+        return "#FF0000" 
+    }
+    else if(percentage > 25 && percentage <= 50){
+        return "#FFE150"
+    }
+    else if(percentage > 50 && percentage <= 75){
+        return "#32CD32"
+    }
+    else{
+        return "#006400"
+    }
+  }
+
   static navigationOptions = {
         title: 'Clients',
         headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
@@ -257,11 +273,11 @@ export default class AllClients extends Component {
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
                 <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
-                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 15, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
+                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 15, color: '#000'}} color={this.percentColor(item.steps_percentage)}></PercentageCircle>  
                   <Text style={{marginTop: 5,}} >{item.first_name} {item.last_name}</Text>
                   <Text style={{marginTop: 5,fontSize: 8,color: '#666'}} >Commission</Text>
                   <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
-                      <Text style={{color: '#fff'}}>${item.commission_val}</Text>
+                      <Text style={{color: '#fff'}}>${Numeral((item.commission_val).toString()).format('0,0')}</Text>
                   </View>
                 </TouchableOpacity>
               }
