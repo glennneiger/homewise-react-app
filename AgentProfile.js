@@ -27,7 +27,20 @@ class AgentProfile extends Component {
       mls_id:'',
       id: ''
     }
+
+    this.changePasswordFlow = this.changePasswordFlow.bind(this);
   }
+
+  changePasswordFlow = function() {
+    // Navigate to change password stack
+    this.props.navigation.navigate('ChangePassword', {
+      currentEmail: this.state.email,
+      fromProfile: true,
+      refresh: true,
+    });
+  }
+
+
 
   getTokenFromStorage = async () => {
     const token = await AsyncStorage.getItem(StorageKeys.authToken);
@@ -208,7 +221,7 @@ class AgentProfile extends Component {
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
-                      () => this.signUp()
+                      () => this.changePasswordFlow()
                    }>
                    <Text style = {styles.submitButtonText}> Change Password </Text>
                 </TouchableOpacity>

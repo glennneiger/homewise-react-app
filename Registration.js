@@ -187,6 +187,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     returnKeyType = {'done'}
                     maxLength = {99}
                     placeholder = 'John'
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({first_name: text})}>
                   </TextInput>
                 </View>
@@ -201,6 +202,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     returnKeyType = {'done'}
                     maxLength = {99}
                     placeholder = 'Doe'
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({last_name: text})}>
                   </TextInput>
                 </View>
@@ -216,6 +218,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     returnKeyType = {'done'}
                     maxLength = {253}
                     placeholder = 'john.doe@gmail.com'
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({email: text})}>
                   </TextInput>
                 </View>
@@ -252,6 +255,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     secureTextEntry={this.state.showPass ? false : true}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({password: text})}>
                   </TextInput>
                 </View>
@@ -265,6 +269,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
                     secureTextEntry={this.state.showPass ? false : true}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({retypePass: text})}>
                   </TextInput>
                 </View>
@@ -288,6 +293,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                     returnKeyType = {'done'}
                     placeholder = '123'
                     maxLength = {99}
+                    underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({mls_id: text})}>
                   </TextInput>
                 </View>

@@ -34,7 +34,7 @@ export default class CalcScreens extends Component {
       FixNFlip: false
     };
   }
-
+  
    static navigationOptions = {
         title: 'Calculators',
         headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},

@@ -164,6 +164,7 @@ class MortgageScreen extends Component {
                 style={styles.dollaSign}
                 keyboardType = {'numeric'}
                 value = '$'
+                underlineColorAndroid='transparent'
                 editable={false}>
               </TextInput>
               <TextInput
@@ -171,6 +172,7 @@ class MortgageScreen extends Component {
                 keyboardType = {'numeric'}
                 returnKeyType = {'done'}
                 placeholder = '0'
+                underlineColorAndroid='transparent'
                 value = {Numeral((this.state.listPrice).toString()).format('0,0')}
                 onChangeText={(listPrice) => this._listPriceOnChangeText(listPrice)}>
               </TextInput>
@@ -188,6 +190,7 @@ class MortgageScreen extends Component {
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                   <TextInput
@@ -196,12 +199,14 @@ class MortgageScreen extends Component {
                     returnKeyType = {'done'}
                     placeholder = '0'
                     value = {(this.state.downPayment).toString()}
+                    underlineColorAndroid='transparent'
                     onChangeText={(downPayment) => this._downPaymentOnChangeText(downPayment)}>
                   </TextInput>
                   <TextInput
                     style={styles.percentValue}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {(this.state.downPaymentPercent).toString()}
                     onChangeText={(downPaymentPercent) => this._downPaymentPercentOnChangeText(downPaymentPercent)}>
                   </TextInput>
@@ -209,6 +214,7 @@ class MortgageScreen extends Component {
                     style={styles.percentSign}
                     keyboardType = {'numeric'}
                     value = '%'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                 </View>
@@ -222,6 +228,7 @@ class MortgageScreen extends Component {
                     style={styles.dollaSign}
                     keyboardType = {'numeric'}
                     value = '$'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                   <TextInput
@@ -230,12 +237,14 @@ class MortgageScreen extends Component {
                     returnKeyType = {'done'}
                     placeholder = '0'
                     value = {(this.state.closingCosts).toString()}
+                    underlineColorAndroid='transparent'
                     onChangeText={(closingCosts) => this._closingCostsOnChangeText(closingCosts)}>
                   </TextInput>
                   <TextInput
                     style={styles.percentValue}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    underlineColorAndroid='transparent'
                     value = {(this.state.closingCostsPercent).toString()}
                     onChangeText={(closingCostsPercent) => this._closingCostsPercentOnChangeText(closingCostsPercent)}>
                   </TextInput>
@@ -243,6 +252,7 @@ class MortgageScreen extends Component {
                     style={styles.percentSign}
                     keyboardType = {'numeric'}
                     value = '%'
+                    underlineColorAndroid='transparent'
                     editable={false}>
                   </TextInput>
                 </View>                
