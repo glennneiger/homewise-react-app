@@ -40,14 +40,12 @@
 		32FF14447393496192360F29 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7484CE057AC640D7A5AD1CE5 /* Feather.ttf */; };
 		47FBC34D727A4836ABA90226 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC5C1435FEEF440A8A8F7531 /* MaterialCommunityIcons.ttf */; };
 		4AE41AE74F8EBDE968A214FD /* libPods-HomeWiseLoginFrontend-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2682DDDD7C2CB1875EEC831 /* libPods-HomeWiseLoginFrontend-tvOS.a */; };
-		4E86694C1CB7467EABDE9A1B /* libRNFIRAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB10097D55C4D1893BA4A9D /* libRNFIRAnalytics.a */; };
 		54B7144020D8B75B00B80039 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B7143F20D8B75B00B80039 /* StoreKit.framework */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		5F4443B038E94D8088B89AA0 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 134227C70C1747148FEFD8B8 /* MaterialIcons.ttf */; };
 		715C36B71D0A4D20B988527E /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6385F6EE9F06479C9C4481D3 /* EvilIcons.ttf */; };
 		7809357A07D440538C91AF85 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 754BB6DCC82A495AACD258EE /* libRNVectorIcons.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		87DF83BCB52D24367CBAD3CC /* libPods-HomeWiseLoginFrontend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9921D03132393A6C7B04927E /* libPods-HomeWiseLoginFrontend.a */; };
 		88A4606CE7754738BA7A4120 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9EB1D95DE164F1D9FCDCA76 /* Foundation.ttf */; };
 		88A7E10273514507AFDDD6DF /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 762AF5D294D7412AABF34172 /* SimpleLineIcons.ttf */; };
 		8A556EA219EE4A5BAB8BF7B6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5922524C9D7A4EE1B1FBD759 /* Entypo.ttf */; };
@@ -56,10 +54,6 @@
 		B32A3B9768BB4454B5E7F93E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D44A496809DF4721A5CED3DA /* Zocial.ttf */; };
 		DFAAC56F90C04A40A0ECB848 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CFA718C58554E9E86D0B2AE /* Ionicons.ttf */; };
 		E471639920D2C9B400657B24 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E471639620D2C99200657B24 /* libART.a */; };
-		E4FE4C3220D9A1B5006353AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4FE4C0820D9A1B5006353AA /* GoogleService-Info.plist */; };
-		E4FE4C3320D9A1B5006353AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4FE4C0820D9A1B5006353AA /* GoogleService-Info.plist */; };
-		E4FE4C3420D9A1B5006353AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4FE4C0820D9A1B5006353AA /* GoogleService-Info.plist */; };
-		E4FE4C3520D9A1B5006353AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4FE4C0820D9A1B5006353AA /* GoogleService-Info.plist */; };
 		EEDDD779D01F81B55835DD54 /* libPods-HomeWiseLoginFrontend-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C330872F4370126914CD16DE /* libPods-HomeWiseLoginFrontend-tvOSTests.a */; };
 		F2B6E3DBFACA43DE8BD1538C /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00B737FE0A2248AF8200E731 /* Octicons.ttf */; };
 /* End PBXBuildFile section */
@@ -345,13 +339,6 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
-		E45D536E20D99FE100EBE7F2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 80976D8F9F6D486F95B57C4F /* RNFIRAnalytics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNFIRAnalytics;
-		};
 		E471639520D2C99200657B24 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E471639020D2C99200657B24 /* ART.xcodeproj */;
@@ -393,38 +380,36 @@
 		2D02E47B1E0B4A5D006451C7 /* HomeWiseLoginFrontend-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HomeWiseLoginFrontend-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* HomeWiseLoginFrontend-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HomeWiseLoginFrontend-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		350075C89672ADD0DEF69ABC /* Pods-HomeWiseLoginFrontend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend/Pods-HomeWiseLoginFrontend.debug.xcconfig"; sourceTree = "<group>"; };
+		3C2AC7D43703D8D12FB55FFD /* Pods-HomeWiseLoginFrontendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontendTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontendTests/Pods-HomeWiseLoginFrontendTests.release.xcconfig"; sourceTree = "<group>"; };
 		3CFA718C58554E9E86D0B2AE /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		406B1B7A4EC84B01F1B2A103 /* Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOS/Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		49B4106D45FB427D814F65DC /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-ionicons/fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		54B7143F20D8B75B00B80039 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5922524C9D7A4EE1B1FBD759 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		5D99538F801053D66A07F218 /* libPods-HomeWiseLoginFrontendTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeWiseLoginFrontendTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6385F6EE9F06479C9C4481D3 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		70E695AB265FF90F09DE02EF /* Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOSTests/Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7484CE057AC640D7A5AD1CE5 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		754BB6DCC82A495AACD258EE /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		762AF5D294D7412AABF34172 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		7938C3FA57D58AB6BF639B00 /* Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOSTests/Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		80976D8F9F6D486F95B57C4F /* RNFIRAnalytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFIRAnalytics.xcodeproj; path = "../node_modules/react-native-firebase-analytics/ios/RNFIRAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		8B259BCE55863767507E812D /* Pods-HomeWiseLoginFrontendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontendTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontendTests/Pods-HomeWiseLoginFrontendTests.release.xcconfig"; sourceTree = "<group>"; };
-		928FB2DC38DD28058699170E /* Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOS/Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		8C045E751B0D95F3BD320F69 /* Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOSTests/Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		91309AF9FCA20F9D1EF5429B /* Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOS/Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		9921D03132393A6C7B04927E /* libPods-HomeWiseLoginFrontend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeWiseLoginFrontend.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FB10097D55C4D1893BA4A9D /* libRNFIRAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFIRAnalytics.a; sourceTree = "<group>"; };
-		A505D76204B0B3F1AEA47561 /* Pods-HomeWiseLoginFrontend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend/Pods-HomeWiseLoginFrontend.debug.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AF3A6C49950B4DE6A9E890D6 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		B7BDAEED6D49E45F3738A0EE /* Pods-HomeWiseLoginFrontend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend/Pods-HomeWiseLoginFrontend.release.xcconfig"; sourceTree = "<group>"; };
 		B9EB1D95DE164F1D9FCDCA76 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		BB25B58050734A478B0176DF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		C2682DDDD7C2CB1875EEC831 /* libPods-HomeWiseLoginFrontend-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeWiseLoginFrontend-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C330872F4370126914CD16DE /* libPods-HomeWiseLoginFrontend-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HomeWiseLoginFrontend-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAB82FDCBC3D88D8FB10AE56 /* Pods-HomeWiseLoginFrontend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend/Pods-HomeWiseLoginFrontend.release.xcconfig"; sourceTree = "<group>"; };
+		C5AFD21884847B931A7391A7 /* Pods-HomeWiseLoginFrontendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontendTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontendTests/Pods-HomeWiseLoginFrontendTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D44A496809DF4721A5CED3DA /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		D74CDCA38E92A217D5EF3BE6 /* Pods-HomeWiseLoginFrontendTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontendTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontendTests/Pods-HomeWiseLoginFrontendTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D92DD9CD4044F3DBC75FE2C6 /* Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOSTests/Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		E471639020D2C99200657B24 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
-		E4FE4C0820D9A1B5006353AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E9E33B3887FA8A327AC3B4AA /* Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeWiseLoginFrontend-tvOS/Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		FC5C1435FEEF440A8A8F7531 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -458,8 +443,6 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				7809357A07D440538C91AF85 /* libRNVectorIcons.a in Frameworks */,
-				4E86694C1CB7467EABDE9A1B /* libRNFIRAnalytics.a in Frameworks */,
-				87DF83BCB52D24367CBAD3CC /* libPods-HomeWiseLoginFrontend.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,7 +561,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				E4FE4C0820D9A1B5006353AA /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -692,7 +674,6 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				BB25B58050734A478B0176DF /* RNVectorIcons.xcodeproj */,
-				80976D8F9F6D486F95B57C4F /* RNFIRAnalytics.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -716,7 +697,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				16D034D51ED940A3B2B4B9B0 /* Resources */,
 				54B7140E20D8981100B80039 /* Recovered References */,
-				EE1C0B3DB879D59E67A3A966 /* Pods */,
+				C23C19E3933DF07DA2219CD5 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -743,12 +724,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E45D536B20D99FE100EBE7F2 /* Products */ = {
+		C23C19E3933DF07DA2219CD5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E45D536F20D99FE100EBE7F2 /* libRNFIRAnalytics.a */,
+				350075C89672ADD0DEF69ABC /* Pods-HomeWiseLoginFrontend.debug.xcconfig */,
+				B7BDAEED6D49E45F3738A0EE /* Pods-HomeWiseLoginFrontend.release.xcconfig */,
+				91309AF9FCA20F9D1EF5429B /* Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig */,
+				E9E33B3887FA8A327AC3B4AA /* Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig */,
+				8C045E751B0D95F3BD320F69 /* Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig */,
+				D92DD9CD4044F3DBC75FE2C6 /* Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig */,
+				C5AFD21884847B931A7391A7 /* Pods-HomeWiseLoginFrontendTests.debug.xcconfig */,
+				3C2AC7D43703D8D12FB55FFD /* Pods-HomeWiseLoginFrontendTests.release.xcconfig */,
 			);
-			name = Products;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		E471639120D2C99200657B24 /* Products */ = {
@@ -758,21 +746,6 @@
 				E471639820D2C99200657B24 /* libART-tvOS.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		EE1C0B3DB879D59E67A3A966 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A505D76204B0B3F1AEA47561 /* Pods-HomeWiseLoginFrontend.debug.xcconfig */,
-				CAB82FDCBC3D88D8FB10AE56 /* Pods-HomeWiseLoginFrontend.release.xcconfig */,
-				406B1B7A4EC84B01F1B2A103 /* Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig */,
-				928FB2DC38DD28058699170E /* Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig */,
-				7938C3FA57D58AB6BF639B00 /* Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig */,
-				70E695AB265FF90F09DE02EF /* Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig */,
-				D74CDCA38E92A217D5EF3BE6 /* Pods-HomeWiseLoginFrontendTests.debug.xcconfig */,
-				8B259BCE55863767507E812D /* Pods-HomeWiseLoginFrontendTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -950,10 +923,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = E45D536B20D99FE100EBE7F2 /* Products */;
-					ProjectRef = 80976D8F9F6D486F95B57C4F /* RNFIRAnalytics.xcodeproj */;
 				},
 				{
 					ProductGroup = 54B7143620D8981600B80039 /* Products */;
@@ -1237,13 +1206,6 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E45D536F20D99FE100EBE7F2 /* libRNFIRAnalytics.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNFIRAnalytics.a;
-			remoteRef = E45D536E20D99FE100EBE7F2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		E471639620D2C99200657B24 /* libART.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1265,7 +1227,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4FE4C3320D9A1B5006353AA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,7 +1236,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				E4FE4C3220D9A1B5006353AA /* GoogleService-Info.plist in Resources */,
 				8A556EA219EE4A5BAB8BF7B6 /* Entypo.ttf in Resources */,
 				715C36B71D0A4D20B988527E /* EvilIcons.ttf in Resources */,
 				32FF14447393496192360F29 /* Feather.ttf in Resources */,
@@ -1296,7 +1256,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
-				E4FE4C3420D9A1B5006353AA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,7 +1263,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4FE4C3520D9A1B5006353AA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1478,7 +1436,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D74CDCA38E92A217D5EF3BE6 /* Pods-HomeWiseLoginFrontendTests.debug.xcconfig */;
+			baseConfigurationReference = C5AFD21884847B931A7391A7 /* Pods-HomeWiseLoginFrontendTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1509,7 +1467,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B259BCE55863767507E812D /* Pods-HomeWiseLoginFrontendTests.release.xcconfig */;
+			baseConfigurationReference = 3C2AC7D43703D8D12FB55FFD /* Pods-HomeWiseLoginFrontendTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1537,7 +1495,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A505D76204B0B3F1AEA47561 /* Pods-HomeWiseLoginFrontend.debug.xcconfig */;
+			baseConfigurationReference = 350075C89672ADD0DEF69ABC /* Pods-HomeWiseLoginFrontend.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1545,15 +1503,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = BD693DG8KK;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-firebase-analytics/ios",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager";
 				INFOPLIST_FILE = HomeWiseLoginFrontend/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
@@ -1566,22 +1523,21 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAB82FDCBC3D88D8FB10AE56 /* Pods-HomeWiseLoginFrontend.release.xcconfig */;
+			baseConfigurationReference = B7BDAEED6D49E45F3738A0EE /* Pods-HomeWiseLoginFrontend.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BD693DG8KK;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-firebase-analytics/ios",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager";
 				INFOPLIST_FILE = HomeWiseLoginFrontend/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
-					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
@@ -1594,7 +1550,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 406B1B7A4EC84B01F1B2A103 /* Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 91309AF9FCA20F9D1EF5429B /* Pods-HomeWiseLoginFrontend-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1631,7 +1587,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 928FB2DC38DD28058699170E /* Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig */;
+			baseConfigurationReference = E9E33B3887FA8A327AC3B4AA /* Pods-HomeWiseLoginFrontend-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1668,7 +1624,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7938C3FA57D58AB6BF639B00 /* Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 8C045E751B0D95F3BD320F69 /* Pods-HomeWiseLoginFrontend-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1704,7 +1660,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70E695AB265FF90F09DE02EF /* Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = D92DD9CD4044F3DBC75FE2C6 /* Pods-HomeWiseLoginFrontend-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
