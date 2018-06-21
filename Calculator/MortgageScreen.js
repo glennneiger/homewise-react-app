@@ -302,7 +302,7 @@ class MortgageScreen extends Component {
     closingCosts = Numeral(listPrice).value() * (Number.parseFloat(this.state.closingCostsPercent)/100);
 
     this.setState({
-      listPrice: Numeral((listPrice).toString()).format('0,0.0'),
+      listPrice: Numeral((listPrice).toString()).format('0,0'),
       downPayment: Numeral((downPayment).toString()).format('0,0.00'),
       closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
 
@@ -319,7 +319,7 @@ class MortgageScreen extends Component {
     console.log('downPaymentPercent ' + downPaymentPercent);
 
     this.setState({
-      downPayment: downPayment,
+      downPayment: Numeral((downPayment).toString()).format('0,0'),
       downPaymentPercent: +(downPaymentPercent.toFixed(2))
     });
   }
@@ -329,7 +329,7 @@ class MortgageScreen extends Component {
     let downPayment = Numeral(this.state.listPrice).value() * (Number.parseFloat(downPaymentPercent)/100);
 
     this.setState({
-      downPayment: downPayment,
+      downPayment: Numeral((downPayment).toString()).format('0,0'),
       downPaymentPercent: downPaymentPercent
     })
   }
@@ -341,7 +341,7 @@ class MortgageScreen extends Component {
 
 
     this.setState({
-      closingCosts: closingCosts,
+      closingCosts: Numeral((closingCosts).toString()).format('0,0'),
       closingCostsPercent: +(closingCostsPercent.toFixed(2))
     });
   }
@@ -351,7 +351,7 @@ class MortgageScreen extends Component {
     let closingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(closingCostsPercent)/100);
 
     this.setState({
-      closingCosts: closingCosts,
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
       closingCostsPercent: closingCostsPercent
     })
   }

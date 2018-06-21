@@ -482,7 +482,7 @@ class FixNFlipScreen extends Component {
     purchaseClosingCosts = Numeral(listPrice).value() * (Number.parseFloat(this.state.purchaseClosingCostsPercent)/100);
 
     this.setState({
-      listPrice: Numeral((listPrice).toString()).format('0,0.0'),
+      listPrice: Numeral((listPrice).toString()).format('0,0'),
       downPayment: Numeral((downPayment).toString()).format('0,0.00'),
       purchaseClosingCosts: Numeral((purchaseClosingCosts).toString()).format('0,0.00'),
 
@@ -494,8 +494,8 @@ class FixNFlipScreen extends Component {
     let monthlyPropertyTaxes = Numeral(annualPropertyTaxes).value()/12;
 
     this.setState({
-      annualPropertyTaxes: annualPropertyTaxes,
-      monthlyPropertyTaxes: monthlyPropertyTaxes
+      annualPropertyTaxes: Numeral((annualPropertyTaxes).toString()).format('0,0'),
+      monthlyPropertyTaxes: Numeral((monthlyPropertyTaxes).toString()).format('0,0.00')
     }); 
   }
 
@@ -508,7 +508,7 @@ class FixNFlipScreen extends Component {
     console.log('downPaymentPercent ' + downPaymentPercent);
 
     this.setState({
-      downPayment: downPayment,
+      downPayment: Numeral((downPayment).toString()).format('0,0'),
       downPaymentPercent: +(downPaymentPercent.toFixed(2))
     });
   }
@@ -518,7 +518,7 @@ class FixNFlipScreen extends Component {
     let downPayment = Numeral(this.state.listPrice).value() * (Number.parseFloat(downPaymentPercent)/100);
 
     this.setState({
-      downPayment: downPayment,
+      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
       downPaymentPercent: downPaymentPercent
     })
   }
@@ -530,7 +530,7 @@ class FixNFlipScreen extends Component {
 
 
     this.setState({
-      purchaseClosingCosts: purchaseClosingCosts,
+      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0'),
       purchaseClosingCostsPercent: +(purchaseClosingCostsPercent.toFixed(2))
     });
   }
@@ -540,7 +540,7 @@ class FixNFlipScreen extends Component {
     let purchaseClosingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(purchaseClosingCostsPercent)/100);
 
     this.setState({
-      purchaseClosingCosts: purchaseClosingCosts,
+      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0.00'),
       purchaseClosingCostsPercent: purchaseClosingCostsPercent
     })
   }

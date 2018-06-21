@@ -137,17 +137,7 @@ class NewClient extends Component {
     });
   }
 
-  test(){
-    if(this.state.client_type === 'B'){
-      alert(this.state.client_type)
-    }
-    else if(this.state.client_type === 'S'){
-      alert(this.state.client_type)
-    }
-    else{
-      alert('hi')
-    }
-  }
+
 
 
   signUp(){

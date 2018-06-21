@@ -493,7 +493,7 @@ class ROIScreen extends Component {
       roi: 0,
       monthlyCashFlow: 0,
       capRate: 0,
-      capRateColor: {fontSize: 30, color: 'black'},
+      capRateColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
       monthlyMortgage: 0,
 
       listPrice: 0,
@@ -526,14 +526,14 @@ class ROIScreen extends Component {
     let maintenance;
     let managementFee;
 
-    downPayment = (listPrice) * (Number.parseFloat(this.state.downPaymentPercent)/100);
-    closingCosts = (listPrice) * (Number.parseFloat(this.state.closingCostsPercent)/100);
+    downPayment = Numeral(listPrice).value() * (Number.parseFloat(this.state.downPaymentPercent)/100);
+    closingCosts = Numeral(listPrice).value() * (Number.parseFloat(this.state.closingCostsPercent)/100);
 
 
 
 
     this.setState({
-      listPrice: Numeral((listPrice).toString()).format('0,0.0'),
+      listPrice: listPrice,
       downPayment: Numeral((downPayment).toString()).format('0,0.00'),
       closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
 
@@ -550,7 +550,7 @@ class ROIScreen extends Component {
     console.log('downPaymentPercent ' + downPaymentPercent);
 
     this.setState({
-      downPayment: downPayment,
+      downPayment: Numeral((downPayment).toString()).format('0,0'),
       downPaymentPercent: +(downPaymentPercent.toFixed(2))
     });
   }
@@ -560,7 +560,7 @@ class ROIScreen extends Component {
     let downPayment = Numeral(this.state.listPrice).value() * (Number.parseFloat(downPaymentPercent)/100);
 
     this.setState({
-      downPayment: downPayment,
+      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
       downPaymentPercent: downPaymentPercent
     })
   }
@@ -582,7 +582,7 @@ class ROIScreen extends Component {
     let closingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(closingCostsPercent)/100);
 
     this.setState({
-      closingCosts: closingCosts,
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
       closingCostsPercent: closingCostsPercent
     })
   }
@@ -594,8 +594,8 @@ class ROIScreen extends Component {
 
 
     this.setState({
-      managementFee: Numeral((managementFee).toString()).format(0,0.0),
-      managementFeePercent: +Numeral((managementFeePercent).toString()).format(0,0.00)
+      managementFee: Numeral((managementFee).toString()).format('0,0'),
+      managementFeePercent: +(managementFeePercent.toFixed(2))
     });
   }
 
@@ -604,8 +604,8 @@ class ROIScreen extends Component {
     let managementFee = Numeral(this.state.rent).value() * (Number.parseFloat(managementFeePercent)/100);
 
     this.setState({
-      managementFee: Numeral((managementFee).toString()).format(0,0.0),
-      managementFeePercent: Numeral((managementFeePercent).toString()).format(0,0.0)
+      managementFee: Numeral((managementFee).toString()).format('0,0.00'),
+      managementFeePercent: managementFeePercent
     })
   }
 
@@ -620,11 +620,11 @@ class ROIScreen extends Component {
 
   _rentOnChangeText(rent){
 
-    let managementFee = (this.state.managementFeePercent/100) * Numeral(rent).value();
+    let managementFee = (Number.parseFloat(this.state.managementFeePercent)/100) * Numeral(rent).value();
 
     this.setState({
-      rent: rent,
-      managementFee: managementFee
+      rent: Numeral((rent).toString()).format('0,0.00'),
+      managementFee: Numeral((managementFee).toString()).format('0,0.00')
     });
   }
 

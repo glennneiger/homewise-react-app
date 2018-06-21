@@ -150,7 +150,6 @@ export default class AllClients extends Component {
   }
 
   refreshData () {
-    // alert('Refreshing data');
     this.setState({
       needToRefresh: true
     });
@@ -245,13 +244,13 @@ export default class AllClients extends Component {
                 <Text style={{color: '#fff', fontSize: 16}}>Buyers</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.toggleClientType.bind(this)} style={[styles.tabButton, styles.tabButtonRight, {backgroundColor: '#fff',marginLeft: -1,}]}>
-                <Text style={{color: '#000', fontSize: 16}}>Listings</Text>
+                <Text style={{color: '#0091FF', fontSize: 16}}>Listings</Text>
             </TouchableOpacity>
           </View>
           :
           <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 30, paddingBottom: 10}}>
             <TouchableOpacity onPress={this.toggleClientType.bind(this)} style={[styles.tabButton, styles.tabButtonLeft, {backgroundColor: '#fff',marginRight: -1,}]} >
-                <Text style={{color: '#000', fontSize: 16}}>Buyers</Text>
+                <Text style={{color: '#0091FF', fontSize: 16}}>Buyers</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.tabButton, styles.tabButtonRight, {backgroundColor: '#0091FF',marginLeft: -1,}]}>
                 <Text style={{color: '#fff', fontSize: 16}}>Listings</Text>
@@ -315,7 +314,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex:1,
     padding: 10,
-    paddingTop: (Platform.OS) === 'ios' ? 20 : 0,
     backgroundColor: '#fff'
   },
   GridViewBlockStyle: {

@@ -96,7 +96,7 @@ class ChangePassword extends Component {
     }
 
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor: '#fff'}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
           <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
