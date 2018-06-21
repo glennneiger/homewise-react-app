@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  KeyboardAvoidingView,
   TouchableOpacity,
   StyleSheet,
   Image,
@@ -84,7 +85,7 @@ export default class Steps extends Component{
     .then((response) => {
       if (!response.ok) {
         // Handle error
-        alert('Error in response')
+        //alert('Error in response')
       } else {
         response.json().then((data) => {
           // Set corresponding state field
@@ -148,9 +149,9 @@ export default class Steps extends Component{
     .then((response) => {
       if (!response.ok) {
         // Handle error
-        alert('Error in response')
-        alert(response.status);
-        alert(response.statusText)
+        //alert('Error in response')
+        //alert(response.status);
+        //alert(response.statusText)
       } else {
         response.json().then((data) => {
             // Trigger refresh hook
@@ -174,6 +175,7 @@ export default class Steps extends Component{
             email: this.props.navigation.getParam('email'),
             client_type: this.props.navigation.getParam('client_type')
         };
+        //alert(this.props.navigation.getParam('client_type'))
 
         // Make async fetch calls
         this.pushStatetoWeb(this.getClientURL, getClientBody, this.getClientStateTransition);
@@ -764,6 +766,7 @@ export default class Steps extends Component{
     render() {
         return (
             <View style={styles.container}>
+
                 <View style={{position: 'relative', alignItems: 'center', width: '100%', marginTop: 10, paddingBottom: 10}}> 
                     {this.state.editMode?
                     <TouchableOpacity
@@ -833,10 +836,19 @@ export default class Steps extends Component{
                     }
                 </View>
                 <ScrollView style={{flex:1, width: '100%'}}>
+                <KeyboardAvoidingView behavior="position" enabled>
+                {this.props.navigation.getParam('client_type') == 'S'?
                     <View style={{alignItems: 'center', paddingTop: 5,}} >
                         <Text style={{color: '#aaa', fontSize: 13}} >{this.state.address}</Text>
                         <Text style={{color: '#aaa', fontSize: 13, marginTop: 7,}} >{this.state.city}, {this.state.state}, {this.state.zipcode}</Text>
                     </View>
+                
+                :
+                <View style={{alignItems: 'center', paddingTop: 5,}} >
+                        <Text style={{color: '#aaa', fontSize: 13}} >{this.state.address}</Text>
+                        <Text style={{color: '#aaa', fontSize: 13, marginTop: 7,}} >{this.state.city} {this.state.state} {this.state.zipcode}</Text>
+                    </View>
+                }
                     <View style={{flex: 1,alignItems: 'center', paddingTop: 18,}} >
                         <PercentageCircle radius={60} borderWidth={8} percent={Math.round(this.state.steps_percentage)} textStyle={{fontSize: 15, color: '#000'}} color={this.percentColor()}></PercentageCircle>  
                         <Text style={{marginTop: 15,fontSize: 9,color: '#666'}} >Commission</Text>
@@ -844,6 +856,7 @@ export default class Steps extends Component{
                             <Text style={{color: '#fff', fontSize: 17}}>${Numeral((this.state.commission_val).toString()).format('0,0')}</Text>
                         </View>
                     </View>
+
                     {!this.state.editMode?
                         <View style={{paddingTop: 20,}}>
                             <FlatList
@@ -912,6 +925,7 @@ export default class Steps extends Component{
                                                 style={styles.values}
                                                 value={item.name}
                                                 keyboardType = {'default'}
+                                                autoCorrect={false}
                                                 returnKeyType = {'done'}
                                                 maxLength = {60}
                                                 onChangeText = {(name)=> this.editModeChangeName(index, name)}
@@ -1001,6 +1015,7 @@ export default class Steps extends Component{
                                     />
                                 </View>  
                             </View>
+                        
                         </View>
                         <View style={styles.addStepButtons}>
                             <TouchableOpacity
@@ -1021,6 +1036,7 @@ export default class Steps extends Component{
                         </View>
 
                     }
+                    </KeyboardAvoidingView>
                 </ScrollView>
             </View>
         )

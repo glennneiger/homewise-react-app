@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Dimensions,
   TextInput,
   TouchableOpacity, 
   LayoutAnimation, 
@@ -11,6 +12,7 @@ import {
   ART,
   KeyboardAvoidingView
 } from 'react-native';
+const {width, height} = Dimensions.get('window')
 
 import PropTypes from 'prop-types';
 
@@ -50,8 +52,9 @@ export default class CalcScreens extends Component {
         <View style={styles.otherStuff}>
           
           {this.state.ROIScreen?
-            <View style={styles.headerTabs1selected}>
+            <View>
             <TouchableOpacity
+            style={styles.headerTabs1selected}
             onPress = {() => {
               console.log(this.state);
               this._setROIScreen();}}>
@@ -59,8 +62,9 @@ export default class CalcScreens extends Component {
             </TouchableOpacity> 
             </View>
             :
-            <View style={styles.headerTabs1}>
+            <View>
             <TouchableOpacity
+            style={styles.headerTabs1}
             onPress = {() => {
               console.log(this.state);
               this._setROIScreen();}}>
@@ -69,8 +73,9 @@ export default class CalcScreens extends Component {
             </View>
           }
           {this.state.Mortgage?
-            <View style={styles.headerTabs2selected}>
+            <View>
             <TouchableOpacity
+            style={styles.headerTabs2selected}
             onPress = {() => {
               console.log(this.state);
               this._setMortgageScreen();}}>
@@ -78,8 +83,9 @@ export default class CalcScreens extends Component {
             </TouchableOpacity> 
             </View>
             :
-            <View style={styles.headerTabs2}>
+            <View>
             <TouchableOpacity
+            style={styles.headerTabs2}
             onPress = {() => {
               console.log(this.state);
               this._setMortgageScreen();}}>
@@ -88,8 +94,9 @@ export default class CalcScreens extends Component {
             </View>
           }
           {this.state.FixNFlip?
-            <View style={styles.headerTabs3selected}>
+            <View>
             <TouchableOpacity
+            style={styles.headerTabs3selected}
             onPress = {() => {
               console.log(this.state);
               this._setFixNFlipScreen();}}>
@@ -97,8 +104,9 @@ export default class CalcScreens extends Component {
             </TouchableOpacity> 
             </View>
             :
-            <View style={styles.headerTabs3}>
+            <View>
             <TouchableOpacity
+            style={styles.headerTabs3}
             onPress = {() => {
               console.log(this.state);
               this._setFixNFlipScreen();}}>
@@ -168,7 +176,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   headerTabs1:{
-    flex:3,
+    width: width * 0.3,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#0091FF',
@@ -177,14 +185,14 @@ const styles = StyleSheet.create({
     top: 0,
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: 10,
+    marginLeft: width * 0.05,
     paddingTop:5,
     paddingBottom:5,
     borderBottomLeftRadius: 4,
     borderTopLeftRadius: 4,
   },
   headerTabs1selected:{
-    flex:3,
+    width: width * 0.3,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#0091FF',
@@ -193,7 +201,7 @@ const styles = StyleSheet.create({
     top: 0,
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: 10,
+    marginLeft: width * 0.05,
     paddingTop: 5,
     paddingBottom:5,
     borderBottomLeftRadius: 4,
@@ -201,7 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0091FF'
   },
   headerTabs2:{
-    flex:3,
+    width: width * 0.3,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#0091FF',
@@ -214,7 +222,7 @@ const styles = StyleSheet.create({
     paddingBottom:5,
   },
    headerTabs2selected:{
-    flex:3,
+    width: width * 0.3,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#0091FF',
@@ -228,7 +236,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0091FF'
   },
   headerTabs3:{
-    flex:3,
+    width: width * 0.3,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#0091FF',
@@ -237,14 +245,13 @@ const styles = StyleSheet.create({
     top: 0,
     marginTop: 10,
     marginBottom: 10,
-    marginRight: 10,
     paddingTop:5,
     paddingBottom:5,
     borderBottomRightRadius: 4,
     borderTopRightRadius: 4,
   },
   headerTabs3selected:{
-    flex:3,
+    width: width * 0.3,
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: '#0091FF',
@@ -253,7 +260,6 @@ const styles = StyleSheet.create({
     top: 0,
     marginTop: 10,
     marginBottom: 10,
-    marginRight: 10,
     paddingTop:5,
     paddingBottom:5,
     borderBottomRightRadius: 4,
