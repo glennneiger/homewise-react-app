@@ -87,7 +87,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
         if(first_name == '' || last_name == '' || email == '' || password == '' || retypePass == '' || date == ''){
             alert('All Fields Required')
         }
-        else if(password.length <= 8){
+        else if(password.length < 8){
           alert('Password Must Be at Least 8 Characters Long')
         }
         else if(reg.test(email) === false){
@@ -118,9 +118,8 @@ pushStatetoWeb = async (url, bodyData, callback) => {
             }
 
             let stateTransition = function(parent, data) {
-              alert('Registration successful.')
-              // Navigate to login
-              this.props.navigation.navigate('Login')
+              // Navigate to clients page
+              this.props.navigation.navigate('AllClients')
             }
 
             // this.pushStatetoWeb(postURL, postBody, stateTransition);
@@ -142,9 +141,8 @@ pushStatetoWeb = async (url, bodyData, callback) => {
               }),
             }).then((response) => response.json())
                 .then((responseJson) => {
-                  alert('Registration successful.');
-                  // Navigate to login
-                  this.props.navigation.navigate('Login')
+                  // Navigate to clients page
+                  this.props.navigation.navigate('AllClients')
                 })
                 .catch((error) => {
                   alert('Error while registering. Try again later.')
