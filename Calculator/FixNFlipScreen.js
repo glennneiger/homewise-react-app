@@ -92,6 +92,15 @@ class FixNFlipScreen extends Component {
     };
   }
 
+    static navigationOptions = {
+        title: 'Calculators',
+        headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
+        headerStyle:{
+            backgroundColor:'#0091FF',
+        },
+        headerLeft: null
+    };
+
   // componentWillMount(){
   //   this.props.toggle_roi_screen();
   // }
@@ -168,7 +177,36 @@ class FixNFlipScreen extends Component {
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
         <ScrollView ref='_scrollView'>
+              <View style={styles.otherStuff}>
+                <View>
+                  <TouchableOpacity
+                  style={styles.idk}
+                  onPress = {() => {
+                    this.props.navigation.navigate('ROIScreen')
+                    console.log(this.state);}}>
+                      <Text style = {{color: '#0091FF'}}> ROI </Text>
+                  </TouchableOpacity> 
+                </View>
+                <View>
+                  <TouchableOpacity
+                  style={styles.headerTabs2}
+                  onPress = {() => {
+                    this.props.navigation.navigate('MortgageScreen')
+                    console.log(this.state);}}>
+                      <Text style = {{color: '#0091FF'}}> Mortgage </Text>
+                  </TouchableOpacity> 
+                </View>
+                <View>
+                  <TouchableOpacity
+                  style={styles.headerTabs3selected}
+                  onPress = {() => {
+                    console.log(this.state);}}>
+                      <Text style = {{color: '#fff'}}> Fix & Flip </Text>
+                  </TouchableOpacity> 
+                </View>
+              </View>
           <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
+
             <TouchableOpacity
               onPress = {
               () => this._reset()
