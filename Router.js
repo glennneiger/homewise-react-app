@@ -19,6 +19,9 @@ import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
 import Steps from './Steps';
 import CalcScreens from './Calculator/CalcScreens'
+import FixNFlipScreen from './Calculator/FixNFlipScreen'
+import MortgageScreen from './Calculator/MortgageScreen'
+import ROIScreen from './Calculator/ROIScreen'
 import AgentProfile from './AgentProfile'
 import CompsPreview from './CompsPreview'
 
@@ -50,8 +53,14 @@ export const Clients = StackNavigator(
 
 export const Calculators = StackNavigator(
 {
-  CalcScreens: {
-    screen: CalcScreens
+  ROIScreen: {
+    screen: ROIScreen
+  },
+  MortgageScreen: {
+    screen: MortgageScreen
+  },
+  FixNFlipScreen: {
+    screen: FixNFlipScreen
   }
 });
 

@@ -1,8 +1,11 @@
 import {
   View,
-   Platform,
-    StyleSheet
+  Platform,
+  Dimensions,
+  StyleSheet
 } from 'react-native';
+
+const {width, height} = Dimensions.get('window')
 
 
 const styles = StyleSheet.create({
@@ -10,8 +13,117 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
-  
-
+  otherStuff: {
+    flex:0.9,
+    flexDirection: 'row'
+  },
+  headerTabs1:{
+    width: width * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: width * 0.05,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomLeftRadius: 4,
+    borderTopLeftRadius: 4,
+  },
+  headerTabs1selected:{
+    width: width * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: width * 0.05,
+    paddingTop: 5,
+    paddingBottom:5,
+    borderBottomLeftRadius: 4,
+    borderTopLeftRadius: 4,
+    backgroundColor: '#0091FF'
+  },
+  idk:{
+    width: width * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: width * 0.05,
+    paddingTop: 5,
+    paddingBottom:5,
+    borderBottomLeftRadius: 4,
+    borderTopLeftRadius: 4,
+  },
+  headerTabs2:{
+    width: width * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingTop:5,
+    paddingBottom:5,
+  },
+   headerTabs2selected:{
+    width: width * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    backgroundColor: '#0091FF'
+  },
+  headerTabs3:{
+    width: width * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomRightRadius: 4,
+    borderTopRightRadius: 4,
+  },
+  headerTabs3selected:{
+    width: width * 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#0091FF',
+    borderWidth: 1,
+    position: 'relative',
+    top: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderBottomRightRadius: 4,
+    borderTopRightRadius: 4,
+    backgroundColor: '#0091FF'
+  },
 
 
 //------------------ROI Screen-------------------//

@@ -80,74 +80,18 @@ class ROIScreen extends Component {
     };
   }
 
+  static navigationOptions = {
+        title: 'Calculators',
+        headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
+        headerStyle:{
+            backgroundColor:'#0091FF',
+        },
+        headerLeft: null
+    };
+
   // componentWillMount(){
   //   this.props.toggle_roi_screen();
   // }
-
-  _expand_collapse_function_upfront(){
-    LayoutAnimation.configureNext( LayoutAnimation.Presets.easeInEaseOut );
-
-    if( this.state.expandUpfront == false ){
-      this.setState({ 
-        updatedHeightUpfront: this.state.textLayoutHeightUpfront, 
-        expandUpfront: true, 
-        arrowUpfront: 'v'
-      }); 
-    }
-    else{
-      this.setState({ 
-        updatedHeightUpfront: 0, 
-        expandUpfront: false, 
-        arrowUpfront: '^'
-      });
-    }
-  }
-
-  _expand_collapse_function_income(){
-    LayoutAnimation.configureNext( LayoutAnimation.Presets.easeInEaseOut );
-
-    if( this.state.expandIncome == false ){
-      this.setState({ 
-        updatedHeightIncome: this.state.textLayoutHeightIncome, 
-        expandIncome: true, 
-      }); 
-    }
-    else{
-      this.setState({ 
-        updatedHeightIncome: 0, 
-        expandIncome: false, 
-      });
-    }
-  }
-
-  _expand_collapse_function_expense(){
-    LayoutAnimation.configureNext( LayoutAnimation.Presets.easeInEaseOut );
-
-    if( this.state.expandExpense == false ){
-      this.setState({ 
-        updatedHeightExpense: this.state.textLayoutHeightExpense, 
-        expandExpense: true, 
-      }); 
-    }
-    else{
-      this.setState({ 
-        updatedHeightExpense: 0, 
-        expandExpense: false, 
-      });
-    }
-  }
-
-  setHeightUpfront(height){
-    this.setState({ textLayoutHeightUpfront: height});
-  }
-
-  setHeightIncome(height){
-    this.setState({ textLayoutHeightIncome: height});
-  }
-
-  setHeightExpense(height){
-    this.setState({ textLayoutHeightExpense: height});
-  }
 
 
   render() {
@@ -159,6 +103,32 @@ class ROIScreen extends Component {
 
           <View style={styles.container}>
             <ScrollView ref='_scrollView'>
+              <View style={styles.otherStuff}>
+                <View>
+                  <TouchableOpacity
+                  style={styles.headerTabs1selected}
+                  onPress = {() => {
+                    console.log(this.state);}}>
+                      <Text style = {{color: '#fff'}}> ROI </Text>
+                  </TouchableOpacity> 
+                </View>
+                <View>
+                  <TouchableOpacity
+                  style={styles.headerTabs2}
+                  onPress = {() => {
+                    this.props.navigation.navigate('MortgageScreen')}}>
+                      <Text style = {{color: '#0091FF'}}> Mortgage </Text>
+                  </TouchableOpacity> 
+                </View>
+                <View>
+                  <TouchableOpacity
+                  style={styles.headerTabs3}
+                  onPress = {() => {
+                    this.props.navigation.navigate('FixNFlipScreen')}}>
+                      <Text style = {{color: '#0091FF'}}> Fix & Flip </Text>
+                  </TouchableOpacity> 
+                </View>
+              </View>
               <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
                <TouchableOpacity
                   onPress = {
