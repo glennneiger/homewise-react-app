@@ -53,7 +53,7 @@ export default class Steps extends Component{
 
 
             newStepName: '',
-            newStepDate: '01/01/2018',
+            newStepDate: new Date(),
 
             icon: true,
 
@@ -462,7 +462,7 @@ export default class Steps extends Component{
             addStep: false,
             addStepButton: true,
             steps_deleted: [],
-            newStepDate: '01/01/2018',
+            newStepDate: new Date(),
             newStepName: ''
         })   
     }
