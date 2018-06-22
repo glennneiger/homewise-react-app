@@ -11,6 +11,7 @@ import {
   Platform,
   KeyboardAvoidingView
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import PropTypes from 'prop-types';
 
 
@@ -140,8 +141,8 @@ class MortgageScreen extends Component {
   render() {
 
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-        <ScrollView ref='_scrollView'>
+      <View style={styles.container}>
+        <KeyboardAwareScrollView ref='_scrollView'>
               <View style={styles.otherStuff}>
                 <View>
                   <TouchableOpacity
@@ -305,8 +306,8 @@ class MortgageScreen extends Component {
                    }>
                    <Text style = {styles.submitButtonText2}> Calculate </Text>
           </TouchableOpacity>
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 

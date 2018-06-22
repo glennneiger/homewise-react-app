@@ -12,6 +12,7 @@ import {
   ART,
   KeyboardAvoidingView
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 const {width, height} = Dimensions.get('window')
 
 import PropTypes from 'prop-types';
@@ -48,7 +49,7 @@ export default class CalcScreens extends Component {
   render () {
     console.disableYellowBox = true;
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <KeyboardAwareScrollView style={styles.container}>
         <View style={styles.otherStuff}>
           
           {this.state.ROIScreen?
@@ -118,7 +119,7 @@ export default class CalcScreens extends Component {
         <View style={{flex: 9.2}}>
           {this.calcDisplay()}
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
 
     );
   }

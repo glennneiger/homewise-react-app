@@ -13,6 +13,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { AnimatedGaugeProgress, GaugeProgress } from 'react-native-simple-gauge';
 
 import Numeral from 'numeral';
@@ -174,9 +175,9 @@ class FixNFlipScreen extends Component {
   render() {
 
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <View style={styles.container}>
 
-        <ScrollView ref='_scrollView'>
+        <KeyboardAwareScrollView ref='_scrollView'>
               <View style={styles.otherStuff}>
                 <View>
                   <TouchableOpacity
@@ -458,8 +459,8 @@ class FixNFlipScreen extends Component {
                    }>
                    <Text style = {styles.submitButtonText2}> Calculate </Text>
           </TouchableOpacity>
-        </ScrollView>        
-      </KeyboardAvoidingView>      
+        </KeyboardAwareScrollView>        
+      </View>      
     );
   }
 

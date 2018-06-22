@@ -100,10 +100,9 @@ class ROIScreen extends Component {
     let roiString = this.state.roi.toString() + '%';
 
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
 
           <View style={styles.container}>
-            <ScrollView ref='_scrollView'>
+            <KeyboardAwareScrollView ref='_scrollView'>
               <View style={styles.otherStuff}>
                 <View>
                   <TouchableOpacity
@@ -443,12 +442,8 @@ class ROIScreen extends Component {
                    }>
                    <Text style = {styles.submitButtonText2}> Calculate </Text>
                 </TouchableOpacity>
-            </ScrollView>
-          </View>
-        
-
-
-      </KeyboardAvoidingView>      
+            </KeyboardAwareScrollView>
+          </View>    
     );
   }
 
