@@ -12,6 +12,7 @@ import {
   ART,
   KeyboardAvoidingView
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import PropTypes from 'prop-types';
 import { AnimatedGaugeProgress, GaugeProgress } from 'react-native-simple-gauge';
 import Numeral from 'numeral';
@@ -504,7 +505,7 @@ class ROIScreen extends Component {
 
     this.setState({
       listPrice: listPrice,
-      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
+      downPayment: Numeral((downPayment).toString()).format('0,0'),
       closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
 
       introScreen: false,
@@ -530,7 +531,7 @@ class ROIScreen extends Component {
     let downPayment = Numeral(this.state.listPrice).value() * (Number.parseFloat(downPaymentPercent)/100);
 
     this.setState({
-      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
+      downPayment: Numeral((downPayment).toString()).format('0,0'),
       downPaymentPercent: downPaymentPercent
     })
   }

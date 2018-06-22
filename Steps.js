@@ -14,12 +14,14 @@ import {
 } from 'react-native';
 //import { Actions } from 'react-native-router-flux';
 //import Icon from 'react-native-vector-icons/FontAwesome';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import PercentageCircle from 'react-native-percentage-circle';
 import DatePicker from 'react-native-datepicker';
 import Numeral from 'numeral';
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
+
 
 export default class Steps extends Component{
     constructor() {
@@ -766,7 +768,6 @@ export default class Steps extends Component{
     render() {
         return (
             <View style={styles.container}>
-
                 <View style={{position: 'relative', alignItems: 'center', width: '100%', marginTop: 10, paddingBottom: 10}}> 
                     {this.state.editMode?
                     <TouchableOpacity
@@ -835,8 +836,7 @@ export default class Steps extends Component{
                     </TouchableOpacity>
                     }
                 </View>
-                <ScrollView style={{flex:1, width: '100%'}}>
-                <KeyboardAvoidingView behavior="position" enabled>
+                <KeyboardAwareScrollView style={{flex:1, width: '100%'}}>
                 {this.props.navigation.getParam('client_type') == 'S'?
                     <View style={{alignItems: 'center', paddingTop: 5,}} >
                         <Text style={{color: '#aaa', fontSize: 13}} >{this.state.address}</Text>
@@ -963,6 +963,7 @@ export default class Steps extends Component{
                                 }
                                  />
                         </View>
+                        
                     }
                     {this.state.addStepButton&&
                         <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 20, paddingBottom: 20}}>
@@ -1034,10 +1035,11 @@ export default class Steps extends Component{
                             </TouchableOpacity>
                         </View>
                         </View>
+                        
+
 
                     }
-                    </KeyboardAvoidingView>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             </View>
         )
     }
