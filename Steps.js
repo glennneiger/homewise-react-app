@@ -19,6 +19,7 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import PercentageCircle from 'react-native-percentage-circle';
 import DatePicker from 'react-native-datepicker';
 import Numeral from 'numeral';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
 
@@ -60,6 +61,7 @@ export default class Steps extends Component{
             currentChecked: -1,
 
             refresh: true,
+            visible: false
 
             
         }
@@ -92,7 +94,8 @@ export default class Steps extends Component{
         response.json().then((data) => {
           // Set corresponding state field
           this.setState({
-            [stateField]: data
+            [stateField]: data,
+            visible: false
           })
         })
       }
@@ -162,6 +165,11 @@ export default class Steps extends Component{
             this.props.navigation.state.params.refresh();
             // Go to callback function
             callback(this, data);
+            setInterval(() => {
+                this.setState({
+                    visible: false
+                });
+            }, 1000);
         })
       }
     });
@@ -182,6 +190,10 @@ export default class Steps extends Component{
         // Make async fetch calls
         this.pushStatetoWeb(this.getClientURL, getClientBody, this.getClientStateTransition);
         this.pushStatetoWeb(this.clientStepsURL, clientStepsBody, this.clientStepsStateTransition);
+
+        this.setState({
+        visible: !this.state.visible,
+      })
 
         console.log('stepscopy')
         console.log(this.state.stepscopy)
@@ -226,6 +238,10 @@ export default class Steps extends Component{
         }
         this.pushStatetoWeb(postURL, postBody, stateTransition);
 
+
+        this.setState({
+            visible: !this.state.visible,
+        })
         //navigate
         this.props.navigation.navigate('AllClients');
     }
@@ -279,7 +295,7 @@ export default class Steps extends Component{
         console.log(total_steps)
         this.setState({
             addStep: true,
-            addStepButton: false
+            addStepButton: false,
         })
 
         let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
@@ -451,7 +467,8 @@ export default class Steps extends Component{
         this.setState({
             refresh: refresh,
             addStep: false,
-            addStepButton: true
+            addStepButton: true,
+            visible: !this.state.visible,
         });
         console.log(this.state.refresh)
     }
@@ -463,7 +480,7 @@ export default class Steps extends Component{
             addStepButton: true,
             steps_deleted: [],
             newStepDate: new Date(),
-            newStepName: ''
+            newStepName: '',
         })   
     }
 
@@ -768,6 +785,7 @@ export default class Steps extends Component{
     render() {
         return (
             <View style={styles.container}>
+            <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} /*overlayColor='#0091FF'*//>
                 <View style={{position: 'relative', alignItems: 'center', width: '100%', marginTop: 10, paddingBottom: 10}}> 
                     {this.state.editMode?
                     <TouchableOpacity

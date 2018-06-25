@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { AppRegistry, StyleSheet, FlatList, Text, View, Alert, Platform, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native';
+import { AppRegistry, StyleSheet, FlatList, Text, View, Alert, Platform, TouchableOpacity, ScrollView, AsyncStorage, ActivityIndicator } from 'react-native';
 import PercentageCircle from 'react-native-percentage-circle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
@@ -9,6 +9,7 @@ import { StackNavigator } from 'react-navigation';
 
 import Steps from './Steps'
 import Numeral from 'numeral';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
 
@@ -24,7 +25,8 @@ export default class AllClients extends Component {
       BuyingClients: [],
       SellingClients: [],
       UpcomingTasks: [],
-      needToRefresh: true
+      needToRefresh: true,
+      visible: false
     }
 
     this.refreshData = this.refreshData.bind(this);
@@ -60,7 +62,8 @@ export default class AllClients extends Component {
             data = data.slice(0, Math.min(data.length, 3))
           }
           this.setState({
-            [stateField]: data
+            [stateField]: data,
+            visible: false
           })
         })
       }
@@ -68,7 +71,6 @@ export default class AllClients extends Component {
   }
 
   componentDidMount(){
-    // Build URLs for fetch calls
     let fetchBuyClientsURL = ApiEndpoints.url + ApiEndpoints.clientlistPath + '?client_type=B';
     let fetchSellClientsURL = ApiEndpoints.url + ApiEndpoints.clientlistPath + '?client_type=S';
     let fetchTasksURL = ApiEndpoints.url + ApiEndpoints.upcomingstepsPath;
@@ -78,9 +80,10 @@ export default class AllClients extends Component {
     this.fetchWebtoState(fetchSellClientsURL, 'SellingClients');
     this.fetchWebtoState(fetchTasksURL, 'UpcomingTasks', true);
 
-    this.setState({
-      needToRefresh: false
-    });
+      this.setState({
+        visible: !this.state.visible,
+        needToRefresh: false
+      })
 
     /*fetch('http://127.0.0.1:8000/agent/Clients/?client_type=B', 
       {
@@ -151,7 +154,8 @@ export default class AllClients extends Component {
 
   refreshData () {
     this.setState({
-      needToRefresh: true
+      needToRefresh: true,
+      //visible: true
     });
   } 
 
@@ -186,6 +190,7 @@ export default class AllClients extends Component {
     }
   }
 
+
   static navigationOptions = {
         title: 'Clients',
         headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
@@ -216,6 +221,7 @@ export default class AllClients extends Component {
    return (
 
     <View style={styles.MainContainer}>
+         <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <ScrollView>
       <Text style={{color: '#0091FF', fontSize: 20, fontWeight: '600', paddingTop: 15,}} >Upcoming Tasks</Text>
       <View style = {{flex: 4}}>
