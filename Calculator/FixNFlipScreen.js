@@ -416,7 +416,29 @@ class FixNFlipScreen extends Component {
             <View style={styles.headerRow}>
               <Text style={styles.headerRowText}>Sale Details</Text>
             </View>
-            <Row caption="Sales Price After Fix Up (ARV)" sign='$' value={Numeral((this.state.arv).toString()).format('0,0')} update={(arv) => this.setState({arv})}/>
+            <View style={styles.caption}>
+              <Text style={styles.captionText}>Sales Price After Fix Up (ARV)</Text>
+            </View>
+            <View style={styles.row}>
+              <TextInput
+                style={styles.dollaSign}
+                keyboardType = {'numeric'}
+                value = '$'
+                editable={false}>
+              </TextInput>
+              <TextInput
+                style={styles.values}
+                keyboardType = {'numeric'}
+                returnKeyType = {'done'}
+                placeholder = '0'
+                value = {Numeral((this.state.arv).toString()).format('0,0')}
+                onChangeText={(arv) => this._ARVOnChangeText(arv)}>
+              </TextInput>
+              <TextInput
+                style={styles.percentPlace}
+                editable={false}>
+              </TextInput>
+            </View>
             <View style={styles.caption}>
               <Text style={styles.captionText}>Real Estate Agent Fee</Text>
             </View>
@@ -432,15 +454,15 @@ class FixNFlipScreen extends Component {
                 keyboardType = {'numeric'}
                 returnKeyType = {'done'}
                 placeholder = '0'
-                value = {Numeral((this.state.realEstateAgentFee).toString()).format('0,0')}
-                onChangeText={(realEstateAgentFee) => this.setState({realEstateAgentFee})}>
+                value = {(this.state.realEstateAgentFee).toString()}
+                onChangeText={(realEstateAgentFee) => this._realEstateAgentFeeOnChangeText({realEstateAgentFee})}>
               </TextInput>
               <TextInput
                 style={styles.percentValue}
                 returnKeyType = {'done'}
                 placeholder = '0'
                 value = {(this.state.realEstateAgentFeePercent).toString()}
-                onChangeText={(realEstateAgentFeePercent) => this.setState({realEstateAgentFeePercent})}>
+                onChangeText={(realEstateAgentFeePercent) => this._realEstateAgentFeePercentOnChangeText({realEstateAgentFeePercent})}>
               </TextInput>
               <TextInput
                 style={styles.percentSign}
@@ -506,6 +528,7 @@ class FixNFlipScreen extends Component {
 
       arv: 0,
       realEstateAgentFee: 0,
+      realEstateAgentFeePercent: 6,
       otherMiscClosingCosts: 0,
       numberOfDaysHeld: 0,
       halfDaysHeld: 0,
@@ -581,6 +604,43 @@ class FixNFlipScreen extends Component {
     this.setState({
       purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0.00'),
       purchaseClosingCostsPercent: purchaseClosingCostsPercent
+    })
+  }
+
+  _ARVOnChangeText(arv){
+  let realEstateAgentFee;
+
+  realEstateAgentFee = Numeral(arv).value() * (Number.parseFloat(this.state.realEstateAgentFeePercent)/100);
+  console.log('arv' + arv);
+  console.log('realEstateAgentFee' + realEstateAgentFee);
+
+    this.setState({
+      arv: Numeral((arv).toString()).format('0,0'),
+      realEstateAgentFee: Numeral((realEstateAgentFee).toString()).format('0,0.0')
+    }); 
+  } 
+
+  _realEstateAgentFeeOnChangeText(realEstateAgentFee){
+
+    let realEstateAgentFeeVal = Numeral(realEstateAgentFee).value();
+    let realEstateAgentFeePercent = (realEstateAgentFeeVal / Numeral(this.state.arv).value()) * 100;
+    console.log('arv ' + this.state.arv);
+    console.log('realEstateAgentFee ' + realEstateAgentFeeVal);
+    console.log('realEstateAgentFeePercent ' + realEstateAgentFeePercent);
+
+    this.setState({
+      realEstateAgentFee: Numeral((realEstateAgentFee).toString()).format('0,0'),
+      realEstateAgentFeePercent: +(realEstateAgentFeePercent.toFixed(2))
+    });
+  }
+
+  _realEstateAgentFeePercentOnChangeText(realEstateAgentFeePercent){
+
+    let realEstateAgentFee = Numeral(this.state.arv).value() * (Number.parseFloat(realEstateAgentFeePercent)/100);
+
+    this.setState({
+      realEstateAgentFee: Numeral((realEstateAgentFee).toString()).format('0,0.00'),
+      realEstateAgentFeePercent: realEstateAgentFeePercent
     })
   }
 
