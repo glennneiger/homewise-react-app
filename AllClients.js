@@ -52,9 +52,14 @@ export default class AllClients extends Component {
       'headers': headerData
     })
     .then((response) => {
-      if (!response.ok) {
+      if (response == []){
+        this.setState({
+          visible: false
+        })
+      }
+      else if (!response.ok) {
         // Handle error
-        alert('Error in response')
+        alert('Error in response test')
       } else {
         response.json().then((data) => {
           // Set corresponding state field

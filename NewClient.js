@@ -90,7 +90,7 @@ class NewClient extends Component {
     .then((response) => {
       if (!response.ok) {
         // Handle error
-        alert('Error in response')
+        alert('You have already entered this client')
       } else {
         response.json().then((data) => {
           // Set corresponding state field
@@ -120,7 +120,6 @@ class NewClient extends Component {
     .then((response) => {
       if (!response.ok) {
         // Handle error
-        alert('Error in response')
         alert(response.status);
         alert(response.statusText)
       } else {
@@ -131,11 +130,6 @@ class NewClient extends Component {
             this.props.navigation.state.params.refresh();
             // Go to callback function
             callback(this, data);
-            setInterval(() => {
-                this.setState({
-                    visible: false
-                });
-            }, 500);
         })
       }
     })
@@ -211,9 +205,6 @@ class NewClient extends Component {
           // Make fetch call
           this.pushStatetoWeb(addclientURL, addclientBody, stateTransition);
 
-          this.setState({
-            visible: !this.state.visible,
-          })
 
           /*fetch('http://127.0.0.1:8000/agent/AddClient/', 
           {
@@ -260,7 +251,6 @@ class NewClient extends Component {
     const { navigation } = this.props;
     return (
       <View style ={styles.header}>
-       <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <View style={{flex:1}}>
       <KeyboardAvoidingView behavior="position" enabled>
         <ScrollView>
