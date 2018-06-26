@@ -18,6 +18,7 @@ import Login from './Login';
 import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
 import AllClients from './AllClients';
+import SingleStep from './SingleStep';
 import Steps from './Steps';
 import AgentProfile from './AgentProfile'
 import NewClient from './NewClient'
@@ -57,7 +58,7 @@ export default class App extends Component {
     console.disableYellowBox = true;
     return (
       <View style={{flex:1}}>
-        <AuthNav />
+        <SingleStep />
       </View>
     );
     }
