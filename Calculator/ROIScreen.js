@@ -102,7 +102,7 @@ class ROIScreen extends Component {
     return (
 
           <View style={styles.container}>
-            <KeyboardAwareScrollView ref='_scrollView'>
+            <KeyboardAwareScrollView innerRef={ref => {this.scroll = ref}}>
               <View style={styles.otherStuff}>
                 <View>
                   <TouchableOpacity
@@ -162,7 +162,7 @@ class ROIScreen extends Component {
                     <Text style={styles.subTextFixNFlip}>Mortgage</Text>
                   </View>
                   <View style={styles.info}>
-                    <Text style={this.state.capRateColor}>{Numeral((this.state.capRate*100).toString()).format('0,0')}%</Text>
+                    <Text style={this.state.capRateColor}>{this.state.capRate}%</Text>
                     <Text style={styles.subTextFixNFlip}>Cap Rate</Text>
                     <Text> </Text>
                   </View>
@@ -226,6 +226,7 @@ class ROIScreen extends Component {
                   <TextInput
                     style={styles.percentValue}
                     returnKeyType = {'done'}
+                    keyboardType ={'numeric'}
                     placeholder = '0'
                     underlineColorAndroid='transparent'
                     value = {(this.state.downPaymentPercent).toString()}
@@ -265,6 +266,7 @@ class ROIScreen extends Component {
                   <TextInput
                     style={styles.percentValue}
                     returnKeyType = {'done'}
+                    keyboardType ={'numeric'}
                     placeholder = '0'
                     underlineColorAndroid='transparent'
                     value = {(this.state.closingCostsPercent).toString()}
@@ -281,7 +283,7 @@ class ROIScreen extends Component {
 
 
                 <Row caption="Interest Rate" sign='%' value={(this.state.interestRate).toString()} update={(interestRate) => this.setState({interestRate})}/>
-                <Row caption="Loan Term (Years)" sign='' value={Numeral((this.state.loanTerm).toString()).format('0,0')} update={(loanTerm) => this.setState({loanTerm})}/>
+                <Row caption="Loan Term (Years)" sign='' value={Numeral((this.state.loanTerm).toString()).format('0,0.[00]')} update={(loanTerm) => this.setState({loanTerm})}/>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Annual Property Tax</Text>
                 </View>
@@ -297,7 +299,7 @@ class ROIScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
-                    value = {Numeral((this.state.propertyTax).toString()).format(0,0)}
+                    value = {(this.state.propertyTax).toString()}
                     onChangeText={(propertyTax) => this._monthlyPropertyTaxOnChangeText(propertyTax)}>
                   </TextInput>
                   <TextInput
@@ -321,7 +323,7 @@ class ROIScreen extends Component {
                     keyboardType = {'numeric'}
                     returnKeyType = {'done'}
                     placeholder = '0'
-                    value = {Numeral((this.state.rehabCosts).toString()).format('0,0')}
+                    value = {Numeral((this.state.rehabCosts).toString()).format('0,0.[00]')}
                     onChangeText={(rehabCosts) => this.setState({rehabCosts})}>
                   </TextInput>
                   <TextInput
@@ -354,7 +356,7 @@ class ROIScreen extends Component {
                     returnKeyType = {'done'}
                     placeholder = '0'
                     underlineColorAndroid='transparent'
-                    value = {Numeral((this.state.rent).toString()).format('0,0')}
+                    value = {(this.state.rent).toString()}
                     onChangeText={(rent) => this._rentOnChangeText(rent)}>
                   </TextInput>
                   <TextInput
@@ -388,6 +390,7 @@ class ROIScreen extends Component {
                   <TextInput
                     style={styles.percentValue}
                     returnKeyType = {'done'}
+                    keyboardType ={'numeric'}
                     placeholder = '0'
                     underlineColorAndroid='transparent'
                     value = {(this.state.managementFeePercent).toString()}
@@ -406,9 +409,9 @@ class ROIScreen extends Component {
                 </View> 
                 
                 
-                <Row caption="Monthly Insurance" sign='$' value={Numeral((this.state.insurance).toString()).format('0,0')} update={(insurance) => this.setState({insurance})}/>
-                <Row caption="Monthly HOA" sign='$' value={Numeral((this.state.hoa).toString()).format('0,0')} update={(hoa) => this.setState({hoa})}/>
-                <Row caption="Monthly Maintenance" sign='$' value={Numeral((this.state.maintenance).toString()).format('0,0')} update={(maintenance) => this.setState({maintenance})}/>
+                <Row caption="Monthly Insurance" sign='$' value={Numeral((this.state.insurance).toString()).format('0,0.[00]')} update={(insurance) => this.setState({insurance})}/>
+                <Row caption="Monthly HOA" sign='$' value={Numeral((this.state.hoa).toString()).format('0,0.[00]')} update={(hoa) => this.setState({hoa})}/>
+                <Row caption="Monthly Maintenance" sign='$' value={Numeral((this.state.maintenance).toString()).format('0,0.[00]')} update={(maintenance) => this.setState({maintenance})}/>
 
                  <View style={styles.caption}>
                   <Text style={styles.captionText}>Monthly Property Tax</Text>
@@ -500,8 +503,8 @@ class ROIScreen extends Component {
 
     this.setState({
       listPrice: listPrice,
-      downPayment: Numeral((downPayment).toString()).format('0,0'),
-      closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.[00]'),
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.[00]'),
 
       introScreen: false,
     }); 
@@ -516,7 +519,7 @@ class ROIScreen extends Component {
     console.log('downPaymentPercent ' + downPaymentPercent);
 
     this.setState({
-      downPayment: Numeral((downPayment).toString()).format('0,0'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.[00]'),
       downPaymentPercent: +(downPaymentPercent.toFixed(2))
     });
   }
@@ -526,7 +529,7 @@ class ROIScreen extends Component {
     let downPayment = Numeral(this.state.listPrice).value() * (Number.parseFloat(downPaymentPercent)/100);
 
     this.setState({
-      downPayment: Numeral((downPayment).toString()).format('0,0'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.[00]'),
       downPaymentPercent: downPaymentPercent
     })
   }
@@ -548,7 +551,7 @@ class ROIScreen extends Component {
     let closingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(closingCostsPercent)/100);
 
     this.setState({
-      closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.[00]'),
       closingCostsPercent: closingCostsPercent
     })
   }
@@ -560,7 +563,7 @@ class ROIScreen extends Component {
 
 
     this.setState({
-      managementFee: Numeral((managementFee).toString()).format('0,0'),
+      managementFee: Numeral((managementFee).toString()).format('0,0.[00]'),
       managementFeePercent: +(managementFeePercent.toFixed(2))
     });
   }
@@ -570,7 +573,7 @@ class ROIScreen extends Component {
     let managementFee = Numeral(this.state.rent).value() * (Number.parseFloat(managementFeePercent)/100);
 
     this.setState({
-      managementFee: Numeral((managementFee).toString()).format('0,0.00'),
+      managementFee: Numeral((managementFee).toString()).format('0,0.[00]'),
       managementFeePercent: managementFeePercent
     })
   }
@@ -579,8 +582,8 @@ class ROIScreen extends Component {
     let monthlyPropertyTax = Numeral(propertyTax).value() / 12;
 
     this.setState({
-      monthlyPropertyTax: Numeral((monthlyPropertyTax).toString()).format('0,0.0'),
-      propertyTax: Numeral((propertyTax).toString()).format('0,0.0')
+      monthlyPropertyTax: Numeral((monthlyPropertyTax).toString()).format('0,0.[00]'),
+      propertyTax: Numeral((propertyTax).toString()).format('0,0.[00]')
     })
   }
 
@@ -589,8 +592,8 @@ class ROIScreen extends Component {
     let managementFee = (Number.parseFloat(this.state.managementFeePercent)/100) * Numeral(rent).value();
 
     this.setState({
-      rent: Numeral((rent).toString()).format('0,0.00'),
-      managementFee: Numeral((managementFee).toString()).format('0,0.00')
+      rent: Numeral((rent).toString()).format('0,0.[00]'),
+      managementFee: Numeral((managementFee).toString()).format('0,0.[00]')
     });
   }
 
@@ -627,7 +630,7 @@ class ROIScreen extends Component {
     console.log('property tax' + propertyTax);
     console.log(' ' + insurance + ' ' + monthlyHOA + ' ' + maintenance);
 
-    let capRate = (monthlyCashFlow * 12)/Number.parseFloat(listPrice);
+    let capRate = ((monthlyCashFlow * 12)/Number.parseFloat(listPrice)*100);
     console.log('cap rate ' + capRate);
 
     let capRateColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
@@ -656,13 +659,13 @@ class ROIScreen extends Component {
 
     let monthlyIncome = rent * (1 - vacancyRate);
 
-    this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true});
+   this.scroll.props.scrollToPosition(0, 0)
 
     this.setState({
       roi: +(roi.toFixed(2)),
-      monthlyCashFlow: Math.round(monthlyCashFlow),
-      monthlyMortgage: Math.round(monthlyMortgage),
-      capRate: +(capRate.toFixed(1)),
+      monthlyCashFlow: Numeral((Math.round(monthlyCashFlow)).toString()).format('0,0'),
+      monthlyMortgage: Numeral((Math.round(monthlyMortgage)).toString()).format('0,0'),
+      capRate: +(capRate.toFixed(2)),
       capRateColor: capRateColor,
       downPayment: downPayment,
       closingCosts: closingCosts,

@@ -172,12 +172,12 @@ class FixNFlipScreen extends Component {
   }
 
 
-  render() {
+  render(){
 
     return (
       <View style={styles.container}>
 
-        <KeyboardAwareScrollView ref='_scrollView'>
+        <KeyboardAwareScrollView innerRef={ref => {this.scroll = ref}}>
               <View style={styles.otherStuff}>
                 <View>
                   <TouchableOpacity
@@ -228,14 +228,14 @@ class FixNFlipScreen extends Component {
                 strokeCap="circle">
                 <View style={styles.textView}>
                   <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
-                    <Text style={{color: '#fff', fontSize: 17}}>{Numeral((this.state.roi).toString()).format('0,0')}%</Text>
+                    <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
                   </View>
                   <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>ROI</Text>
                   </View>
               </AnimatedGaugeProgress>
               <View style={styles.fnfheaderval1}>
                 <View style={styles.fnfinfo}>
-                  <Text style={styles.infoTextFixNFlip}>{Numeral((this.state.roiAnnualized).toString()).format('0,0')}%</Text>
+                  <Text style={styles.infoTextFixNFlip}>{this.state.roiAnnualized}%</Text>
                   <Text style={styles.subTextFixNFlip}>ROI</Text>
                   <Text style={styles.subTextFixNFlip}>Annualized</Text>
                 </View>
@@ -320,6 +320,7 @@ class FixNFlipScreen extends Component {
                 style={styles.percentValue}
                 returnKeyType = {'done'}
                 placeholder = '0'
+                keyboardType ={'numeric'}
                 value = {(this.state.downPaymentPercent).toString()}
                 onChangeText={(downPaymentPercent) => this._downPaymentPercentOnChangeText(downPaymentPercent)}>
               </TextInput>
@@ -353,6 +354,7 @@ class FixNFlipScreen extends Component {
                 style={styles.percentValue}
                 returnKeyType = {'done'}
                 placeholder = '0'
+                keyboardType ={'numeric'}
                 value = {(this.state.purchaseClosingCostsPercent).toString()}
                 onChangeText={(purchaseClosingCostsPercent) => this._closingCostsPercentOnChangeText(purchaseClosingCostsPercent)}>
               </TextInput>
@@ -455,14 +457,15 @@ class FixNFlipScreen extends Component {
                 returnKeyType = {'done'}
                 placeholder = '0'
                 value = {(this.state.realEstateAgentFee).toString()}
-                onChangeText={(realEstateAgentFee) => this._realEstateAgentFeeOnChangeText({realEstateAgentFee})}>
+                onChangeText={(realEstateAgentFee) => this._realEstateAgentFeeOnChangeText(realEstateAgentFee)}>
               </TextInput>
               <TextInput
                 style={styles.percentValue}
                 returnKeyType = {'done'}
                 placeholder = '0'
+                keyboardType ={'numeric'}
                 value = {(this.state.realEstateAgentFeePercent).toString()}
-                onChangeText={(realEstateAgentFeePercent) => this._realEstateAgentFeePercentOnChangeText({realEstateAgentFeePercent})}>
+                onChangeText={(realEstateAgentFeePercent) => this._realEstateAgentFeePercentOnChangeText(realEstateAgentFeePercent)}>
               </TextInput>
               <TextInput
                 style={styles.percentSign}
@@ -544,9 +547,9 @@ class FixNFlipScreen extends Component {
     purchaseClosingCosts = Numeral(listPrice).value() * (Number.parseFloat(this.state.purchaseClosingCostsPercent)/100);
 
     this.setState({
-      listPrice: Numeral((listPrice).toString()).format('0,0'),
-      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
-      purchaseClosingCosts: Numeral((purchaseClosingCosts).toString()).format('0,0.00'),
+      listPrice: Numeral((listPrice).toString()).format('0,0.[00]'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.[00]'),
+      purchaseClosingCosts: Numeral((purchaseClosingCosts).toString()).format('0,0.[00]'),
 
       introScreen: false,
     }); 
@@ -556,8 +559,8 @@ class FixNFlipScreen extends Component {
     let monthlyPropertyTaxes = Numeral(annualPropertyTaxes).value()/12;
 
     this.setState({
-      annualPropertyTaxes: Numeral((annualPropertyTaxes).toString()).format('0,0'),
-      monthlyPropertyTaxes: Numeral((monthlyPropertyTaxes).toString()).format('0,0.00')
+      annualPropertyTaxes: Numeral((annualPropertyTaxes).toString()).format('0,0.[00]'),
+      monthlyPropertyTaxes: Numeral((monthlyPropertyTaxes).toString()).format('0,0.[00]')
     }); 
   }
 
@@ -580,7 +583,7 @@ class FixNFlipScreen extends Component {
     let downPayment = Numeral(this.state.listPrice).value() * (Number.parseFloat(downPaymentPercent)/100);
 
     this.setState({
-      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.[00]'),
       downPaymentPercent: downPaymentPercent
     })
   }
@@ -602,7 +605,7 @@ class FixNFlipScreen extends Component {
     let purchaseClosingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(purchaseClosingCostsPercent)/100);
 
     this.setState({
-      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0.00'),
+      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0.[00]'),
       purchaseClosingCostsPercent: purchaseClosingCostsPercent
     })
   }
@@ -616,7 +619,7 @@ class FixNFlipScreen extends Component {
 
     this.setState({
       arv: Numeral((arv).toString()).format('0,0'),
-      realEstateAgentFee: Numeral((realEstateAgentFee).toString()).format('0,0.0')
+      realEstateAgentFee: Numeral((realEstateAgentFee).toString()).format('0,0.[0]')
     }); 
   } 
 
@@ -625,7 +628,7 @@ class FixNFlipScreen extends Component {
     let realEstateAgentFeeVal = Numeral(realEstateAgentFee).value();
     let realEstateAgentFeePercent = (realEstateAgentFeeVal / Numeral(this.state.arv).value()) * 100;
     console.log('arv ' + this.state.arv);
-    console.log('realEstateAgentFee ' + realEstateAgentFeeVal);
+    console.log('realEstateAgentFee ' + realEstateAgentFee);
     console.log('realEstateAgentFeePercent ' + realEstateAgentFeePercent);
 
     this.setState({
@@ -639,7 +642,7 @@ class FixNFlipScreen extends Component {
     let realEstateAgentFee = Numeral(this.state.arv).value() * (Number.parseFloat(realEstateAgentFeePercent)/100);
 
     this.setState({
-      realEstateAgentFee: Numeral((realEstateAgentFee).toString()).format('0,0.00'),
+      realEstateAgentFee: Numeral((realEstateAgentFee).toString()).format('0,0.[00]'),
       realEstateAgentFeePercent: realEstateAgentFeePercent
     })
   }
@@ -689,15 +692,17 @@ class FixNFlipScreen extends Component {
     let totalProjectedPreTaxProfitsDouble = profitshelper - (monthlyHoldingCosts * (doubleDaysHeld / 30));
 
     //ROI
-    let roi = (totalProjectedPreTaxProfits/totalCashInvested) * 100;
+    let roi = (totalProjectedPreTaxProfits/Number.parseFloat(totalCashInvested)) * 100;
 
     //ROI Annualized 
-    let roiAnnualized = roi * (365/numberOfDaysHeld);
+    let roiAnnualized = roi * (365/Number.parseFloat(numberOfDaysHeld));
+    console.log('test');
 
     // roi = roi * 100;
     // roiAnnualized = roiAnnualized * 100;
 
-    this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true});
+    this.scroll.props.scrollToPosition(0, 0)
+
 
 
     this.setState({

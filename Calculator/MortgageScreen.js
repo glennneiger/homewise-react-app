@@ -142,7 +142,7 @@ class MortgageScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <KeyboardAwareScrollView ref='_scrollView'>
+        <KeyboardAwareScrollView innerRef={ref => {this.scroll = ref}}>
               <View style={styles.otherStuff}>
                 <View>
                   <TouchableOpacity
@@ -244,6 +244,7 @@ class MortgageScreen extends Component {
                     style={styles.percentValue}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    keyboardType ={'numeric'}
                     underlineColorAndroid='transparent'
                     value = {(this.state.downPaymentPercent).toString()}
                     onChangeText={(downPaymentPercent) => this._downPaymentPercentOnChangeText(downPaymentPercent)}>
@@ -282,6 +283,7 @@ class MortgageScreen extends Component {
                     style={styles.percentValue}
                     returnKeyType = {'done'}
                     placeholder = '0'
+                    keyboardType ={'numeric'}
                     underlineColorAndroid='transparent'
                     value = {(this.state.closingCostsPercent).toString()}
                     onChangeText={(closingCostsPercent) => this._closingCostsPercentOnChangeText(closingCostsPercent)}>
@@ -296,8 +298,8 @@ class MortgageScreen extends Component {
                 </View>                
 
             <Row caption="Interest Rate" sign='%' value={(this.state.interestRate).toString()}  update={(interestRate) => this.setState({interestRate})}/>
-            <Row caption="Loan Term (Years)" sign='' value={Numeral((this.state.loanTerm).toString()).format('0,0')} update={(loanTerm) => this.setState({loanTerm})}/>
-            <Row caption="Rehab Costs" sign='$' value={Numeral((this.state.rehabCosts).toString()).format('0,0')} update={(rehabCosts) => this.setState({rehabCosts})}/>
+            <Row caption="Loan Term (Years)" sign='' value={Numeral((this.state.loanTerm).toString()).format('0,0.[00]')} update={(loanTerm) => this.setState({loanTerm})}/>
+            <Row caption="Rehab Costs" sign='$' value={Numeral((this.state.rehabCosts).toString()).format('0,0.[00]')} update={(rehabCosts) => this.setState({rehabCosts})}/>
           </View>
           <TouchableOpacity
                    style = {styles.submitButton2}
@@ -340,9 +342,9 @@ class MortgageScreen extends Component {
     closingCosts = Numeral(listPrice).value() * (Number.parseFloat(this.state.closingCostsPercent)/100);
 
     this.setState({
-      listPrice: Numeral((listPrice).toString()).format('0,0'),
-      downPayment: Numeral((downPayment).toString()).format('0,0.00'),
-      closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
+      listPrice: Numeral((listPrice).toString()).format('0,0.[00]'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.[00]'),
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.[00]'),
 
       introScreen: false,
     }); 
@@ -367,7 +369,7 @@ class MortgageScreen extends Component {
     let downPayment = Numeral(this.state.listPrice).value() * (Number.parseFloat(downPaymentPercent)/100);
 
     this.setState({
-      downPayment: Numeral((downPayment).toString()).format('0,0'),
+      downPayment: Numeral((downPayment).toString()).format('0,0.[00]'),
       downPaymentPercent: downPaymentPercent
     })
   }
@@ -379,7 +381,7 @@ class MortgageScreen extends Component {
 
 
     this.setState({
-      closingCosts: Numeral((closingCosts).toString()).format('0,0'),
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.[00]'),
       closingCostsPercent: +(closingCostsPercent.toFixed(2))
     });
   }
@@ -389,7 +391,7 @@ class MortgageScreen extends Component {
     let closingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(closingCostsPercent)/100);
 
     this.setState({
-      closingCosts: Numeral((closingCosts).toString()).format('0,0.00'),
+      closingCosts: Numeral((closingCosts).toString()).format('0,0.[00]'),
       closingCostsPercent: closingCostsPercent
     })
   }
@@ -413,7 +415,7 @@ class MortgageScreen extends Component {
 
     let upfrontCosts = Numeral((Math.round(downPayment + closingCosts + rehabCosts)).toString()).format('0,0');
 
-    this.refs._scrollView.scrollTo({x: 0, y: 0, animated: true});
+    this.scroll.props.scrollToPosition(0, 0)
 
     this.setState({
       monthlyMortgage: monthlyMortgageRound,
