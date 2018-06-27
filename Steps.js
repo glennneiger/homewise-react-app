@@ -870,9 +870,9 @@ export default class Steps extends Component{
                 }
                     <View style={{flex: 1,alignItems: 'center', paddingTop: 18,}} >
                         <PercentageCircle radius={70} borderWidth={15} percent={Math.round(this.state.steps_percentage)} textStyle={{fontSize: 20, color: '#000'}} color={this.percentColor()}></PercentageCircle>  
-                        <Text style={{marginTop: 15,fontSize: 20,color: '#666'}} >Commission</Text>
-                        <View style={{backgroundColor: '#4BD964', marginTop: 15, width: 150, height: 45, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
-                            <Text style={{color: '#fff', fontSize: 25, fontWeight: 'bold'}}>${Numeral((this.state.commission_val).toString()).format('0,0')}</Text>
+                        <Text style={{marginTop: 15,fontSize: 15,color: '#666'}} >Commission</Text>
+                        <View style={{backgroundColor: '#4BD964', marginTop: 15, width: 150, height: 35, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
+                            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>${Numeral((this.state.commission_val).toString()).format('0,0')}</Text>
                         </View>
                     </View>
 
@@ -903,7 +903,7 @@ export default class Steps extends Component{
                                         </View>
                                         <View style={{flex: 1, paddingVertical: 20, paddingHorizontal: 10}}>
                                             <Text style={{fontSize: 20, fontWeight: 'bold'}} >{item.name}</Text>
-                                            <Text style={{fontSize: 18, color: '#707070'}}>{item.date}</Text>
+                                            <Text style={{fontSize: 15, color: '#707070'}}>{item.date}</Text>
                                         </View>
                                         <View style={{alignItems: 'center', justifyContent: 'center', paddingRight: 10,}} >
                                             <Icon name="angle-right" style={{fontSize: 20, color: '#707070'}} />
@@ -1158,7 +1158,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
 
-    //backgroundColor: '#F7F7F5'
   },
   submitButton: {
     marginRight: 35,

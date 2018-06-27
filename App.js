@@ -58,7 +58,7 @@ export default class App extends Component {
     console.disableYellowBox = true;
     return (
       <View style={{flex:1}}>
-        <SingleStep />
+        <AuthNav />
       </View>
     );
     }
