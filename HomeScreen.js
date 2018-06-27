@@ -13,7 +13,7 @@ export default class HomeScreen extends Component{
             <View style={{width, height, backgroundColor: 'white', alignItems: 'center'}}>
                 <View style={{width: width * 0.7, height: height* 0.3, marginTop: height* 0.15, alignItems: 'center'}}>
                     <Image source={require('./logo.png')} style={{width: width * 0.8, height: height* 0.2}}/>
-                    <Text style={{color:'rgb(65,147,237)'}}>A personal assistant at your fingertips</Text>
+                    <Text style={{color:'rgb(65,147,237)', fontSize: 15}}>A personal assistant at your fingertips</Text>
                 </View>
                 <View style={{width:width, height: height* 0.55, alignItems:'center'}}>
                     <TouchableOpacity onPress={()=> this.props.navigation.navigate('Registration')} style={{width: width* 0.6, height: height* 0.09, backgroundColor:'rgb(65,147,237)', borderRadius: 10, marginTop: height * 0.06, justifyContent:'center', alignItems:'center'}}>

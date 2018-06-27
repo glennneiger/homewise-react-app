@@ -198,7 +198,7 @@ export default class AllClients extends Component {
 
   static navigationOptions = {
         title: 'Clients',
-        headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
+        headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff', fontSize: 22},
         headerStyle:{
             backgroundColor:'#0091FF',
         },
@@ -232,13 +232,13 @@ export default class AllClients extends Component {
       <View style = {{flex: 4}}>
       <FlatList
         data = { this.state.UpcomingTasks }
-        ListEmptyComponent = { <Text> No tasks </Text> }
+        ListEmptyComponent = { <Text style={{fontSize: 18}}> No tasks </Text> }
         renderItem={({item}) =>
           //<View style={styles.GridViewBlockStyle}>
             <TouchableOpacity onPress={this.GetGridViewItem.bind(this, item.client.email, item.client.client_type)} style={styles.touchbutton1}>
                 <View style={{flex: 1, paddingRight: 30}}>
-                    <Text>{item.date}</Text>
-                    <Text>{item.name} ({item.client.first_name} {item.client.last_name})</Text>
+                    <Text style={{fontSize: 18}}>{item.name} ({item.client.first_name} {item.client.last_name})</Text>
+                    <Text style={{fontSize: 18, color: '#A9A9A9'}}>{item.date}</Text>
                 </View>
                 <View style={{width: 20, alignItems: 'center', justifyContent: 'center'}} >
                   <Icon name="angle-right" style={{fontSize: 20}} />
@@ -252,42 +252,44 @@ export default class AllClients extends Component {
         {this.state.client_type?
           <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 30, paddingBottom: 10}}>
             <TouchableOpacity style={[styles.tabButton, styles.tabButtonLeft, {backgroundColor: '#0091FF',marginRight: -1,}]} >
-                <Text style={{color: '#fff', fontSize: 16}}>Buyers</Text>
+                <Text style={{color: '#fff', fontSize: 18}}>Buyers</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.toggleClientType.bind(this)} style={[styles.tabButton, styles.tabButtonRight, {backgroundColor: '#fff',marginLeft: -1,}]}>
-                <Text style={{color: '#0091FF', fontSize: 16}}>Listings</Text>
+                <Text style={{color: '#0091FF', fontSize: 18}}>Listings</Text>
             </TouchableOpacity>
           </View>
           :
           <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 30, paddingBottom: 10}}>
             <TouchableOpacity onPress={this.toggleClientType.bind(this)} style={[styles.tabButton, styles.tabButtonLeft, {backgroundColor: '#fff',marginRight: -1,}]} >
-                <Text style={{color: '#0091FF', fontSize: 16}}>Buyers</Text>
+                <Text style={{color: '#0091FF', fontSize: 18}}>Buyers</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.tabButton, styles.tabButtonRight, {backgroundColor: '#0091FF',marginLeft: -1,}]}>
-                <Text style={{color: '#fff', fontSize: 16}}>Listings</Text>
+                <Text style={{color: '#fff', fontSize: 18}}>Listings</Text>
             </TouchableOpacity>
           </View>
         }
         <View style={{flexDirection: 'row', justifyContent: 'center', paddingBottom: 20, paddingTop: 10}}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('NewClient', {refresh: this.refreshData})} style={{flexDirection: 'row'}} >
-                <View style={{width: 16, height: 16, backgroundColor: '#4CD964', paddingLeft: 1, alignItems: 'center', borderRadius: 8, marginRight: 5,}}>
-                    <Icon2 name="md-add" style={{fontSize: 17, color: '#fff', marginTop: -0.5}} />
-                </View>
-                <Text style={{color: '#000', fontSize: 13}}>Add Client</Text>
-            </TouchableOpacity>
-        </View> 
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('NewClient', {refresh: this.refreshData})} style={{flexDirection: 'row'}} >
+                               <View style={{width: 40, height: 40, backgroundColor: '#4CD964', alignItems: 'center', borderRadius: 20, marginRight: 10,}}>
+                                   <Icon2 name="md-add" style={{fontSize: 40, color: '#fff', marginTop: -0.5}} />
+                               </View>
+                               <View style={{paddingTop: 10}}>
+                                   <Text style={{color: '#000', fontSize: 20}}>Add Client</Text>
+                               </View>
+                           </TouchableOpacity>
+      </View>
         {this.state.client_type ?
           <FlatList
              data={ this.state.BuyingClients }
-             ListEmptyComponent = { <Text> No Clients </Text> }
+             ListEmptyComponent = { <Text style={{fontSize: 18}}> No Clients </Text> }
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
                 <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
-                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 15, color: '#000'}} color={this.percentColor(item.steps_percentage)}></PercentageCircle>  
-                  <Text style={{marginTop: 5,}} >{item.first_name} {item.last_name}</Text>
-                  <Text style={{marginTop: 5,fontSize: 8,color: '#666'}} >Commission</Text>
-                  <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
-                      <Text style={{color: '#fff'}}>${Numeral((item.commission_val).toString()).format('0,0')}</Text>
+                  <PercentageCircle radius={60} borderWidth={10} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={this.percentColor(item.steps_percentage)}></PercentageCircle>  
+                  <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>
+                  <Text style={{marginTop: 5,fontSize: 16,color: '#666'}} >Commission</Text>
+                  <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 85,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
+                      <Text style={{color: '#fff', fontSize: 16}}>${Numeral((item.commission_val).toString()).format('0,0')}</Text>
                   </View>
                 </TouchableOpacity>
               }
@@ -300,9 +302,9 @@ export default class AllClients extends Component {
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
                 <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
-                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 15, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
-                  <Text style={{marginTop: 5,}} >{item.first_name} {item.last_name}</Text>
-                  <Text style={{marginTop: 5,fontSize: 8,color: '#666'}} >Commission</Text>
+                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
+                  <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>
+                  <Text style={{marginTop: 5,fontSize: 15,color: '#666'}} >Commission</Text>
                   <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
                       <Text style={{color: '#fff'}}>${item.commission_val}</Text>
                   </View>
@@ -331,7 +333,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex:1,
     alignItems: 'center',
-    height: 200,
+    height: 250,
     margin: 0.1,
     borderWidth: 1,
     borderColor: '#FAFAFA',

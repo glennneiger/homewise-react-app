@@ -268,7 +268,8 @@ const styles = StyleSheet.create({
     fontSize: 12
    },
    ButtonText:{
-    color: 'rgb(65,147,237)'
+    color: 'rgb(65,147,237)',
+    fontSize: 18
    }
 });
 
