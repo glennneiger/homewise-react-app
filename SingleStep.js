@@ -87,7 +87,14 @@ class SingleStep extends Component {
   //     });
   // }
 
+componentDidMount(){
+    let id = this.props.navigation.getParam('id')
+    alert(id);
 
+    this.setState({
+        id: id,
+      })
+   }
 
   back(){
     //api call for UpdateStep
@@ -144,6 +151,12 @@ class SingleStep extends Component {
       editMode: false
     });
   }
+
+static navigationOptions = ({ navigation }) => {
+    return {
+       header: null
+    }
+ }
 
 
   render() {

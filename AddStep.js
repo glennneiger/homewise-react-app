@@ -28,6 +28,7 @@ class AddStep extends Component {
     super(props);
 
     this.state = {
+      id: '',
       name: '',
       date: '',
       newStepDate: new Date(),
@@ -36,7 +37,20 @@ class AddStep extends Component {
     };
   }
 
+  componentDidMount(){
+    let id = this.props.navigation.getParam('id')
+    alert(id);
 
+    this.setState({
+        id: id,
+      })
+   }
+
+static navigationOptions = ({ navigation }) => {
+    return {
+       header: null
+    }
+ }
 
   render() {
 
@@ -105,7 +119,9 @@ class AddStep extends Component {
               }
               </View>
               <TouchableOpacity
-                 style = {styles.submitButton}>
+                 style = {styles.submitButton}
+                 onPress = {
+                    () => this.props.navigation.navigate('Steps')}> 
                  <Text style = {styles.submitButtonText}> Add Step! </Text>
               </TouchableOpacity>
             </View>

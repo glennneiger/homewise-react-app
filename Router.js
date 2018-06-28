@@ -24,6 +24,8 @@ import MortgageScreen from './Calculator/MortgageScreen'
 import ROIScreen from './Calculator/ROIScreen'
 import AgentProfile from './AgentProfile'
 import CompsPreview from './CompsPreview'
+import AddStep from './AddStep'
+import SingleStep from './SingleStep'
 
 
 
@@ -48,6 +50,12 @@ export const Clients = StackNavigator(
     navigationOptions: {
       headerTintColor: 'white'
     }
+  },
+  AddStep:{
+    screen: AddStep
+  },
+  SingleStep:{
+    screen: SingleStep
   }
 });
 

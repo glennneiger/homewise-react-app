@@ -280,6 +280,9 @@ export default class Steps extends Component{
 
             }
         }
+        this.props.navigation.navigate('SingleStep', {
+            id: this.state.id,
+        })
     }
 
 
@@ -774,6 +777,12 @@ export default class Steps extends Component{
         });
     }
 
+    GetGridViewItem = function() { 
+    this.props.navigation.navigate('AddStep', {
+        id: this.state.id
+    });
+  }
+
     static navigationOptions = ({ navigation }) => {
         return {
            header: null
@@ -987,7 +996,10 @@ export default class Steps extends Component{
                     }
                     {this.state.addStepButton&&
                         <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 5, paddingBottom: 30}}>
-                            <TouchableOpacity onPress={this.preAddStep.bind(this)} style={{flexDirection: 'row'}} >
+                            <TouchableOpacity
+                             style={{flexDirection: 'row'}}
+                             onPress = {
+                                  () => this.GetGridViewItem()}>
                                 <View style={{width: 40, height: 40, backgroundColor: '#4CD964', alignItems: 'center', borderRadius: 20, marginRight: 10,}}>
                                     <Icon2 name="md-add" style={{fontSize: 40, color: '#fff', marginTop: -0.5}} />
                                 </View>
