@@ -15,6 +15,7 @@ import {
 //import { Actions } from 'react-native-router-flux';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import PercentageCircle from 'react-native-percentage-circle';
 import DatePicker from 'react-native-datepicker';
@@ -800,7 +801,7 @@ export default class Steps extends Component{
                             borderRadius: 4,
                             left: 15,
                         }}>
-                        <Text style={{color: '#0091FF',}}>Cancel</Text>
+                        <Text style={{color: '#0091FF', }}>Cancel</Text>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity
@@ -817,11 +818,11 @@ export default class Steps extends Component{
                             left: 15,
                         }}>
                         <View style={{flexDirection: 'row'}}>
-                            <Icon2 name="md-arrow-round-back" style={{fontSize: 17, color: '#fff'}} />
-                            <Text style={{color: '#fff',}}> Back</Text>
+                            <Icon2 name="md-arrow-round-back" style={{fontSize: 17, color: '#fff', paddingTop: 3}} />
+                            <Text style={{color: '#fff', fontSize: 18}}> Back</Text>
                         </View>
                     </TouchableOpacity>}
-                    <Text style={{color: '#0091FF', fontSize: 20, fontWeight: '600',}} >{this.state.first_name} {this.state.last_name}</Text>
+                    <Text style={{color: '#0091FF', fontSize: 22, fontWeight: '600',}} >{this.state.first_name} {this.state.last_name}</Text>
                     {this.state.editMode?
                     <TouchableOpacity
                         onPress={this.editModeDone.bind(this)}
@@ -850,7 +851,7 @@ export default class Steps extends Component{
                             borderRadius: 4,
                             right: 15,
                         }}>
-                        <Text style={{color: '#0091FF',}}>Edit</Text>
+                        <Text style={{color: '#0091FF', fontSize: 18}}>Edit</Text>
                     </TouchableOpacity>
                     }
                 </View>
@@ -868,10 +869,10 @@ export default class Steps extends Component{
                     </View>
                 }
                     <View style={{flex: 1,alignItems: 'center', paddingTop: 18,}} >
-                        <PercentageCircle radius={60} borderWidth={8} percent={Math.round(this.state.steps_percentage)} textStyle={{fontSize: 15, color: '#000'}} color={this.percentColor()}></PercentageCircle>  
-                        <Text style={{marginTop: 15,fontSize: 9,color: '#666'}} >Commission</Text>
-                        <View style={{backgroundColor: '#4BD964', marginTop: 15, width: 100,height: 31, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
-                            <Text style={{color: '#fff', fontSize: 17}}>${Numeral((this.state.commission_val).toString()).format('0,0')}</Text>
+                        <PercentageCircle radius={70} borderWidth={15} percent={Math.round(this.state.steps_percentage)} textStyle={{fontSize: 20, color: '#000'}} color={this.percentColor()}></PercentageCircle>  
+                        <Text style={{marginTop: 15,fontSize: 15,color: '#666'}} >Commission</Text>
+                        <View style={{backgroundColor: '#4BD964', marginTop: 15, width: 150, height: 35, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
+                            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>${Numeral((this.state.commission_val).toString()).format('0,0')}</Text>
                         </View>
                     </View>
 
@@ -879,15 +880,15 @@ export default class Steps extends Component{
                         <View style={{paddingTop: 20,}}>
                             <FlatList
                                 showsVerticalScrollIndicator={false}
-                                style={{padding: 5}}
+                                style={{paddingTop: 15, paddingBottom: 15}}
                                 data={this.state.steps}
                                 extraData={this.state.refresh}
                                 renderItem={({item, index}) =>
-                                    <TouchableOpacity style={styles.dayLineButton} onPress={this.changeCurrentChecked.bind(this, item.id)}>
+                                    <TouchableOpacity style={styles.dayLineButton} onPress={this.changeCurrentChecked.bind(this, item.id)} activeOpacity = { 1 }>
                                         <View style={{zIndex: 1, width: 50,alignItems: 'center', justifyContent: 'center', position: 'relative',}} >
                                             
                                             {index == 0 &&
-                                                <View style={{zIndex: 11,position: 'absolute', width: 2, height: '50%', top: 35, left: 24, backgroundColor: '#0091FF'}} />
+                                                <View style={{zIndex: 11,position: 'absolute', width: 2, height: '50%', top: 45, left: 24, backgroundColor: '#0091FF'}} />
                                             }
                                             {index > 0 && index < (this.state.steps.length-1) &&
                                                 <View style={{zIndex: 11,position: 'absolute', width: 2, height: '100%', top: 0, left: 24, backgroundColor: '#0091FF'}} />
@@ -895,16 +896,17 @@ export default class Steps extends Component{
                                             {index == (this.state.steps.length-1) &&
                                                 <View style={{zIndex: 11,position: 'absolute', width: 2, height: '50%', top: 0, left: 24, backgroundColor: '#0091FF'}} />
                                             }
-                                            <View style={{zIndex: 12,backgroundColor: '#fff', width: 20, height: 20, alignItems: 'center', justifyContent:'center'}} >
-                                                <Icon2 name="md-checkmark-circle" style={{fontSize: 23, marginLeft: 0.5, marginTop: -2, color: item.complete? '#0091FF': '#ddd'}} />
+                                            <View style={{zIndex: 12,backgroundColor: '#fff', width: 24, height: 24, alignItems: 'center', justifyContent:'center'}} >
+                                                <Icon2 name="md-checkmark-circle" style={{fontSize: 27, marginLeft: 0.5, marginTop: -2, color: item.complete? '#0091FF': '#ddd'}} />
                                             </View>
                                             
                                         </View>
-                                        <View style={{flex: 1, paddingVertical: 20, paddingHorizontal: 10,}}>
-                                            <Text style={{fontSize: 13}} >{item.name}</Text>
+                                        <View style={{flex: 1, paddingVertical: 20, paddingHorizontal: 10}}>
+                                            <Text style={{fontSize: 20, fontWeight: 'bold'}} >{item.name}</Text>
+                                            <Text style={{fontSize: 15, color: '#707070'}}>{item.date}</Text>
                                         </View>
                                         <View style={{alignItems: 'center', justifyContent: 'center', paddingRight: 10,}} >
-                                            <Text>{item.date}</Text>
+                                            <Icon name="angle-right" style={{fontSize: 20, color: '#707070'}} />
                                         </View>
                                         {index == 0 &&
                                             <View style={{position: 'absolute', width: '100%', height: 1, backgroundColor: '#ddd', left: 0, top: 0,}} />
@@ -984,12 +986,14 @@ export default class Steps extends Component{
                         
                     }
                     {this.state.addStepButton&&
-                        <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 20, paddingBottom: 20}}>
+                        <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 5, paddingBottom: 30}}>
                             <TouchableOpacity onPress={this.preAddStep.bind(this)} style={{flexDirection: 'row'}} >
-                                <View style={{width: 16, height: 16, backgroundColor: '#4CD964', paddingLeft: 1, alignItems: 'center', borderRadius: 8, marginRight: 5,}}>
-                                    <Icon2 name="md-add" style={{fontSize: 17, color: '#fff', marginTop: -0.5}} />
+                                <View style={{width: 40, height: 40, backgroundColor: '#4CD964', alignItems: 'center', borderRadius: 20, marginRight: 10,}}>
+                                    <Icon2 name="md-add" style={{fontSize: 40, color: '#fff', marginTop: -0.5}} />
                                 </View>
-                                <Text style={{color: '#000', fontSize: 13}}>Add Step</Text>
+                                <View style={{paddingTop: 10}}>
+                                    <Text style={{color: '#000', fontSize: 20}}>Add Step</Text>
+                                </View>
                             </TouchableOpacity>
                         </View>
                     }
@@ -1020,7 +1024,7 @@ export default class Steps extends Component{
                                         showIcon= {false}
                                         mode="date"
                                         date = {this.state.newStepDate}
-                                        format="MM/DD/YYYY"
+                                        format="MM/DD/YY"
                                         minDate="1900-01-01"
                                         maxDate="2017-12-31"
                                         confirmBtnText="Done"
@@ -1154,7 +1158,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
 
-    //backgroundColor: '#F7F7F5'
   },
   submitButton: {
     marginRight: 35,
