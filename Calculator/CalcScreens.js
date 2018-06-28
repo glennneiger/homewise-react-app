@@ -38,7 +38,7 @@ export default class CalcScreens extends Component {
   
    static navigationOptions = {
         title: 'Calculators',
-        headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff'},
+        headerTitleStyle :{textAlign: 'center',alignSelf:'center', color: '#fff', fontSize: 22},
         headerStyle:{
             backgroundColor:'#0091FF',
         },

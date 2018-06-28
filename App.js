@@ -24,6 +24,7 @@ import AgentProfile from './AgentProfile'
 import NewClient from './NewClient'
 import States from './States'
 import CompsPreview from './CompsPreview'
+import AddStep from './AddStep'
 
 import {Clients, HomeNav} from './Router';
 import {Tabs} from './Router';
@@ -58,7 +59,7 @@ export default class App extends Component {
     console.disableYellowBox = true;
     return (
       <View style={{flex:1}}>
-        <AuthNav />
+        <AuthNav/>
       </View>
     );
     }

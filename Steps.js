@@ -1014,7 +1014,6 @@ export default class Steps extends Component{
                                     </TextInput>
                                 </View>  
                             </View>
-                            <View style={styles.addStepInput}>
                                 <View style={styles.caption}>
                                     <Text style={styles.captionText}>Date</Text>
                                 </View>
@@ -1036,8 +1035,7 @@ export default class Steps extends Component{
                                         }}
                                         onDateChange={(date) => {this.setState({newStepDate: date})}}
                                     />
-                                </View>  
-                            </View>
+                                </View> 
                         
                         </View>
                         <View style={styles.addStepButtons}>
