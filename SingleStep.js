@@ -68,6 +68,10 @@ class SingleStep extends Component {
     let url = ApiEndpoints.url + ApiEndpoints.singlestepPath;
     const bearerToken = this.getTokenFromStorage();
 
+    this.setState({
+      id:id
+    });
+
     // Make fetch calls
     fetch(url, 
       {
