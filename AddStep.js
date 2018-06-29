@@ -29,16 +29,14 @@ class AddStep extends Component {
 
     this.state = {
       id: '',
-      name: '',
-      date: '',
+      newStepName: '',
       newStepDate: new Date(),
 
-      editMode: false
     };
   }
 
   componentDidMount(){
-    let id = this.props.navigation.getParam('id')
+    let id = 1;
     alert(id);
 
     this.setState({
@@ -46,11 +44,49 @@ class AddStep extends Component {
       })
    }
 
-static navigationOptions = ({ navigation }) => {
-    return {
-       header: null
-    }
- }
+   addStep(){
+    let url = let url = ApiEndpoints.url + ApiEndpoints.addstepPath;
+    const bearerToken = this.getTokenFromStorage();
+
+    let id = this.state.id;
+    let newStepName = this.state.newStepName;
+    let newStepDate = this.state.newStepDate;
+
+    fetch(url, 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer' + bearerToken
+        },
+        body: JSON.stringify({
+          id:id,
+          newStepName: newStepName,
+          newStepDate: newStepDate
+        }),
+      })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      //this.props.navigation.navigate('Steps');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+   }
+
+
+  back(){
+    this.props.navigation.navigate('Steps');
+  }
+
+
+
+  static navigationOptions = ({ navigation }) => {
+      return {
+         header: null
+      }
+   }
 
   render() {
 
@@ -70,7 +106,9 @@ static navigationOptions = ({ navigation }) => {
                           top: 0,
                           borderRadius: 4,
                           left: 15,
-                      }}>
+                      }}
+                      onPress = {
+                        () => this.back()}>
                       <View style={{flexDirection: 'row'}}>
                           <Icon2 name="md-arrow-round-back" style={{fontSize: 17, color: '#fff', paddingTop: 3}} />
                           <Text style={{color: '#fff', fontSize: 18}}>Back</Text>
@@ -121,7 +159,7 @@ static navigationOptions = ({ navigation }) => {
               <TouchableOpacity
                  style = {styles.submitButton}
                  onPress = {
-                    () => this.props.navigation.navigate('Steps')}> 
+                    () => this.addStep()}> 
                  <Text style = {styles.submitButtonText}> Add Step! </Text>
               </TouchableOpacity>
             </View>
