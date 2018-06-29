@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Alert,
   StyleSheet,
   Text,
   View,
@@ -36,6 +37,7 @@ class SingleStep extends Component {
       date: '',
       date_copy: '',
       complete: false,
+      modalVisible: false,
 
       vendors: [
       {
@@ -62,6 +64,10 @@ class SingleStep extends Component {
     return token;
   }
 
+ setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
   componentDidMount(){
     // Prepare fetch call arguments
     let id = this.props.navigation.getParam('id');
@@ -73,7 +79,7 @@ class SingleStep extends Component {
     });
 
     // Make fetch calls
-    fetch(url, 
+    /*fetch(url, 
       {
         method: 'POST',
         headers: {
@@ -97,7 +103,7 @@ class SingleStep extends Component {
     })
     .catch((error) => {
       console.error(error);
-    });
+    });*/
   }
 
 
@@ -183,6 +189,10 @@ class SingleStep extends Component {
       date_copy: date,
       editMode: false
     });
+  }
+
+  deleteStep(){
+    this.props.navigation.navigate('Steps')
   }
 
 static navigationOptions = ({ navigation }) => {
@@ -272,10 +282,35 @@ static navigationOptions = ({ navigation }) => {
                       }>
                       <Text style={{color: '#0091FF', fontSize: 18}}>Edit</Text>
                   </TouchableOpacity>
-                }
+                  }
               </View>
             </View>
             <View style={styles.body}>
+              {this.state.editMode&&
+                <View style={{flexDirection: 'row', justifyContent: 'center', paddingTop: 5, paddingBottom: 30}}>
+            
+            
+                  <TouchableOpacity
+                    style={{flexDirection: 'row'}}
+                    onPress = {
+                      () => Alert.alert(
+                        'Are you sure?',
+                        'My Alert Msg',
+                        [
+                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                        {text: 'OK', onPress: () => this.deleteStep()},
+                        ],
+                        { cancelable: false }
+                    )}>
+                      <View style={{width: 40, height: 40, backgroundColor: '#f22634', alignItems: 'center', borderRadius: 20, marginRight: 10,}}>
+                        <Icon2 name="md-remove-circle" style={{fontSize: 40, color: '#fff', marginTop: -0.5}} />
+                      </View>
+                      <View style={{paddingTop: 10}}>
+                        <Text style={{color: '#000', fontSize: 20}}>Delete Step</Text>
+                      </View>
+                  </TouchableOpacity>
+             </View> 
+            }
               <View style={styles.caption}>
                 <Text style={styles.captionText}>Task</Text>
               </View>
@@ -306,8 +341,7 @@ static navigationOptions = ({ navigation }) => {
                       underlineColorAndroid='transparent'>
                     </TextInput>
 
-                  }
-                  
+                  }    
               </View>
               <View style={styles.caption}>
                 <Text style={styles.captionText}>Date</Text>
@@ -379,12 +413,12 @@ static navigationOptions = ({ navigation }) => {
                       () => this.complete()
                    }>
                 {this.state.complete?
-                  <Text style = {styles.submitButtonText}> Step Not Complete </Text>
+                  <Text style={styles.submitNotButtonText}>Step Not Complete</Text>
                   :
-                  <Text style = {styles.submitButtonText}> Step Complete </Text>
+                  <Text style={styles.submitButtonText}>Step Complete</Text>
                 }
-                
               </TouchableOpacity>
+              
             </View>
             </ScrollView>
       </View>    
@@ -487,16 +521,25 @@ const styles = StyleSheet.create({
     height: 50,
     
     paddingRight: 10,
-    backgroundColor: 'red',
+    backgroundColor: '#fff',
+    borderColor: '#20BF55',
+    borderRadius: 5,
+    borderWidth: 1,
     //'#04E762',
     justifyContent:'center', 
-    alignItems:'center'
+    alignItems:'center',
   },
   submitButtonText:{
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold'
   },
+  submitNotButtonText:{
+    color: '#20BF55',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+
 
 });
 

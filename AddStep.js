@@ -45,7 +45,7 @@ class AddStep extends Component {
    }
 
    addStep(){
-    let url = let url = ApiEndpoints.url + ApiEndpoints.addstepPath;
+    let url = ApiEndpoints.url + ApiEndpoints.addstepPath;
     const bearerToken = this.getTokenFromStorage();
 
     let id = this.state.id;
