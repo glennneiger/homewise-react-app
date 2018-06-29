@@ -19,6 +19,7 @@ import Numeral from 'numeral';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import DatePicker from 'react-native-datepicker';
+import { ApiEndpoints, StorageKeys } from './AppConfig'
 
 
 
@@ -30,10 +31,10 @@ class SingleStep extends Component {
 
     this.state = {
       id: '1',
-      name: 'Set an Appointment',
-      name_copy: 'Set an Appointment',
-      date: '06/30/2018',
-      date_copy: '06/30/2018',
+      name: '',
+      name_copy: '',
+      date: '',
+      date_copy: '',
       complete: false,
 
       vendors: [
@@ -56,49 +57,77 @@ class SingleStep extends Component {
     };
   }
 
-  // componentDidMount(){
-  //   // Prepare fetch call arguments
-  //   let id = this.props.navigation.getParam('id');
+  getTokenFromStorage = async () => {
+    const token = await AsyncStorage.getItem(StorageKeys.authToken);
+    return token;
+  }
 
-  //   //alert(this.props.navigation.getParam('client_type'))
+  componentDidMount(){
+    // Prepare fetch call arguments
+    let id = this.props.navigation.getParam('id');
+    let url = ApiEndpoints.url + ApiEndpoints.singlestepPath;
+    const bearerToken = this.getTokenFromStorage();
 
-  //   // Make fetch calls
-  //   fetch('http://127.0.0.1:8000/agent/SingleStep/', 
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
-  //       },
-  //       body: JSON.stringify({
-  //         id:id,
-  //       }),
-  //     }).then((response) => response.json())
-  //         .then((responseJson) => {
-  //           this.setState({
-  //             id: id,
-  //             name: responseJson.name,
-  //             date: responseJson.date,
-  //             complete: responseJson.complete
-  //           })
-  //         })
-  //         .catch((error) => {
-  //           console.error(error);
-  //     });
-  // }
-
-componentDidMount(){
-    let id = this.props.navigation.getParam('id')
-    alert(id);
-
-    this.setState({
-        id: id,
+    // Make fetch calls
+    fetch(url, 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer' + bearerToken
+        },
+        body: JSON.stringify({
+          id:id,
+        }),
       })
-   }
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        id: id,
+        name: responseJson.name,
+        name_copy: responseJson.name,
+        date: responseJson.date,
+        date_copy: responseJson.date,
+        complete: responseJson.complete
+      })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
 
   back(){
     //api call for UpdateStep
     //post id, name, date, complete
+    let url = ApiEndpoints.url + ApiEndpoints.singlestepPath;
+    const bearerToken = this.getTokenFromStorage();
+    let id = this.state.id;
+    let name = this.state.name_copy;
+    let complete = this.state.complete;
+    let date = this.state.date;
+
+    fetch(url, 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer' + bearerToken
+        },
+        body: JSON.stringify({
+          id:id,
+          name:name,
+          complete:complete,
+          date:date
+        }),
+      })
+    .then((response) => response.json())
+    .then((responseJson) => {
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   complete(){
@@ -195,7 +224,10 @@ static navigationOptions = ({ navigation }) => {
                           top: 0,
                           borderRadius: 4,
                           left: 15,
-                      }}>
+                      }}
+                      onPress = {
+                        () => this.back()
+                      }>
                       <View style={{flexDirection: 'row'}}>
                           <Icon2 name="md-arrow-round-back" style={{fontSize: 17, color: '#fff', paddingTop: 3}} />
                           <Text style={{color: '#fff', fontSize: 18}}>Back</Text>

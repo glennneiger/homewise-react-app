@@ -797,22 +797,7 @@ export default class Steps extends Component{
             <View style={styles.container}>
             <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} /*overlayColor='#0091FF'*//>
                 <View style={{position: 'relative', alignItems: 'center', width: '100%', marginTop: 10, paddingBottom: 10}}> 
-                    {this.state.editMode?
-                    <TouchableOpacity
-                        onPress={this.editModeCancel.bind(this)}
-                        style={{
-                            paddingHorizontal: 8,
-                            paddingVertical: 3,
-                            borderColor: '#0091FF',
-                            borderWidth: 0.5,
-                            position: 'absolute',
-                            top: 0,
-                            borderRadius: 4,
-                            left: 15,
-                        }}>
-                        <Text style={{color: '#0091FF', }}>Cancel</Text>
-                    </TouchableOpacity>
-                    :
+
                     <TouchableOpacity
                         onPress={this.back.bind(this)}
                         style={{
@@ -830,39 +815,8 @@ export default class Steps extends Component{
                             <Icon2 name="md-arrow-round-back" style={{fontSize: 17, color: '#fff', paddingTop: 3}} />
                             <Text style={{color: '#fff', fontSize: 18}}> Back</Text>
                         </View>
-                    </TouchableOpacity>}
+                    </TouchableOpacity>
                     <Text style={{color: '#0091FF', fontSize: 22, fontWeight: '600',}} >{this.state.first_name} {this.state.last_name}</Text>
-                    {this.state.editMode?
-                    <TouchableOpacity
-                        onPress={this.editModeDone.bind(this)}
-                        style={{
-                            paddingHorizontal: 8,
-                            paddingVertical: 3,
-                            borderColor: '#0091FF',
-                            borderWidth: 0.5,
-                            position: 'absolute',
-                            top: 0,
-                            borderRadius: 4,
-                            right: 15,
-                        }}>
-                        <Text style={{color: '#0091FF',}}>Done</Text>
-                    </TouchableOpacity>
-                    :
-                    <TouchableOpacity
-                        onPress={this.preEdit.bind(this)}
-                        style={{
-                            paddingHorizontal: 8,
-                            paddingVertical: 3,
-                            borderColor: '#0091FF',
-                            borderWidth: 0.5,
-                            position: 'absolute',
-                            top: 0,
-                            borderRadius: 4,
-                            right: 15,
-                        }}>
-                        <Text style={{color: '#0091FF', fontSize: 18}}>Edit</Text>
-                    </TouchableOpacity>
-                    }
                 </View>
                 <KeyboardAwareScrollView style={{flex:1, width: '100%'}}>
                 {this.props.navigation.getParam('client_type') == 'S'?
