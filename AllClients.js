@@ -289,7 +289,7 @@ export default class AllClients extends Component {
                   <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>
                   <Text style={{marginTop: 5,fontSize: 16,color: '#666'}} >Commission</Text>
                   <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 85,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
-                      <Text style={{color: '#fff', fontSize: 16}}>${Numeral((item.commission_val).toString()).format('0,0')}</Text>
+                      <Text style={{color: '#fff', fontSize: 16}}>${Numeral(item.commission_val).format('0,0')}</Text>
                   </View>
                 </TouchableOpacity>
               }

@@ -62,10 +62,11 @@ export default class Steps extends Component{
             currentChecked: -1,
 
             refresh: true,
-            visible: false
+            visible: false,
 
-            
+            needToRefresh: true
         }
+        this.refreshData = this.refreshData.bind(this);
     }
 
   getTokenFromStorage = async () => {
@@ -193,14 +194,21 @@ export default class Steps extends Component{
         this.pushStatetoWeb(this.clientStepsURL, clientStepsBody, this.clientStepsStateTransition);
 
         this.setState({
-        visible: !this.state.visible,
-      })
+            visible: !this.state.visible,
+        })
 
         console.log('stepscopy')
         console.log(this.state.stepscopy)
         console.log(this.state.steps)
         return true;
     }
+
+    refreshData () {
+        this.setState({
+          needToRefresh: true,
+          //visible: true
+        });
+    } 
 
     percentColor(){
         let percentage = this.state.steps_percentage;
@@ -223,21 +231,21 @@ export default class Steps extends Component{
 
     back(){
         // Save current completion state for tasks
-        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
-        let postBody = {
-            steps:this.state.steps,
-            id: this.state.id,
-            steps_complete: this.state.steps_complete,
-            steps_percentage: this.state.steps_percentage,
-            steps_deleted: this.state.steps_deleted,
-            total_steps: this.state.total_steps
-        };
-        let stateTransition = function(parent, data) {
-            parent.setState({
-                steps_deleted: []
-            })
-        }
-        this.pushStatetoWeb(postURL, postBody, stateTransition);
+        // let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
+        // let postBody = {
+        //     steps:this.state.steps,
+        //     id: this.state.id,
+        //     steps_complete: this.state.steps_complete,
+        //     steps_percentage: this.state.steps_percentage,
+        //     steps_deleted: this.state.steps_deleted,
+        //     total_steps: this.state.total_steps
+        // };
+        // let stateTransition = function(parent, data) {
+        //     parent.setState({
+        //         steps_deleted: []
+        //     })
+        // }
+        // this.pushStatetoWeb(postURL, postBody, stateTransition);
 
 
         this.setState({
@@ -248,508 +256,49 @@ export default class Steps extends Component{
     }
 
     changeCurrentChecked(id) {
-        let stepscopy = JSON.parse(JSON.stringify(this.state.steps))
-        for (var i = 0; i < stepscopy.length; i++) {
-            if(stepscopy[i].id == id){
-                let x = !stepscopy[i].complete; 
-                stepscopy[i].complete = x;
-                this.setState({
-                    steps: stepscopy,
-                    stepscopy: stepscopy
-                });
-                console.log(this.state.steps);
-                if(x){
-                    steps_complete_updated = this.state.steps_complete + 1;
-                    console.log('total steps ' + this.state.total_steps)
-                    console.log(steps_complete_updated)
-                    steps_percentage_updated = Math.round((steps_complete_updated / this.state.total_steps) * 100)
-                    this.setState({
-                        steps_complete: steps_complete_updated,
-                        steps_percentage: steps_percentage_updated
-                    })
-                }
-                else{
-                    steps_complete_updated = this.state.steps_complete - 1;
-                    console.log(steps_complete_updated)
-                    steps_percentage_updated = Math.round((steps_complete_updated / this.state.total_steps) * 100)
-                    this.setState({
-                        steps_complete: steps_complete_updated,
-                        steps_percentage: steps_percentage_updated
-                    })
-                }
+        // let stepscopy = JSON.parse(JSON.stringify(this.state.steps))
+        // for (var i = 0; i < stepscopy.length; i++) {
+        //     if(stepscopy[i].id == id){
+        //         let x = !stepscopy[i].complete; 
+        //         stepscopy[i].complete = x;
+        //         this.setState({
+        //             steps: stepscopy,
+        //             stepscopy: stepscopy
+        //         });
+        //         console.log(this.state.steps);
+        //         if(x){
+        //             steps_complete_updated = this.state.steps_complete + 1;
+        //             console.log('total steps ' + this.state.total_steps)
+        //             console.log(steps_complete_updated)
+        //             steps_percentage_updated = Math.round((steps_complete_updated / this.state.total_steps) * 100)
+        //             this.setState({
+        //                 steps_complete: steps_complete_updated,
+        //                 steps_percentage: steps_percentage_updated
+        //             })
+        //         }
+        //         else{
+        //             steps_complete_updated = this.state.steps_complete - 1;
+        //             console.log(steps_complete_updated)
+        //             steps_percentage_updated = Math.round((steps_complete_updated / this.state.total_steps) * 100)
+        //             this.setState({
+        //                 steps_complete: steps_complete_updated,
+        //                 steps_percentage: steps_percentage_updated
+        //             })
+        //         }
 
-            }
-        }
+        //     }
+        // }
         this.props.navigation.navigate('SingleStep', {
-            id: this.state.id,
-        })
-    }
-
-
-    preAddStep(){
-        let steps = this.state.steps
-        let id = this.state.id
-        let steps_complete = this.state.steps_complete
-        let steps_percentage = this.state.steps_percentage
-        let steps_deleted = this.state.steps_deleted
-        let total_steps = this.state.total_steps
-        console.log('steps_complete ' + steps_complete)
-        console.log(steps_percentage)
-        console.log(steps_deleted)
-        console.log(total_steps)
-        this.setState({
-            addStep: true,
-            addStepButton: false,
-        })
-
-        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
-        let postBody = {
-            steps:steps,
             id: id,
-            steps_complete: steps_complete,
-            steps_percentage: steps_percentage,
-            steps_deleted: steps_deleted,
-            total_steps: total_steps
-        };
-        let stateTransition = function(parent, data) {
-            parent.setState({
-                steps_deleted: []
-            })
-        }
-        this.pushStatetoWeb(postURL, postBody, stateTransition);
-
-
-        /*fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-              },
-              body: JSON.stringify({
-                steps:steps,
-                id: id,
-                steps_complete: steps_complete,
-                steps_percentage: steps_percentage,
-                steps_deleted: steps_deleted,
-                total_steps: total_steps
-              }),
-            }).then((response) => response.json())
-                .then((responseJson) => {
-                    this.setState({
-                        steps_deleted: []
-                    })
-                })
-                .catch((error) => {
-                  console.error(error);
-                });*/
-
-    }
-
-    postAddStep(){
-        let id = this.state.id
-        
-        let newStepName = this.state.newStepName
-        let newStepDate = this.state.newStepDate
-        let total_steps = this.state.total_steps + 1
-        let steps_percentage = Math.round(((this.state.steps_complete)/total_steps) * 100)
-
-        let postURL = ApiEndpoints.url + ApiEndpoints.addstepPath;
-        let postBody = {
-            id: id,
-            newStepName: newStepName,
-            newStepDate: newStepDate,
-            total_steps: total_steps,
-            steps_percentage: steps_percentage      
-        };
-
-        let stateTransition = function(parent, data) {
-            // Prepare fetch call arguments
-            let refreshPostBody = {
-                email: parent.state.email,
-                client_type: parent.state.client_type
-            };
-
-            // Refresh clients
-            parent.pushStatetoWeb(parent.getClientURL, refreshPostBody, parent.getClientStateTransition);
-
-            // Refresh steps
-            parent.pushStatetoWeb(parent.clientStepsURL, refreshPostBody, parent.clientStepsStateTransition);
-
-        }
-
-        this.pushStatetoWeb(postURL, postBody, stateTransition);
-
-        /*fetch('http://127.0.0.1:8000/agent/AddStep/', 
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-              },
-              body: JSON.stringify({
-                id: id,
-                newStepName: newStepName,
-                newStepDate: newStepDate,
-                total_steps: total_steps,
-                steps_percentage: steps_percentage
-              }),
-            }).then((response) => response.json())
-                .then((responseJson) => {
-                  fetch('http://127.0.0.1:8000/agent/GetClient/', 
-            {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-            },
-            body: JSON.stringify({
-                email:this.state.email,
-                client_type:this.state.client_type
-            }),
-        }).then((response) => response.json())
-          .then((responseJson) => {
-            console.log(responseJson[0])
-            this.setState({
-                id: responseJson[0].id,
-                first_name: responseJson[0].first_name,
-                last_name: responseJson[0].last_name,
-                email: responseJson[0].email,
-                client_type: responseJson[0].client_type,
-                phone_number: responseJson[0].phone_number,
-                address: responseJson[0].address,
-                city: responseJson[0].city,
-                state: responseJson[0].state,
-                zipcode: responseJson[0].zipcode,
-                steps_percentage: responseJson[0].steps_percentage,
-                total_steps: responseJson[0].total_steps,
-                steps_complete: responseJson[0].steps_complete,
-                commission_val: responseJson[0].commission_val,
-                total_steps_copy: responseJson[0].total_steps,
-                steps_complete_copy: responseJson[0].steps_complete,
-
-            })
-
-            fetch('http://127.0.0.1:8000/agent/ClientSteps/', 
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-                },
-                body: JSON.stringify({
-                    email:this.state.email,
-                    client_type:this.state.client_type
-                }),
-            }).then((response) => response.json())
-              .then((responseJson) => {
-                console.log(responseJson[0])
-                this.setState({
-                    steps: responseJson,
-                    stepscopy: responseJson
-                })
-
-              })
-              .catch((error) =>{
-                console.error(error);
-            })
-
-          })
-          .catch((error) =>{
-            console.error(error);
-        })
-                })
-                .catch((error) => {
-                  console.error(error);
-                });*/
-        
-
-        
-        console.log(this.state.refresh)
-        let refresh = !this.state.refresh
-        
-        this.setState({
-            refresh: refresh,
-            addStep: false,
-            addStepButton: true,
-            visible: !this.state.visible,
-        });
-        console.log(this.state.refresh)
-    }
-
-    addStepCancel(){
-        console.log(this.state.newStepDate)
-        this.setState({
-            addStep: false,
-            addStepButton: true,
-            steps_deleted: [],
-            newStepDate: new Date(),
-            newStepName: '',
-        })   
-    }
-
-    preEdit(){
-        let steps = this.state.steps
-        let id = this.state.id
-        let steps_complete = this.state.steps_complete
-        let steps_percentage = this.state.steps_percentage
-        let steps_deleted = []
-        let total_steps = this.state.total_steps
-        let editMode = !this.state.editMode
-        let addStepButton = !this.state.addStepButton
-        console.log(steps_percentage)
-
-        this.setState({
-            editMode: editMode,
-            addStepButton: addStepButton,
-            steps_complete_copy: steps_complete,
-            total_steps_copy: total_steps,
-            steps_deleted: []
-
-        })
-
-        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
-        let postBody = {
-            steps:steps,
-            id: id,
-            steps_complete: steps_complete,
-            steps_percentage: steps_percentage,
-            steps_deleted: steps_deleted,
-            total_steps: total_steps
-        }
-        let stateTransition = function(parent, data) {
-            parent.setState({
-                steps_deleted: []
-            });
-        }
-
-        this.pushStatetoWeb(postURL, postBody, stateTransition);
-
-        /*fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-              },
-              body: JSON.stringify({
-                steps:steps,
-                id: id,
-                steps_complete: steps_complete,
-                steps_percentage: steps_percentage,
-                steps_deleted: steps_deleted,
-                total_steps: total_steps
-              }),
-            }).then((response) => response.json())
-                .then((responseJson) => {
-                    this.setState({
-                        steps_deleted: []
-                    })
-                })
-                .catch((error) => {
-                  console.error(error);
-                });*/
-    };
-
-    editModeChangeName(index, name){
-        let stepscopy = JSON.parse(JSON.stringify(this.state.stepscopy))
-        // for (var i = 0; i < stepscopy.length; i++) {
-        //     if(stepscopy[i].id == id){
-        //         stepscopy[i].name = name;
-        //         this.setState({
-        //             stepscopy: stepscopy
-        //         });
-        //         console.log(this.state.stepscopy);
-        //         break;
-        //     }
-        // }
-
-        stepscopy[index].name = name;
-        console.log(stepscopy[index].name)
-        this.setState({
-            stepscopy: stepscopy
-        });
-        console.log(stepscopy[index].name)
-        console.log(this.state.stepscopy)
-    }
-
-    editModeChangeDate(index, date){
-        let stepscopy = JSON.parse(JSON.stringify(this.state.stepscopy))
-        // for (var i = 0; i < stepscopy.length; i++) {
-        //     if(stepscopy[i].id == id){
-        //         stepscopy[i].name = name;
-        //         this.setState({
-        //             stepscopy: stepscopy
-        //         });
-        //         console.log(this.state.stepscopy);
-        //         break;
-        //     }
-        // }
-
-        stepscopy[index].date = date;
-        console.log(stepscopy[index].date)
-        this.setState({
-            stepscopy: stepscopy,
-        });
-        console.log(stepscopy[index].date)
-        console.log(this.state.stepscopy)
-    }
-
-    editModeDone(){
-        let editMode = !this.state.editMode;
-        let addStepButton = !this.state.addStepButton;
-        let newSteps = this.state.stepscopy;
-        let steps_deleted = this.state.steps_deleted;
-        let id = this.state.id
-        let steps_complete_copy = this.state.steps_complete_copy
-        let total_steps_copy = this.state.total_steps_copy
-        let steps_percentage = Math.round((steps_complete_copy/total_steps_copy) * 100)
-
-
-        this.setState({
-            steps: newSteps,
-            editMode: editMode,
-            addStepButton: addStepButton,
-            steps_complete: steps_complete_copy,
-            total_steps: total_steps_copy,
-            steps_percentage: steps_percentage
-
-        });
-        console.log('newSteps')
-        console.log(newSteps)
-        console.log('deletedSteps')
-        console.log(steps_deleted)
-
-        let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
-        let postBody = {
-            steps: newSteps,
-            steps_deleted: steps_deleted,
-            id: id,
-            steps_complete: steps_complete_copy,
-            total_steps: total_steps_copy,
-            steps_percentage: steps_percentage    
-        };
-        let stateTransition = function(parent, data) {
-            // Prepare fetch call arguments
-            let refreshPostBody = {
-                email: parent.state.email,
-                client_type: parent.state.client_type
-            };
-
-            // Refresh clients
-            parent.pushStatetoWeb(parent.getClientURL, refreshPostBody, parent.getClientStateTransition);
-
-            // Refresh steps
-            parent.pushStatetoWeb(parent.clientStepsURL, refreshPostBody, parent.clientStepsStateTransition);
-
-        }
-
-        this.pushStatetoWeb(postURL, postBody, stateTransition);
-
-        /*fetch('http://127.0.0.1:8000/agent/UpdateSteps/', 
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-              },
-              body: JSON.stringify({
-                steps: newSteps,
-                steps_deleted: steps_deleted,
-                id: id,
-                steps_complete: steps_complete_copy,
-                total_steps: total_steps_copy,
-                steps_percentage: steps_percentage
-              }),
-            }).then((response) => response.json())
-                .then((responseJson) => {
-                fetch('http://127.0.0.1:8000/agent/GetClient/', 
-                {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-                },
-                body: JSON.stringify({
-                    email:this.state.email,
-                    client_type:this.state.client_type
-                }),
-        }).then((response) => response.json())
-          .then((responseJson) => {
-            console.log(responseJson[0])
-            this.setState({
-                id: responseJson[0].id,
-                first_name: responseJson[0].first_name,
-                last_name: responseJson[0].last_name,
-                email: responseJson[0].email,
-                client_type: responseJson[0].client_type,
-                phone_number: responseJson[0].phone_number,
-                address: responseJson[0].address,
-                city: responseJson[0].city,
-                state: responseJson[0].state,
-                zipcode: responseJson[0].zipcode,
-                steps_percentage: responseJson[0].steps_percentage,
-                total_steps: responseJson[0].total_steps,
-                steps_complete: responseJson[0].steps_complete,
-                commission_val: responseJson[0].commission_val,
-                total_steps_copy: responseJson[0].total_steps,
-                steps_complete_copy: responseJson[0].steps_complete,
-
-            })
-
-            fetch('http://127.0.0.1:8000/agent/ClientSteps/', 
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer c2rGxk6dRTlhYgvz9WyZaT9P1K9yiG'
-                },
-                body: JSON.stringify({
-                    email:this.state.email,
-                    client_type:this.state.client_type
-                }),
-            }).then((response) => response.json())
-              .then((responseJson) => {
-                console.log(responseJson[0])
-                this.setState({
-                    steps: responseJson,
-                    stepscopy: responseJson,
-                    steps_deleted: []
-                })
-
-              })
-              .catch((error) =>{
-                console.error(error);
-            })
-
-          })
-          .catch((error) =>{
-            console.error(error);
-        })
-                })
-                .catch((error) => {
-                  console.error(error);
-                });*/
-
-        
-
-    }
-
-    editModeCancel(){
-        let editMode = !this.state.editMode
-        let addStepButton = !this.state.addStepButton
-        let oldSteps = this.state.steps;
-        let steps_complete = this.state.steps_complete;
-        let total_steps = this.state.total_steps;
-
-        this.setState({
-            editMode: editMode,
-            addStepButton: addStepButton,
-            stepscopy: oldSteps,
-            steps_complete_copy: steps_complete,
-            total_steps_copy: total_steps
+            client_id: this.state.id,
+            refresh: this.refreshData
         })
     }
+
+
+
+
+
 
     deleteStep(index){
         let stepscopy = JSON.parse(JSON.stringify(this.state.stepscopy));
@@ -779,7 +328,8 @@ export default class Steps extends Component{
 
     GetGridViewItem = function() { 
     this.props.navigation.navigate('AddStep', {
-        id: this.state.id
+        id: this.state.id,
+        refresh: this.refreshData
     });
   }
 
@@ -793,6 +343,30 @@ export default class Steps extends Component{
 
 
     render() {
+        if(this.state.needToRefresh) {
+            // Prepare fetch call arguments
+            let getClientBody = {
+                email: this.props.navigation.getParam('email'),
+                client_type: this.props.navigation.getParam('client_type')
+            };
+            let clientStepsBody = {
+                email: this.props.navigation.getParam('email'),
+                client_type: this.props.navigation.getParam('client_type')
+            };
+            //alert(this.props.navigation.getParam('client_type'))
+
+            // Make async fetch calls
+            this.pushStatetoWeb(this.getClientURL, getClientBody, this.getClientStateTransition);
+            this.pushStatetoWeb(this.clientStepsURL, clientStepsBody, this.clientStepsStateTransition);
+
+            this.setState({
+                visible: !this.state.visible,
+            })
+
+            this.setState({
+              needToRefresh: false
+            })
+        }
         return (
             <View style={styles.container}>
             <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} /*overlayColor='#0091FF'*//>

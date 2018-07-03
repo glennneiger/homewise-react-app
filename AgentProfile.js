@@ -77,20 +77,20 @@ class AgentProfile extends Component {
   
   componentDidMount(){
 
-    let getURL = ApiEndpoints.url + ApiEndpoints.agentProfile;
+    // let getURL = ApiEndpoints.url + ApiEndpoints.agentProfile;
 
-    let stateTransition = function(parent, responseJson) {
-      parent.setState({
-        first_name: responseJson.first_name,
-        last_name: responseJson.last_name,
-        email: responseJson.email,
-        mls_region: responseJson.mls_region,
-        mls_id: responseJson.mls_id,
-        id: responseJson.id
-      })
-    }
+    // let stateTransition = function(parent, responseJson) {
+    //   parent.setState({
+    //     first_name: responseJson.first_name,
+    //     last_name: responseJson.last_name,
+    //     email: responseJson.email,
+    //     mls_region: responseJson.mls_region,
+    //     mls_id: responseJson.mls_id,
+    //     id: responseJson.id
+    //   })
+    // }
 
-    this.fetchWebtoState(getURL, stateTransition);
+    // this.fetchWebtoState(getURL, stateTransition);
 
     /*fetch('http://127.0.0.1:8000/agent/AgentProfile/', 
       {
