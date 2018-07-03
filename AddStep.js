@@ -11,7 +11,8 @@ import {
   Platform,
   ART,
   FlatList,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  AsyncStorage
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import PropTypes from 'prop-types';
@@ -19,6 +20,8 @@ import Numeral from 'numeral';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import DatePicker from 'react-native-datepicker';
+
+import { ApiEndpoints, StorageKeys } from './AppConfig';
 
 
 
@@ -35,18 +38,24 @@ class AddStep extends Component {
     };
   }
 
-  componentDidMount(){
-    let id = 1;
-    alert(id);
+  getTokenFromStorage = async () => {
+    const token = await AsyncStorage.getItem(StorageKeys.authToken);
+    return token;
+  }
 
+  componentDidMount(){
+    let id = this.props.navigation.getParam('id');
+    this.props.navigation.state.params.refresh();
     this.setState({
         id: id,
       })
    }
 
+
    addStep(){
     let url = ApiEndpoints.url + ApiEndpoints.addstepPath;
     const bearerToken = this.getTokenFromStorage();
+    console.log(bearerToken);
 
     let id = this.state.id;
     let newStepName = this.state.newStepName;
@@ -57,7 +66,7 @@ class AddStep extends Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer' + bearerToken
+          'Authorization': 'Bearer ' + bearerToken
         },
         body: JSON.stringify({
           id:id,
@@ -67,7 +76,8 @@ class AddStep extends Component {
       })
     .then((response) => response.json())
     .then((responseJson) => {
-      //this.props.navigation.navigate('Steps');
+      this.props.navigation.state.params.refresh();
+      this.props.navigation.navigate('Steps');
     })
     .catch((error) => {
       console.error(error);
@@ -114,7 +124,7 @@ class AddStep extends Component {
                           <Text style={{color: '#fff', fontSize: 18}}>Back</Text>
                       </View>
                   </TouchableOpacity>
-                  <Text style={{color: '#0091FF', fontSize: 25, fontWeight: '600',}} > Add Step</Text>
+                  <Text style={{color: '#0091FF', fontSize: 25, fontWeight: '600',}} >Add Step</Text>
               </View>
             </View>
             <View style={styles.body}>

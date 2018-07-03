@@ -12,7 +12,8 @@ import {
   Platform,
   ART,
   FlatList,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  AsyncStorage
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import PropTypes from 'prop-types';
@@ -31,7 +32,8 @@ class SingleStep extends Component {
     super(props);
 
     this.state = {
-      id: '1',
+      client_id: '',
+      id: '',
       name: '',
       name_copy: '',
       date: '',
@@ -70,6 +72,7 @@ class SingleStep extends Component {
 
   componentDidMount(){
     // Prepare fetch call arguments
+    let client_id = this.props.navigation.getParam('client_id');
     let id = this.props.navigation.getParam('id');
     let url = ApiEndpoints.url + ApiEndpoints.singlestepPath;
     const bearerToken = this.getTokenFromStorage();
@@ -78,13 +81,15 @@ class SingleStep extends Component {
       id:id
     });
 
+    console.log(this.state);
+
     // Make fetch calls
-    /*fetch(url, 
+    fetch(url, 
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer' + bearerToken
+          'Authorization': 'Bearer ' + bearerToken
         },
         body: JSON.stringify({
           id:id,
@@ -92,7 +97,10 @@ class SingleStep extends Component {
       })
     .then((response) => response.json())
     .then((responseJson) => {
+      this.props.navigation.state.params.refresh();
+
       this.setState({
+        client_id: client_id,
         id: id,
         name: responseJson.name,
         name_copy: responseJson.name,
@@ -103,15 +111,16 @@ class SingleStep extends Component {
     })
     .catch((error) => {
       console.error(error);
-    });*/
+    });
   }
 
 
   back(){
     //api call for UpdateStep
     //post id, name, date, complete
-    let url = ApiEndpoints.url + ApiEndpoints.singlestepPath;
+    let url = ApiEndpoints.url + ApiEndpoints.updatestepPath;
     const bearerToken = this.getTokenFromStorage();
+    let client_id = this.state.client_id;
     let id = this.state.id;
     let name = this.state.name_copy;
     let complete = this.state.complete;
@@ -122,9 +131,10 @@ class SingleStep extends Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer' + bearerToken
+          'Authorization': 'Bearer ' + bearerToken
         },
         body: JSON.stringify({
+          client_id:client_id,
           id:id,
           name:name,
           complete:complete,
@@ -133,7 +143,9 @@ class SingleStep extends Component {
       })
     .then((response) => response.json())
     .then((responseJson) => {
-
+      this.props.navigation.state.params.refresh();
+      alert('updated');
+      this.props.navigation.navigate('Steps');
     })
     .catch((error) => {
       console.error(error);
@@ -192,7 +204,32 @@ class SingleStep extends Component {
   }
 
   deleteStep(){
-    this.props.navigation.navigate('Steps')
+    let url = ApiEndpoints.url + ApiEndpoints.deletestepPath;
+    const bearerToken = this.getTokenFromStorage();
+    let client_id = this.state.client_id;
+    let id = this.state.id;
+
+    fetch(url, 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + bearerToken
+        },
+        body: JSON.stringify({
+          client_id:client_id,
+          id:id,
+        }),
+      })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      alert('deleted');
+      this.props.navigation.state.params.refresh();
+      this.props.navigation.navigate('Steps');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
 static navigationOptions = ({ navigation }) => {
