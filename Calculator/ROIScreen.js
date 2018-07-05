@@ -37,6 +37,7 @@ class ROIScreen extends Component {
       introScreen: true,
 
       roi: 0,
+      roiColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
       monthlyCashFlow: 0,
       capRate: 0,
       capRateColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
@@ -129,7 +130,7 @@ class ROIScreen extends Component {
                   </TouchableOpacity> 
                 </View>
               </View>
-              <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
+              <View style={{backgroundColor: '#f6fbfc',flexDirection: 'row', justifyContent: 'flex-end'}}>
                <TouchableOpacity
                   onPress = {
                   () => this._reset()
@@ -149,10 +150,8 @@ class ROIScreen extends Component {
                   stroke={[2, 2]} 
                   strokeCap="circle">
                   <View style = {styles.textView}> 
-                    <View style={styles.ROIViewStyle}>
-                      <Text style={styles.ROITextStyle}>{this.state.roi}%</Text>
-                    </View>
-                  <Text style = {{color:'black', fontSize: 18}}>ROI</Text>
+                      <Text style={this.state.roiColor}>{this.state.roi}%</Text>
+                  <Text style = {{color:'black', fontSize: 18}}>1 Year Cash-on-Cash Return</Text>
                   </View>
                 </AnimatedGaugeProgress>
                 <View style={styles.roiheadervalues}>
@@ -598,6 +597,26 @@ class ROIScreen extends Component {
   }
 
   _calculateROI(listPrice,rent){
+
+    let roiColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
+    if(roi >= 8){
+      roiColor = {fontSize: 30, color: '#006400', fontWeight: 'bold'};
+    }
+    else if(roi >= 6 && roi < 8){
+      roiColor = {fontSize: 30, color: '#32CD32', fontWeight: 'bold'};
+    }
+    else if(roi >= 4 && roi < 6){
+      roiColor = {fontSize: 30, color: '#FFFF00', fontWeight: 'bold'};
+    }
+    else if(roi > 0 && roi < 4){
+      roiColor = {fontSize: 30, color: '#FFA500', fontWeight: 'bold'};
+    }
+    else if(roi <= 0){
+      roiColor = {fontSize: 30, color: '#FF0000', fontWeight: 'bold'};
+    }
+    else{
+      roiColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
+    }
 
 
     let downPayment = Numeral(this.state.downPayment).value();

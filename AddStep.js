@@ -170,7 +170,7 @@ class AddStep extends Component {
                  style = {styles.submitButton}
                  onPress = {
                     () => this.addStep()}> 
-                 <Text style = {styles.submitButtonText}> Add Step! </Text>
+                 <Text style = {styles.submitButtonText}> Add Step </Text>
               </TouchableOpacity>
             </View>
             </ScrollView>

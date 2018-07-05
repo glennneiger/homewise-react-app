@@ -438,7 +438,7 @@ export default class Steps extends Component{
                                             </View>
                                             
                                         </View>
-                                        <View style={{flex: 1, paddingVertical: 20, paddingHorizontal: 10}}>
+                                        <View style={{flex: 1, paddingVertical: 30, paddingHorizontal: 10}}>
                                             <Text style={{fontSize: 20, fontWeight: 'bold'}} >{item.name}</Text>
                                             <Text style={{fontSize: 15, color: '#707070'}}>{item.date}</Text>
                                         </View>

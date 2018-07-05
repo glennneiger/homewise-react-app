@@ -10,7 +10,7 @@ export default class HomeScreen extends Component{
 
     render(){
         return(
-            <View style={{width, height, backgroundColor: 'white', alignItems: 'center'}}>
+            <View style={{width, height, backgroundColor: '#f6fbfc', alignItems: 'center'}}>
                 <View style={{width: width * 0.7, height: height* 0.3, marginTop: height* 0.15, alignItems: 'center'}}>
                     <Image source={require('./logo.png')} style={{width: width * 0.8, height: height* 0.2}}/>
                     <Text style={{color:'rgb(65,147,237)', fontSize: 15}}>A personal assistant at your fingertips</Text>

@@ -11,7 +11,7 @@ const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#f6fbfc'
   },
   otherStuff: {
     flex:0.9,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
 
   header: {
     flex:2,
-    backgroundColor: '#fff',
+    backgroundColor: '#f6fbfc',
     alignItems: 'center',
     //justifyContent: 'center',
     borderBottomColor: '#D3D3D3',
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
 
   headerFixNFlip: {
     flex:3,
-    backgroundColor: '#fff',
+    backgroundColor: '#f6fbfc',
     alignItems: 'center',
     //justifyContent: 'center',
     borderBottomColor: '#348EF2',
@@ -415,10 +415,8 @@ const styles = StyleSheet.create({
       padding: 12
   },
 
-  ROIViewStyle: {backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12},
 
   ROITextStyle: {color: '#fff', fontSize: 17},
-
 });
 
 export default styles;

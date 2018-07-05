@@ -170,7 +170,7 @@ class MortgageScreen extends Component {
                   </TouchableOpacity> 
                 </View>
               </View>
-          <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <View style={{backgroundColor: '#f6fbfc',flexDirection: 'row', justifyContent: 'flex-end'}}>
 
             <TouchableOpacity
               onPress = {

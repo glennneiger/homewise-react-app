@@ -23,6 +23,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import MLSRegion from './MLSRegion'
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const {width, height} = Dimensions.get('window')
 
@@ -38,6 +39,7 @@ class Registration extends Component {
       retypePass:'',
       mls_region: '',
       mls_id:'',
+      visible: false
     }
 
     // this.getTokenFromStorage = this.getTokenFromStorage.bind(this);
@@ -118,8 +120,8 @@ pushStatetoWeb = async (url, bodyData, callback) => {
             }
 
             let stateTransition = function(parent, data) {
-              // Navigate to clients page
-              this.props.navigation.navigate('AllClients')
+              // Navigate to login page
+              this.props.navigation.navigate('Login')
             }
 
             // this.pushStatetoWeb(postURL, postBody, stateTransition);
@@ -141,8 +143,8 @@ pushStatetoWeb = async (url, bodyData, callback) => {
               }),
             }).then((response) => response.json())
                 .then((responseJson) => {
-                  // Navigate to clients page
-                  this.props.navigation.navigate('AllClients')
+                  // Navigate to login page
+                  this.props.navigation.navigate('Login')
                 })
                 .catch((error) => {
                   alert('Error while registering. Try again later.')
@@ -162,12 +164,13 @@ pushStatetoWeb = async (url, bodyData, callback) => {
     const { navigation } = this.props;
     return (
       <View style ={styles.header}>
+      <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <View style={{flex:1}}>
       <KeyboardAvoidingView behavior="position" enabled>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 40, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>
+          <Image style={{width: 60, height: 70, marginTop: 40, paddingBottom: 0}} 
+              source={require('./Homewise.png')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 45}}>Create an Account</Text>
         </View>
         <View style={{flex:9}}>
@@ -319,11 +322,11 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {

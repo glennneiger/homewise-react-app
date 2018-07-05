@@ -206,7 +206,7 @@ class FixNFlipScreen extends Component {
                   </TouchableOpacity> 
                 </View>
               </View>
-          <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <View style={{backgroundColor: '#f6fbfc',flexDirection: 'row', justifyContent: 'flex-end'}}>
 
             <TouchableOpacity
               onPress = {
@@ -227,9 +227,7 @@ class FixNFlipScreen extends Component {
                 stroke={[2, 2]} 
                 strokeCap="circle">
                 <View style={styles.textView}>
-                  <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
-                    <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
-                  </View>
+                    <Text style={{fontSize: 30, color: 'black', fontWeight: 'bold'}}>{this.state.roi}%</Text>
                   <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>ROI</Text>
                   </View>
               </AnimatedGaugeProgress>

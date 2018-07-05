@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex:1,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   GridViewBlockStyle: {
     justifyContent: 'center',
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
     margin: 0.1,
     borderWidth: 1,
     borderColor: '#FAFAFA',
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   GridViewInsideTextItemStyle: {
     color: '#fff',
