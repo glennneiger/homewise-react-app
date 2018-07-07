@@ -284,7 +284,7 @@ export default class AllClients extends Component {
              ListEmptyComponent = { <Text style={{fontSize: 18}}> No Clients </Text> }
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
-                <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
+                <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)} activeOpacity = { 1 }>
                   <PercentageCircle radius={60} borderWidth={10} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={this.percentColor(item.steps_percentage)}></PercentageCircle>  
                   <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>
                   <Text style={{marginTop: 5,fontSize: 16,color: '#666'}} >Commission</Text>
@@ -301,12 +301,12 @@ export default class AllClients extends Component {
              ListEmptyComponent = { <Text> No Clients </Text> }
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
-                <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
+                <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)} activeOpacity = { 1 }>
                   <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
                   <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>
                   <Text style={{marginTop: 5,fontSize: 15,color: '#666'}} >Commission</Text>
                   <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
-                      <Text style={{color: '#fff'}}>${item.commission_val}</Text>
+                      <Text style={{color: '#fff'}}>${Numeral(item.commission_val).format('0,0')}</Text>
                   </View>
                 </TouchableOpacity>
               }
