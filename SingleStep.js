@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Alert,
+  Animated,
   StyleSheet,
   Text,
   View,
@@ -13,6 +14,7 @@ import {
   ART,
   FlatList,
   KeyboardAvoidingView,
+  Easing,
   AsyncStorage
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -144,7 +146,7 @@ class SingleStep extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       this.props.navigation.state.params.refresh();
-      alert('updated');
+      //alert('updated');
       this.props.navigation.navigate('Steps');
     })
     .catch((error) => {
@@ -223,7 +225,7 @@ class SingleStep extends Component {
       })
     .then((response) => response.json())
     .then((responseJson) => {
-      alert('deleted');
+      //alert('deleted');
       this.props.navigation.state.params.refresh();
       this.props.navigation.navigate('Steps');
     })
@@ -331,11 +333,11 @@ static navigationOptions = ({ navigation }) => {
                     style={{flexDirection: 'row'}}
                     onPress = {
                       () => Alert.alert(
-                        'Are you sure?',
-                        'My Alert Msg',
+                        'Are you sure you want to delete this step?',
+                        '',
                         [
-                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                        {text: 'OK', onPress: () => this.deleteStep()},
+                        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                        {text: 'Yes', onPress: () => this.deleteStep()},
                         ],
                         { cancelable: false }
                     )}>
@@ -452,7 +454,12 @@ static navigationOptions = ({ navigation }) => {
                 {this.state.complete?
                   <Text style={styles.submitNotButtonText}>Step Not Complete</Text>
                   :
-                  <Text style={styles.submitButtonText}>Step Complete</Text>
+                  <Icon 
+              name="check"
+              color="white"
+              size={25}>
+                  <Text style={styles.submitButtonText}>  Step Complete</Text>
+                  </Icon>
                 }
               </TouchableOpacity>
               
@@ -468,7 +475,7 @@ static navigationOptions = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   headerButtons: {
@@ -546,6 +553,7 @@ const styles = StyleSheet.create({
     height: 50,
     
     paddingRight: 10,
+    paddingLeft: 15,
     backgroundColor: '#20BF55',
     //'#04E762',
     justifyContent:'center', 
@@ -569,12 +577,16 @@ const styles = StyleSheet.create({
   submitButtonText:{
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   submitNotButtonText:{
     color: '#20BF55',
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  checks:{
+    justifyContent:'center', 
+    alignItems:'center',
   },
 
 

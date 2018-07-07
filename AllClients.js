@@ -302,7 +302,7 @@ export default class AllClients extends Component {
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
                 <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
-                  <PercentageCircle radius={50} borderWidth={8} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
+                  <PercentageCircle radius={60} borderWidth={10} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={"#4CD964"}></PercentageCircle>  
                   <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>
                   <Text style={{marginTop: 5,fontSize: 15,color: '#666'}} >Commission</Text>
                   <View style={{backgroundColor: '#4BD964', marginTop: 5, width: 70,height: 25, justifyContent: 'center', alignItems: 'center', padding: 3,borderRadius: 12,}}>
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex:1,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   GridViewBlockStyle: {
     justifyContent: 'center',
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
     margin: 0.1,
     borderWidth: 1,
     borderColor: '#FAFAFA',
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   GridViewInsideTextItemStyle: {
     color: '#fff',

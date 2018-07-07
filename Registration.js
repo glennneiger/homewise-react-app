@@ -23,6 +23,8 @@ import { Dropdown } from 'react-native-material-dropdown';
 import MLSRegion from './MLSRegion'
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
+import Spinner from 'react-native-loading-spinner-overlay';
+import RNPickerSelect from 'react-native-picker-select';
 
 const {width, height} = Dimensions.get('window')
 
@@ -118,8 +120,8 @@ pushStatetoWeb = async (url, bodyData, callback) => {
             }
 
             let stateTransition = function(parent, data) {
-              // Navigate to clients page
-              this.props.navigation.navigate('AllClients')
+              // Navigate to login page
+              this.props.navigation.navigate('Login')
             }
 
             // this.pushStatetoWeb(postURL, postBody, stateTransition);
@@ -141,8 +143,8 @@ pushStatetoWeb = async (url, bodyData, callback) => {
               }),
             }).then((response) => response.json())
                 .then((responseJson) => {
-                  // Navigate to clients page
-                  this.props.navigation.navigate('AllClients')
+                  // Navigate to login page
+                  this.props.navigation.navigate('Login')
                 })
                 .catch((error) => {
                   alert('Error while registering. Try again later.')
@@ -166,8 +168,8 @@ pushStatetoWeb = async (url, bodyData, callback) => {
       <KeyboardAvoidingView behavior="position" enabled>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 40, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>
+          <Image style={{width: 60, height: 70, marginTop: 40, paddingBottom: 0}} 
+              source={require('./Homewise.png')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 45}}>Create an Account</Text>
         </View>
         <View style={{flex:9}}>
@@ -275,11 +277,15 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                   <Text style={styles.captionText}>MLS Region</Text>
                 </View>
                 <View>
-                   <Dropdown
-                    data = {MLSRegion}
-                    containerStyle = {styles.rowmls}
-                    onChangeText = {(text)=> this.setState({mls_region: text})}>
-                  </Dropdown>
+                <RNPickerSelect
+                    placeholder={{
+                        label: '',
+                    }}
+                    value={this.state.mls_region}
+                    items={MLSRegion}
+                    onValueChange= {(text)=> this.setState({mls_region: text})}
+                    style={{ ...pickerSelectStyles }}
+                />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>MLS ID</Text>
@@ -319,11 +325,11 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
@@ -349,7 +355,8 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     height: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    color: 'black'
   },
   caption: {
     marginLeft: 35,
@@ -407,6 +414,26 @@ const styles = StyleSheet.create({
    submitButtonText:{
       color: 'white',
    }
+});
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingTop: 13,
+        paddingHorizontal: 10,
+        paddingBottom: 12,
+        borderBottomWidth: 1,
+        borderColor: '#D3D3D3',
+        /*borderRadius: 4,
+        backgroundColor: 'white',*/
+        color: 'black',
+        marginTop: 0,
+    marginBottom: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    height: 40,
+    justifyContent: 'center',
+    },
 });
 
 

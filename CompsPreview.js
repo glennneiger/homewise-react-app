@@ -28,8 +28,8 @@ export default class CompsPreview extends Component{
       <View style ={styles.header}>
       <View style={{flex:1}}>
         <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 40, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>
+          <Image style={{width: 60, height: 70, marginTop: 40, paddingBottom: 0}} 
+              source={require('./Homewise.png')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 45}}>A.I. CMA Coming Soon</Text>
         </View>
         <View style ={{flex:3}}>
@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {

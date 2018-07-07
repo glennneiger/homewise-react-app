@@ -7,7 +7,7 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#f6fbfc'
   },
   headerTabs1:{
     flex:3,

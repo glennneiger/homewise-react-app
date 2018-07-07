@@ -174,7 +174,7 @@ export default class CalcScreens extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#f6fbfc'
   },
   headerTabs1:{
     width: width * 0.3,

@@ -19,6 +19,7 @@ import { ApiEndpoints, StorageKeys } from './AppConfig'
 import Numeral from 'numeral';
 import { TextInputMask } from 'react-native-masked-text';
 import Spinner from 'react-native-loading-spinner-overlay';
+import RNPickerSelect from 'react-native-picker-select';
 
 const {width, height} = Dimensions.get('window')
 
@@ -95,7 +96,8 @@ class NewClient extends Component {
         response.json().then((data) => {
           // Set corresponding state field
           this.setState({
-            [stateField]: data
+            [stateField]: data,
+            visible: false
           })
         })
       }
@@ -128,6 +130,9 @@ class NewClient extends Component {
             //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
             //hook();
             this.props.navigation.state.params.refresh();
+            this.setState({
+              visible: !this.state.visible,
+            })
             // Go to callback function
             callback(this, data);
         })
@@ -251,12 +256,13 @@ class NewClient extends Component {
     const { navigation } = this.props;
     return (
       <View style ={styles.header}>
+      <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <View style={{flex:1}}>
       <KeyboardAvoidingView behavior="position" enabled>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>
+          <Image style={{width: 60, height: 70, marginTop: 30, paddingBottom: 0, backgroundColor: '#f6fbfc'}} 
+              source={require('./Homewise.png')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Add Client</Text>
         </View> 
         <View style={{flex:9}}>
@@ -377,11 +383,15 @@ class NewClient extends Component {
                   <Text style={styles.captionText}>State</Text>
                 </View>
                 <View>
-                  <Dropdown
-                    data = {States}
-                    containerStyle = {styles.rowdate}
-                    onChangeText = {(text)=> this.setState({state: text})}>
-                  </Dropdown>
+                 <RNPickerSelect
+                    placeholder={{
+                        label: '',
+                    }}
+                    value={this.state.state}
+                    items={States}
+                    onValueChange= {(text)=> this.setState({state: text})}
+                    style={{ ...pickerSelectStyles }}
+                />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Zip Code</Text>
@@ -587,11 +597,11 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
@@ -696,6 +706,25 @@ const styles = StyleSheet.create({
    submitButtonText:{
       color: 'white',
    }
+});
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingTop: 13,
+        paddingHorizontal: 10,
+        paddingBottom: 12,
+        borderBottomWidth: 1,
+        borderColor: '#D3D3D3',
+        /*borderRadius: 4,
+        backgroundColor: 'white',*/
+        color: 'black',
+        marginTop: 0,
+    marginBottom: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    height: 40,
+    justifyContent: 'center',
+    },
 });
 
 export default NewClient;

@@ -170,7 +170,7 @@ class AddStep extends Component {
                  style = {styles.submitButton}
                  onPress = {
                     () => this.addStep()}> 
-                 <Text style = {styles.submitButtonText}> Add Step! </Text>
+                 <Text style = {styles.submitButtonText}> Add Step </Text>
               </TouchableOpacity>
             </View>
             </ScrollView>
@@ -184,7 +184,7 @@ class AddStep extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   headerButtons: {
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     height: 50,
     
     paddingRight: 10,
-    backgroundColor: 'rgb(65,147,237)',
+    backgroundColor: '#0091FF',
     justifyContent:'center', 
     alignItems:'center'
   },

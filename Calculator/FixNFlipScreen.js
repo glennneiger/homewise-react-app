@@ -206,7 +206,7 @@ class FixNFlipScreen extends Component {
                   </TouchableOpacity> 
                 </View>
               </View>
-          <View style={{backgroundColor: '#fff',flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <View style={{backgroundColor: '#f6fbfc',flexDirection: 'row', justifyContent: 'flex-end'}}>
 
             <TouchableOpacity
               onPress = {
@@ -227,10 +227,8 @@ class FixNFlipScreen extends Component {
                 stroke={[2, 2]} 
                 strokeCap="circle">
                 <View style={styles.textView}>
-                  <View style={{backgroundColor: '#4BD964', marginTop: 15, marginBottom: 10, width: 110,height: 40, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
-                    <Text style={{color: '#fff', fontSize: 17}}>{this.state.roi}%</Text>
-                  </View>
-                  <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>ROI</Text>
+                    <Text style={{fontSize: 50, color: 'black', fontWeight: 'bold'}}>{this.state.roi}%</Text>
+                  <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>1 Year Cash-on-Cash Return</Text>
                   </View>
               </AnimatedGaugeProgress>
               <View style={styles.fnfheaderval1}>
@@ -595,7 +593,7 @@ class FixNFlipScreen extends Component {
 
 
     this.setState({
-      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0'),
+      purchaseClosingCosts: Numeral(purchaseClosingCosts).value(),
       purchaseClosingCostsPercent: +(purchaseClosingCostsPercent.toFixed(2))
     });
   }
@@ -605,7 +603,7 @@ class FixNFlipScreen extends Component {
     let purchaseClosingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(purchaseClosingCostsPercent)/100);
 
     this.setState({
-      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0.[00]'),
+      purchaseClosingCosts: Numeral((purchaseClosingCosts).toString()).format('0,0.[00]'),
       purchaseClosingCostsPercent: purchaseClosingCostsPercent
     })
   }

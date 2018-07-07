@@ -51,8 +51,8 @@ class ForgotPassword extends Component {
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>
+          <Image style={{width: 60, height: 70, marginTop: 30, paddingBottom: 0}} 
+              source={require('./Homewise.png')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Forgot Password</Text>
         </View>
         <View style={{flex:9}}>
@@ -67,6 +67,7 @@ class ForgotPassword extends Component {
                     style={styles.values}
                     keyboardType = {'default'}
                     returnKeyType = {'done'}
+                     autoCapitalize = 'none'
                     underlineColorAndroid='transparent'
                     onChangeText = {(text)=> this.setState({textEmail: text})}>
                   </TextInput>
@@ -94,11 +95,11 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#f6fbfc'
   },
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
