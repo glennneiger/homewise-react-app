@@ -122,8 +122,7 @@ class NewClient extends Component {
     .then((response) => {
       if (!response.ok) {
         // Handle error
-        alert(response.status);
-        alert(response.statusText)
+        alert('Client already exists')
       } else {
         response.json().then((data) => {
             // Trigger refresh hook
