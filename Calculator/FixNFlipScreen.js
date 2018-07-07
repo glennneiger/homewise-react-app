@@ -593,7 +593,7 @@ class FixNFlipScreen extends Component {
 
 
     this.setState({
-      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0'),
+      purchaseClosingCosts: Numeral(purchaseClosingCosts).value(),
       purchaseClosingCostsPercent: +(purchaseClosingCostsPercent.toFixed(2))
     });
   }
@@ -603,7 +603,7 @@ class FixNFlipScreen extends Component {
     let purchaseClosingCosts = Numeral(this.state.listPrice).value() * (Number.parseFloat(purchaseClosingCostsPercent)/100);
 
     this.setState({
-      purchaseClosingCosts: Numeral((downPayment).toString()).format('0,0.[00]'),
+      purchaseClosingCosts: Numeral((purchaseClosingCosts).toString()).format('0,0.[00]'),
       purchaseClosingCostsPercent: purchaseClosingCostsPercent
     })
   }

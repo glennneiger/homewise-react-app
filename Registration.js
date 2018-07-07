@@ -24,6 +24,7 @@ import MLSRegion from './MLSRegion'
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
 import Spinner from 'react-native-loading-spinner-overlay';
+import RNPickerSelect from 'react-native-picker-select';
 
 const {width, height} = Dimensions.get('window')
 
@@ -39,7 +40,6 @@ class Registration extends Component {
       retypePass:'',
       mls_region: '',
       mls_id:'',
-      visible: false
     }
 
     // this.getTokenFromStorage = this.getTokenFromStorage.bind(this);
@@ -164,7 +164,6 @@ pushStatetoWeb = async (url, bodyData, callback) => {
     const { navigation } = this.props;
     return (
       <View style ={styles.header}>
-      <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <View style={{flex:1}}>
       <KeyboardAvoidingView behavior="position" enabled>
         <ScrollView>
@@ -278,11 +277,15 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                   <Text style={styles.captionText}>MLS Region</Text>
                 </View>
                 <View>
-                   <Dropdown
-                    data = {MLSRegion}
-                    containerStyle = {styles.rowmls}
-                    onChangeText = {(text)=> this.setState({mls_region: text})}>
-                  </Dropdown>
+                <RNPickerSelect
+                    placeholder={{
+                        label: '',
+                    }}
+                    value={this.state.mls_region}
+                    items={MLSRegion}
+                    onValueChange= {(text)=> this.setState({mls_region: text})}
+                    style={{ ...pickerSelectStyles }}
+                />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>MLS ID</Text>
@@ -352,7 +355,8 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     height: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    color: 'black'
   },
   caption: {
     marginLeft: 35,
@@ -410,6 +414,26 @@ const styles = StyleSheet.create({
    submitButtonText:{
       color: 'white',
    }
+});
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingTop: 13,
+        paddingHorizontal: 10,
+        paddingBottom: 12,
+        borderBottomWidth: 1,
+        borderColor: '#D3D3D3',
+        /*borderRadius: 4,
+        backgroundColor: 'white',*/
+        color: 'black',
+        marginTop: 0,
+    marginBottom: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    height: 40,
+    justifyContent: 'center',
+    },
 });
 
 
