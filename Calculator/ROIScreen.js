@@ -37,7 +37,7 @@ class ROIScreen extends Component {
       introScreen: true,
 
       roi: 0,
-      roiColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
+      roiColor: {fontSize: 50, color: 'black', fontWeight: 'bold'},
       monthlyCashFlow: 0,
       capRate: 0,
       capRateColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
@@ -598,27 +598,6 @@ class ROIScreen extends Component {
 
   _calculateROI(listPrice,rent){
 
-    let roiColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
-    if(roi >= 8){
-      roiColor = {fontSize: 30, color: '#006400', fontWeight: 'bold'};
-    }
-    else if(roi >= 6 && roi < 8){
-      roiColor = {fontSize: 30, color: '#32CD32', fontWeight: 'bold'};
-    }
-    else if(roi >= 4 && roi < 6){
-      roiColor = {fontSize: 30, color: '#FFFF00', fontWeight: 'bold'};
-    }
-    else if(roi > 0 && roi < 4){
-      roiColor = {fontSize: 30, color: '#FFA500', fontWeight: 'bold'};
-    }
-    else if(roi <= 0){
-      roiColor = {fontSize: 30, color: '#FF0000', fontWeight: 'bold'};
-    }
-    else{
-      roiColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
-    }
-
-
     let downPayment = Numeral(this.state.downPayment).value();
     let closingCosts = Numeral(this.state.closingCosts).value();
     let propertyTax = Numeral(this.state.propertyTax).value();
@@ -678,10 +657,31 @@ class ROIScreen extends Component {
 
     let monthlyIncome = rent * (1 - vacancyRate);
 
+    let roiColor = {fontSize: 50, color: 'black', fontWeight: 'bold'};
+    if(roi >= 8){
+      roiColor = {fontSize: 50, color: '#006400', fontWeight: 'bold'};
+    }
+    else if(roi >= 6 && roi < 8){
+      roiColor = {fontSize: 50, color: '#32CD32', fontWeight: 'bold'};
+    }
+    else if(roi >= 4 && roi < 6){
+      roiColor = {fontSize: 50, color: '#FFFF00', fontWeight: 'bold'};
+    }
+    else if(roi > 0 && roi < 4){
+      roiColor = {fontSize: 50, color: '#FFA500', fontWeight: 'bold'};
+    }
+    else if(roi <= 0){
+      roiColor = {fontSize: 50, color: '#FF0000', fontWeight: 'bold'};
+    }
+    else{
+      roiColor = {fontSize: 50, color: 'black', fontWeight: 'bold'};
+    }
+
    this.scroll.props.scrollToPosition(0, 0)
 
     this.setState({
       roi: +(roi.toFixed(2)),
+      roiColor: roiColor,
       monthlyCashFlow: Numeral((Math.round(monthlyCashFlow)).toString()).format('0,0'),
       monthlyMortgage: Numeral((Math.round(monthlyMortgage)).toString()).format('0,0'),
       capRate: +(capRate.toFixed(2)),

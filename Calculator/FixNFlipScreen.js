@@ -227,8 +227,8 @@ class FixNFlipScreen extends Component {
                 stroke={[2, 2]} 
                 strokeCap="circle">
                 <View style={styles.textView}>
-                    <Text style={{fontSize: 30, color: 'black', fontWeight: 'bold'}}>{this.state.roi}%</Text>
-                  <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>ROI</Text>
+                    <Text style={{fontSize: 50, color: 'black', fontWeight: 'bold'}}>{this.state.roi}%</Text>
+                  <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>1 Year Cash-on-Cash Return</Text>
                   </View>
               </AnimatedGaugeProgress>
               <View style={styles.fnfheaderval1}>

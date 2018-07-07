@@ -425,7 +425,7 @@ export default class Steps extends Component{
                                         <View style={{zIndex: 1, width: 50,alignItems: 'center', justifyContent: 'center', position: 'relative',}} >
                                             
                                             {index == 0 &&
-                                                <View style={{zIndex: 11,position: 'absolute', width: 2, height: '50%', top: 45, left: 24, backgroundColor: '#0091FF'}} />
+                                                <View style={{zIndex: 11,position: 'absolute', width: 2, height: '50%', top: 65, left: 24, backgroundColor: '#0091FF'}} />
                                             }
                                             {index > 0 && index < (this.state.steps.length-1) &&
                                                 <View style={{zIndex: 11,position: 'absolute', width: 2, height: '100%', top: 0, left: 24, backgroundColor: '#0091FF'}} />
@@ -433,7 +433,7 @@ export default class Steps extends Component{
                                             {index == (this.state.steps.length-1) &&
                                                 <View style={{zIndex: 11,position: 'absolute', width: 2, height: '50%', top: 0, left: 24, backgroundColor: '#0091FF'}} />
                                             }
-                                            <View style={{zIndex: 12,backgroundColor: '#fff', width: 24, height: 24, alignItems: 'center', justifyContent:'center'}} >
+                                            <View style={{zIndex: 12,backgroundColor: '#f6fbfc', width: 24, height: 24, alignItems: 'center', justifyContent:'center'}} >
                                                 <Icon2 name="md-checkmark-circle" style={{fontSize: 27, marginLeft: 0.5, marginTop: -2, color: item.complete? '#0091FF': '#ddd'}} />
                                             </View>
                                             
@@ -609,7 +609,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#f6fbfc',
         paddingTop: Platform.OS === 'ios' ? 12 : 0,
     },
     dayLineButton: {
