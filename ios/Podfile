@@ -8,6 +8,8 @@ target 'HomeWiseLoginFrontend' do
   # Pods for HomeWiseLoginFrontend
 	pod 'Firebase/Core'
 
+  pod 'Picker', :path => '../node_modules/react-native-picker'
+
   target 'HomeWiseLoginFrontendTests' do
     inherit! :search_paths
     # Pods for testing

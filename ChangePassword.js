@@ -96,11 +96,11 @@ class ChangePassword extends Component {
     }
 
     return (
-      <View style={{flex:1, backgroundColor: '#fff'}}>
+      <View style={{flex:1, backgroundColor: '#f6fbfc'}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
-          <Image style={{width: 70, height: 70, marginTop: 30, paddingBottom: 0}} 
-              source={require('./Homewise.jpg')}/>
+          <Image style={{width: 60, height: 70, marginTop: 30, paddingBottom: 0}} 
+              source={require('./Homewise.png')}/>
           <Text style={{fontSize: 20, fontWeight: 'bold', paddingTop: 10, paddingBottom: 20}}>Change Password</Text>
         </View>
         <View style={{flex:9}}>
@@ -168,7 +168,7 @@ class ChangePassword extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f6fbfc',
     paddingTop: Platform.OS === 'ios' ? 12 : 0,
   },
   body: {
