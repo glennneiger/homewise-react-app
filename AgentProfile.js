@@ -74,49 +74,23 @@ class AgentProfile extends Component {
     });
   }
 
-  
-  componentDidMount(){
-
-    // let getURL = ApiEndpoints.url + ApiEndpoints.agentProfile;
-
-    // let stateTransition = function(parent, responseJson) {
-    //   parent.setState({
-    //     first_name: responseJson.first_name,
-    //     last_name: responseJson.last_name,
-    //     email: responseJson.email,
-    //     mls_region: responseJson.mls_region,
-    //     mls_id: responseJson.mls_id,
-    //     id: responseJson.id
-    //   })
-    // }
-
-    // this.fetchWebtoState(getURL, stateTransition);
-
-    /*fetch('http://127.0.0.1:8000/agent/AgentProfile/', 
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
+  getClientStateTransition = function(parent, responseJson) {
+    parent.setState({
           first_name: responseJson.first_name,
           last_name: responseJson.last_name,
           email: responseJson.email,
           mls_region: responseJson.mls_region,
           mls_id: responseJson.mls_id,
-          id: responseJson.id,
-          phone_number: responseJson.phone_number
-        })
-      })
-      .catch((error) =>{
-        console.error(error);
-    });*/
+          id:responseJson.id
+    });
+  }
 
+  
+  componentDidMount(){
+    let url = ApiEndpoints.url + ApiEndpoints.agentProfile;
+    const bearerToken = this.getTokenFromStorage();
 
+    this.fetchWebtoState(url, this.getClientStateTransition);
   
   }
 
