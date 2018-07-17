@@ -452,13 +452,13 @@ static navigationOptions = ({ navigation }) => {
                       () => this.complete()
                    }>
                 {this.state.complete?
-                  <Text style={styles.submitNotButtonText}>Step Not Complete</Text>
+                  <Text style={styles.submitNotButtonText}>Completed</Text>
                   :
                   <Icon 
               name="check"
               color="white"
               size={25}>
-                  <Text style={styles.submitButtonText}>  Step Complete</Text>
+                  <Text style={styles.submitButtonText}>Complete</Text>
                   </Icon>
                 }
               </TouchableOpacity>
