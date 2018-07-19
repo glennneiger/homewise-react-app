@@ -327,7 +327,8 @@ const styles = StyleSheet.create({
   MainContainer :{
     justifyContent: 'center',
     flex:1,
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: '#f6fbfc'
   },
   GridViewBlockStyle: {

@@ -43,13 +43,10 @@ class NewClient extends Component {
       display_form: false,
       phoneNumberFormat: '',
       visible: false,
-      est_closing_day: '',
-      offer_accept_day: '',
+      est_closing_date: '',
       listing_date: '',
-      buyer_agreement: '',
-      offer_accept: '',
-      est_close_day: ''
-    }
+      buyers_agreement: '',
+      offer_accepted: ''    }
   }
 
   setClientType(text){
@@ -153,12 +150,13 @@ class NewClient extends Component {
 
 
   signUp(){
-        const {email, phone_number, address, city, client_type, first_name, last_name, state, zipcode, est_price, commission } = this.state
+        const {email, phone_number, address, city, client_type, first_name, last_name, 
+          state, zipcode, est_price, commission, est_closing_date, listing_date, buyers_agreement, offer_accepted } = this.state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
         let submit = true;
         if(client_type === 'B'){
-          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_price == '' || commission == '' || buyer_agreement == '' ||
-      offer_accept == '' || est_close_day == ''){
+          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_price == '' || commission == '' || buyers_agreement == '' ||
+      offer_accepted == '' || est_closing_date == ''){
             alert('All Field Required');
             submit = false;
           }
@@ -168,7 +166,7 @@ class NewClient extends Component {
           } 
         } else if(client_type === 'S') {
           if(first_name == '' || last_name == '' || email == '' || phone_number == '' || address == '' || city == '' || state == '' || zipcode == '' || est_price == '' || commission == '' ||
-            est_closing_day == '' || offer_accept_day == '' || listing_date == ''){
+            est_closing_date == '' || offer_accepted == '' || listing_date == ''){
             alert('All Fields Required')
             submit = false;
           }
@@ -193,7 +191,7 @@ class NewClient extends Component {
           let commission = this.state.commission
 
           // Build URL
-          let addclientURL = ApiEndpoints.url + ApiEndpoints.addclientPath;
+          let addclientURL = ApiEndpoints.url + ApiEndpoints.addclientnewPath;
 
           // Prepare fetch call arguments
           let addclientBody = {
@@ -208,12 +206,10 @@ class NewClient extends Component {
               est_price: est_price,
               commission: commission,
               client_type: client_type,
-              est_closing_day: est_closing_day,
-              offer_accept_day: offer_accept_day,
               listing_date: listing_date,
-              buyer_agreement: buyer_agreement,
-              offer_accept: offer_accept,
-              est_close_day: est_close_day
+              buyers_agreement: buyers_agreement,
+              offer_accepted: offer_accepted,
+              est_closing_date: est_closing_date
             };
 
           // Prepare callback after POST request
@@ -464,15 +460,15 @@ class NewClient extends Component {
                   </TextInput>
                 </View>
                 <View style={styles.caption}>
-                  <Text style={styles.captionText}>Estimated Closing Day</Text>
+                  <Text style={styles.captionText}>Estimated Closing</Text>
                 </View>
                 <View style={styles.rowdate}>
                   <DatePicker
                             style={{width: width, height: 25,borderRadius:7, marginTop:10}}
-                            date={this.state.est_closing_day}
+                            date={this.state.est_closing_date}
                             showIcon= {false}
                             mode="date"
-                            placeholder="Estimated Closing Day"
+                            placeholder="Estimated Closing"
                             format="MM/DD/YYYY"
                             minDate="1900-01-01"
                             maxDate="2017-12-31"
@@ -483,19 +479,19 @@ class NewClient extends Component {
                                 borderWidth: 0
                               }
                             }}
-                            onDateChange={(date) => {this.setState({est_closing_day: date})}}
+                            onDateChange={(date) => {this.setState({est_closing_date: date})}}
                         />
                 </View>
                 <View style={styles.caption}>
-                  <Text style={styles.captionText}>Offer Accepted Day</Text>
+                  <Text style={styles.captionText}>Offer Accepted</Text>
                 </View>
                 <View style={styles.rowdate}>
                   <DatePicker
                             style={{width: width, height: 25,borderRadius:7, marginTop:10}}
-                            date={this.state.offer_accept_day}
+                            date={this.state.offer_accepted}
                             showIcon= {false}
                             mode="date"
-                            placeholder="Offer Accepted Day"
+                            placeholder="Offer Accepted"
                             format="MM/DD/YYYY"
                             minDate="1900-01-01"
                             maxDate="2017-12-31"
@@ -506,7 +502,7 @@ class NewClient extends Component {
                                 borderWidth: 0
                               }
                             }}
-                            onDateChange={(date) => {this.setState({offer_accept_day: date})}}
+                            onDateChange={(date) => {this.setState({offer_accepted: date})}}
                         />
                 </View>
                 <View style={styles.caption}>
@@ -657,7 +653,7 @@ class NewClient extends Component {
                 <View style={styles.rowdate}>
                   <DatePicker
                             style={{width: width, height: 25,borderRadius:7, marginTop:10}}
-                            date={this.state.buyer_agreement}
+                            date={this.state.buyers_agreement}
                             showIcon= {false}
                             mode="date"
                             placeholder="Buyer's Agreement"
@@ -671,7 +667,7 @@ class NewClient extends Component {
                                 borderWidth: 0
                               }
                             }}
-                            onDateChange={(date) => {this.setState({buyer_agreement: date})}}
+                            onDateChange={(date) => {this.setState({buyers_agreement: date})}}
                         />
                 </View>
                 <View style={styles.caption}>
@@ -680,7 +676,7 @@ class NewClient extends Component {
                 <View style={styles.rowdate}>
                   <DatePicker
                             style={{width: width, height: 25,borderRadius:7, marginTop:10}}
-                            date={this.state.offer_accept}
+                            date={this.state.offer_accepted}
                             showIcon= {false}
                             mode="date"
                             placeholder="Offer Accepted"
@@ -694,7 +690,7 @@ class NewClient extends Component {
                                 borderWidth: 0
                               }
                             }}
-                            onDateChange={(date) => {this.setState({offer_accept: date})}}
+                            onDateChange={(date) => {this.setState({offer_accepted: date})}}
                         />
                 </View>
                 <View style={styles.caption}>
@@ -703,7 +699,7 @@ class NewClient extends Component {
                 <View style={styles.rowdate}>
                   <DatePicker
                             style={{width: width, height: 25,borderRadius:7, marginTop:10}}
-                            date={this.state.est_close_day}
+                            date={this.state.est_closing_date}
                             showIcon= {false}
                             mode="date"
                             placeholder="Estimated Closing Day"
@@ -717,7 +713,7 @@ class NewClient extends Component {
                                 borderWidth: 0
                               }
                             }}
-                            onDateChange={(date) => {this.setState({est_close_day: date})}}
+                            onDateChange={(date) => {this.setState({est_closing_date: date})}}
                         />
                 </View>
                 <TouchableOpacity

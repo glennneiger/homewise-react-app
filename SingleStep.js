@@ -415,7 +415,7 @@ static navigationOptions = ({ navigation }) => {
                       style={styles.values}
                       keyboardType = {'numeric'}
                       returnKeyType = {'done'}
-                      placeholder = 'Click Edit to Change Text'
+                      placeholder = 'Click Edit to Change Date'
                       editable = {false}
                       value = {this.state.date}
                       underlineColorAndroid='transparent'

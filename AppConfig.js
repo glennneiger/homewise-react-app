@@ -23,6 +23,7 @@ export let ApiEndpoints = {
 	'deletestepPath': '/agent/DeleteStep/',
 	'addstepPath': '/agent/AddStep/',
 	'addclientPath': '/agent/AddClient/',
+	'addclientnewPath': '/agent/AddClientNew/',
 	'agentProfile': '/agent/AgentProfile/',
 
 }
