@@ -610,7 +610,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#f6fbfc',
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
+        paddingTop: Platform.OS === 'ios' ? 25 : 0,
     },
     dayLineButton: {
         width: '100%',
