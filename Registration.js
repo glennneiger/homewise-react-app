@@ -25,6 +25,7 @@ import MLSRegion from './MLSRegion'
 import { ApiEndpoints, StorageKeys } from './AppConfig'
 import Spinner from 'react-native-loading-spinner-overlay';
 import RNPickerSelect from 'react-native-picker-select';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const {width, height} = Dimensions.get('window')
 
@@ -165,8 +166,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
     return (
       <View style ={styles.header}>
       <View style={{flex:1}}>
-      <KeyboardAvoidingView behavior="position" enabled>
-        <ScrollView>
+      <KeyboardAwareScrollView innerRef={ref => {this.scroll = ref}}>
         <View style={{flex:1, alignItems:'center'}}>
           <Image style={{width: 60, height: 70, marginTop: 40, paddingBottom: 0}} 
               source={require('./Homewise.png')}/>
@@ -312,8 +312,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
             </View>
         </View> 
         </View>
-        </ScrollView>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </View> 
       </View>  
     );

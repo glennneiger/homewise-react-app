@@ -281,7 +281,7 @@ export default class AllClients extends Component {
         {this.state.client_type ?
           <FlatList
              data={ this.state.BuyingClients }
-             ListEmptyComponent = { <Text style={{fontSize: 18}}> No Clients </Text> }
+             ListEmptyComponent = { <Text style={{fontSize: 18}}>  </Text> }
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
                 <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)} activeOpacity = { 1 }>
@@ -298,7 +298,7 @@ export default class AllClients extends Component {
           :
           <FlatList
              data={ this.state.SellingClients }
-             ListEmptyComponent = { <Text> No Clients </Text> }
+             ListEmptyComponent = { <Text>  </Text> }
              renderItem={({item}) =>
               //<View style={styles.GridViewBlockStyle}>
 

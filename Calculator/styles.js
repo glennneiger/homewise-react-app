@@ -129,14 +129,20 @@ const styles = StyleSheet.create({
 //------------------ROI Screen-------------------//
 
   header: {
-    flex:2,
+    flex:3,
+    backgroundColor: '#f6fbfc',
+    alignItems: 'center',
+    //justifyContent: 'center',
+    borderBottomColor: '#348EF2',
+    paddingTop: 10
+    /*flex:2,
     backgroundColor: '#f6fbfc',
     alignItems: 'center',
     //justifyContent: 'center',
     borderBottomColor: '#D3D3D3',
     borderBottomWidth: 0.5,
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 10,*/
   },
   roi: {
     flex:1,
