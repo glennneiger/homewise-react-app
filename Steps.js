@@ -406,7 +406,7 @@ export default class Steps extends Component{
                     </View>
                 }
                     <View style={{flex: 1,alignItems: 'center', paddingTop: 18,}} >
-                        <PercentageCircle radius={70} borderWidth={15} percent={Math.round(this.state.steps_percentage)} textStyle={{fontSize: 20, color: '#000'}} color={this.percentColor()}></PercentageCircle>  
+                        <PercentageCircle radius={70} borderWidth={15} percent={Math.round(this.state.steps_percentage)} textStyle={{fontSize: 20, color: '#000'}} color={this.percentColor()} innerColor={'#f6fbfc'}></PercentageCircle>  
                         <Text style={{marginTop: 15,fontSize: 15,color: '#666'}} >Commission</Text>
                         <View style={{backgroundColor: '#4BD964', marginTop: 15, width: 150, height: 35, justifyContent: 'center', alignItems: 'center', padding: 7,borderRadius: 12,}}>
                             <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>${Numeral((this.state.commission_val).toString()).format('0,0')}</Text>

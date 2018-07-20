@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Alert,
   Animated,
+  Animatable,
   StyleSheet,
   Text,
   View,
@@ -156,9 +157,11 @@ class SingleStep extends Component {
 
   complete(){
     let complete = !this.state.complete;
+    LayoutAnimation.spring();
     this.setState({
       complete: complete,
       updated: true
+      //w: this.state.w + 15, h: this.state.h + 15
     });
   }
 
@@ -242,7 +245,6 @@ static navigationOptions = ({ navigation }) => {
 
 
   render() {
-
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -385,6 +387,7 @@ static navigationOptions = ({ navigation }) => {
               <View style={styles.caption}>
                 <Text style={styles.captionText}>Date</Text>
               </View>
+              
               <View style={styles.row}>
                   {this.state.editMode?
                     <DatePicker
@@ -412,11 +415,11 @@ static navigationOptions = ({ navigation }) => {
                       style={styles.values}
                       keyboardType = {'numeric'}
                       returnKeyType = {'done'}
-                      placeholder = '0'
+                      placeholder = 'Click Edit to Change Date'
                       editable = {false}
                       value = {this.state.date}
                       underlineColorAndroid='transparent'
-                      onChangeText={(downPayment) => this._downPaymentOnChangeText(downPayment)}>
+                      >
                     </TextInput>
                   }
               </View>

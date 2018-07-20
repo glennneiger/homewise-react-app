@@ -20,6 +20,7 @@ import Numeral from 'numeral';
 import { TextInputMask } from 'react-native-masked-text';
 import Spinner from 'react-native-loading-spinner-overlay';
 import RNPickerSelect from 'react-native-picker-select';
+import DatePicker from 'react-native-datepicker'
 
 const {width, height} = Dimensions.get('window')
 
@@ -41,8 +42,11 @@ class NewClient extends Component {
       client_type: '',
       display_form: false,
       phoneNumberFormat: '',
-      visible: false
-    }
+      visible: false,
+      est_closing_date: '',
+      listing_date: '',
+      buyers_agreement: '',
+      offer_accepted: ''    }
   }
 
   setClientType(text){
@@ -146,11 +150,13 @@ class NewClient extends Component {
 
 
   signUp(){
-        const {email, phone_number, address, city, client_type, first_name, last_name, state, zipcode, est_price, commission } = this.state
+        const {email, phone_number, address, city, client_type, first_name, last_name, 
+          state, zipcode, est_price, commission, est_closing_date, listing_date, buyers_agreement, offer_accepted } = this.state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
         let submit = true;
         if(client_type === 'B'){
-          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_price == '' || commission == ''){
+          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || est_price == '' || commission == '' || buyers_agreement == '' ||
+      offer_accepted == '' || est_closing_date == ''){
             alert('All Field Required');
             submit = false;
           }
@@ -159,7 +165,8 @@ class NewClient extends Component {
             submit = false;
           } 
         } else if(client_type === 'S') {
-          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || address == '' || city == '' || state == '' || zipcode == '' || est_price == '' || commission == ''){
+          if(first_name == '' || last_name == '' || email == '' || phone_number == '' || address == '' || city == '' || state == '' || zipcode == '' || est_price == '' || commission == '' ||
+            est_closing_date == '' || offer_accepted == '' || listing_date == ''){
             alert('All Fields Required')
             submit = false;
           }
@@ -184,7 +191,7 @@ class NewClient extends Component {
           let commission = this.state.commission
 
           // Build URL
-          let addclientURL = ApiEndpoints.url + ApiEndpoints.addclientPath;
+          let addclientURL = ApiEndpoints.url + ApiEndpoints.addclientnewPath;
 
           // Prepare fetch call arguments
           let addclientBody = {
@@ -198,7 +205,11 @@ class NewClient extends Component {
               zipcode:zipcode,
               est_price: est_price,
               commission: commission,
-              client_type: client_type              
+              client_type: client_type,
+              listing_date: listing_date,
+              buyers_agreement: buyers_agreement,
+              offer_accepted: offer_accepted,
+              est_closing_date: est_closing_date
             };
 
           // Prepare callback after POST request
@@ -274,7 +285,7 @@ class NewClient extends Component {
                 <View>
                   <Dropdown
                     data = {ClientType}
-                    containerStyle = {styles.rowdate}
+                    containerStyle = {styles.rowlisting}
                     onChangeText = {(text)=> this.setClientType(text)}>
                   </Dropdown>
                 </View>
@@ -448,6 +459,75 @@ class NewClient extends Component {
                     onChangeText = {(text)=> this.setState({commission: text})}>
                   </TextInput>
                 </View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Estimated Closing</Text>
+                </View>
+                <View style={styles.rowdate}>
+                  <DatePicker
+                            style={{width: width, height: 25,borderRadius:7, marginTop:10}}
+                            date={this.state.est_closing_date}
+                            showIcon= {false}
+                            mode="date"
+                            placeholder="Estimated Closing"
+                            format="MM/DD/YYYY"
+                            minDate="1900-01-01"
+                            maxDate="2017-12-31"
+                            confirmBtnText="Done"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                              dateInput: {
+                                borderWidth: 0
+                              }
+                            }}
+                            onDateChange={(date) => {this.setState({est_closing_date: date})}}
+                        />
+                </View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Offer Accepted</Text>
+                </View>
+                <View style={styles.rowdate}>
+                  <DatePicker
+                            style={{width: width, height: 25,borderRadius:7, marginTop:10}}
+                            date={this.state.offer_accepted}
+                            showIcon= {false}
+                            mode="date"
+                            placeholder="Offer Accepted"
+                            format="MM/DD/YYYY"
+                            minDate="1900-01-01"
+                            maxDate="2017-12-31"
+                            confirmBtnText="Done"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                              dateInput: {
+                                borderWidth: 0
+                              }
+                            }}
+                            onDateChange={(date) => {this.setState({offer_accepted: date})}}
+                        />
+                </View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Listing Date</Text>
+                </View>
+                <View style={styles.rowdate}>
+                  <DatePicker
+                            style={{width: width, height: 25,borderRadius:7, marginTop:10}}
+                            date={this.state.listing_date}
+                            showIcon= {false}
+                            mode="date"
+                            placeholder="Listing Date"
+                            format="MM/DD/YYYY"
+                            minDate="1900-01-01"
+                            maxDate="2017-12-31"
+                            confirmBtnText="Done"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                              dateInput: {
+                                borderWidth: 0
+                              }
+                            }}
+                            onDateChange={(date) => {this.setState({listing_date: date})}}
+                        />
+                </View>
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
@@ -567,6 +647,75 @@ class NewClient extends Component {
                     onChangeText = {(text)=> this.setState({commission: text})}>
                   </TextInput>
                 </View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Buyer's Agreement</Text>
+                </View>
+                <View style={styles.rowdate}>
+                  <DatePicker
+                            style={{width: width, height: 25,borderRadius:7, marginTop:10}}
+                            date={this.state.buyers_agreement}
+                            showIcon= {false}
+                            mode="date"
+                            placeholder="Buyer's Agreement"
+                            format="MM/DD/YYYY"
+                            minDate="1900-01-01"
+                            maxDate="2017-12-31"
+                            confirmBtnText="Done"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                              dateInput: {
+                                borderWidth: 0
+                              }
+                            }}
+                            onDateChange={(date) => {this.setState({buyers_agreement: date})}}
+                        />
+                </View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Offer Accepted</Text>
+                </View>
+                <View style={styles.rowdate}>
+                  <DatePicker
+                            style={{width: width, height: 25,borderRadius:7, marginTop:10}}
+                            date={this.state.offer_accepted}
+                            showIcon= {false}
+                            mode="date"
+                            placeholder="Offer Accepted"
+                            format="MM/DD/YYYY"
+                            minDate="1900-01-01"
+                            maxDate="2017-12-31"
+                            confirmBtnText="Done"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                              dateInput: {
+                                borderWidth: 0
+                              }
+                            }}
+                            onDateChange={(date) => {this.setState({offer_accepted: date})}}
+                        />
+                </View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Estimated Closing Day</Text>
+                </View>
+                <View style={styles.rowdate}>
+                  <DatePicker
+                            style={{width: width, height: 25,borderRadius:7, marginTop:10}}
+                            date={this.state.est_closing_date}
+                            showIcon= {false}
+                            mode="date"
+                            placeholder="Estimated Closing Day"
+                            format="MM/DD/YYYY"
+                            minDate="1900-01-01"
+                            maxDate="2017-12-31"
+                            confirmBtnText="Done"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                              dateInput: {
+                                borderWidth: 0
+                              }
+                            }}
+                            onDateChange={(date) => {this.setState({est_closing_date: date})}}
+                        />
+                </View>
                 <TouchableOpacity
                    style = {styles.submitButton}
                    onPress = {
@@ -613,13 +762,28 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingBottom: 0
   },
-  rowdate: {
+  rowlisting: {
     marginTop: 0,
     marginBottom: 40,
     marginLeft: 35,
     marginRight: 35,
     height: 20,
     justifyContent: 'center'
+  },
+  rowdate: {
+    /*marginTop: 0,
+    marginBottom: 40,
+    marginLeft: 35,
+    marginRight: 35,
+    height: 20,
+    justifyContent: 'center',*/
+    flex:1,
+    flexDirection: 'row',
+    marginBottom: 20,
+    paddingBottom: 0,
+    alignItems: 'center'
+
+
   },
   caption: {
     marginLeft: 35,
