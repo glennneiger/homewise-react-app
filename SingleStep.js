@@ -461,7 +461,7 @@ static navigationOptions = ({ navigation }) => {
               name="check"
               color="white"
               size={25}>
-                  <Text style={styles.submitButtonText}>Complete</Text>
+                  <Text style={styles.submitButtonText}>  Complete</Text>
                   </Icon>
                 }
               </TouchableOpacity>

@@ -17,6 +17,7 @@ export let ApiEndpoints = {
 	'upcomingstepsPath': '/agent/UpcomingSteps/',
 	'getclientPath': '/agent/GetClient/',
 	'clientstepsPath': '/agent/ClientSteps/',
+	'clientstepsnewPath': '/agent/ClientStepsNew/',
 	'updatestepsPath': '/agent/UpdateSteps/',
 	'singlestepPath': '/agent/SingleStep/',
 	'updatestepPath': '/agent/UpdateStep/',

@@ -136,7 +136,7 @@ export default class Steps extends Component{
 
     // Build URLs for fetch calls
     getClientURL = ApiEndpoints.url + ApiEndpoints.getclientPath;
-    clientStepsURL = ApiEndpoints.url + ApiEndpoints.clientstepsPath;
+    clientStepsURL = ApiEndpoints.url + ApiEndpoints.clientstepsnewPath;
 
   // Async function to POST web data from state, and subsequently set state
   pushStatetoWeb = async (url, bodyData, callback) => {
