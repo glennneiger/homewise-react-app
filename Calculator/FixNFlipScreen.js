@@ -227,8 +227,8 @@ class FixNFlipScreen extends Component {
                 stroke={[2, 2]} 
                 strokeCap="circle">
                 <View style={styles.textView}>
-                    <Text style={{fontSize: 50, color: 'black', fontWeight: 'bold'}}>{this.state.roi}%</Text>
-                  <Text style = {{color:'black', fontSize: 18, marginBottom: 25}}>1 Year Cash-on-Cash Return</Text>
+                    <Text style={{fontSize: 50, color: 'rgb(65,147,237)', fontWeight: 'bold'}}>{this.state.roi}%</Text>
+                  <Text style = {{color:'black', fontSize: 18, marginBottom: 45}}>Cash-on-Cash Return (ROI)</Text>
                   </View>
               </AnimatedGaugeProgress>
               <View style={styles.fnfheaderval1}>
@@ -589,11 +589,11 @@ class FixNFlipScreen extends Component {
   _closingCostsOnChangeText(purchaseClosingCosts){
 
     let purchaseClosingCostsVal = Numeral(purchaseClosingCosts).value();
-    let purchaseClosingCostsPercent = (purchaseClosingCosts / Numeral(this.state.listPrice).value()) * 100;
+    let purchaseClosingCostsPercent = (purchaseClosingCostsVal / Numeral(this.state.listPrice).value()) * 100;
 
 
     this.setState({
-      purchaseClosingCosts: Numeral(purchaseClosingCosts).value(),
+      purchaseClosingCosts: Numeral((purchaseClosingCosts).toString()).format('0,0'),
       purchaseClosingCostsPercent: +(purchaseClosingCostsPercent.toFixed(2))
     });
   }

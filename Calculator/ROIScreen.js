@@ -37,7 +37,7 @@ class ROIScreen extends Component {
       introScreen: true,
 
       roi: 0,
-      roiColor: {fontSize: 50, color: 'black', fontWeight: 'bold'},
+      roiColor: {fontSize: 50, color: 'rgb(65,147,237)', fontWeight: 'bold'},
       monthlyCashFlow: 0,
       capRate: 0,
       capRateColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
@@ -150,8 +150,8 @@ class ROIScreen extends Component {
                   stroke={[2, 2]} 
                   strokeCap="circle">
                   <View style = {styles.textView}> 
-                      <Text style={this.state.roiColor}>{this.state.roi}%</Text>
-                  <Text style = {{color:'black', fontSize: 18}}>1 Year Cash-on-Cash Return</Text>
+                      <Text style={{fontSize: 50, color: 'rgb(65,147,237)', fontWeight: 'bold'}}>{this.state.roi}%</Text>
+                  <Text style = {{color:'black', fontSize: 18, marginBottom: 45}}>1 Year Cash-on-Cash Return</Text>
                   </View>
                 </AnimatedGaugeProgress>
                 <View style={styles.roiheadervalues}>
@@ -459,6 +459,7 @@ class ROIScreen extends Component {
     this.setState({
       introScreen: true,
       roi: 0,
+      roiColor: {fontSize: 50, color: 'rgb(65,147,237)', fontWeight: 'bold'},
       monthlyCashFlow: 0,
       capRate: 0,
       capRateColor: {fontSize: 30, color: 'black', fontWeight: 'bold'},
@@ -639,7 +640,7 @@ class ROIScreen extends Component {
       capRateColor = {fontSize: 30, color: '#32CD32', fontWeight: 'bold'};
     }
     else if(capRate >= 4 && capRate < 6){
-      capRateColor = {fontSize: 30, color: '#FFFF00', fontWeight: 'bold'};
+      capRateColor = {fontSize: 30, color: '#d6d602', fontWeight: 'bold'};
     }
     else if(capRate > 0 && capRate < 4){
       capRateColor = {fontSize: 30, color: '#FFA500', fontWeight: 'bold'};
@@ -657,25 +658,6 @@ class ROIScreen extends Component {
 
     let monthlyIncome = rent * (1 - vacancyRate);
 
-    let roiColor = {fontSize: 50, color: 'black', fontWeight: 'bold'};
-    if(roi >= 8){
-      roiColor = {fontSize: 50, color: '#006400', fontWeight: 'bold'};
-    }
-    else if(roi >= 6 && roi < 8){
-      roiColor = {fontSize: 50, color: '#32CD32', fontWeight: 'bold'};
-    }
-    else if(roi >= 4 && roi < 6){
-      roiColor = {fontSize: 50, color: '#FFFF00', fontWeight: 'bold'};
-    }
-    else if(roi > 0 && roi < 4){
-      roiColor = {fontSize: 50, color: '#FFA500', fontWeight: 'bold'};
-    }
-    else if(roi <= 0){
-      roiColor = {fontSize: 50, color: '#FF0000', fontWeight: 'bold'};
-    }
-    else{
-      roiColor = {fontSize: 50, color: 'black', fontWeight: 'bold'};
-    }
 
    this.scroll.props.scrollToPosition(0, 0)
 
