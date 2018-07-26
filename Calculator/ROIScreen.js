@@ -599,7 +599,7 @@ class ROIScreen extends Component {
 
   _calculateROI(listPrice,rent){
 
-    let downPayment = Numeral(this.state.downPayment).value();
+   let downPayment = Numeral(this.state.downPayment).value();
     let closingCosts = Numeral(this.state.closingCosts).value();
     let propertyTax = Numeral(this.state.propertyTax).value();
     let insurance = Numeral(this.state.insurance).value();
@@ -629,8 +629,10 @@ class ROIScreen extends Component {
     console.log('property tax' + propertyTax);
     console.log(' ' + insurance + ' ' + monthlyHOA + ' ' + maintenance);
 
+
     let capRate = ((monthlyCashFlow * 12)/Number.parseFloat(listPrice)*100);
-    console.log('cap rate ' + capRate);
+    capRate = capRate || 0;
+    //console.log('cap rate ' + capRate);
 
     let capRateColor = {fontSize: 30, color: 'black', fontWeight: 'bold'};
     if(capRate >= 8){
@@ -653,10 +655,15 @@ class ROIScreen extends Component {
     }
 
     let roi = ((monthlyCashFlow * 12)/(downPayment + closingCosts + rehabCosts)) * 100;
+    roi = roi || 0;
+    //console.log('roi' + roi);
+    let roiColor = {fontSize: 50, color: 'rgb(65,147,237)', fontWeight: 'bold'};
 
     let upfrontCosts = downPayment + closingCosts + rehabCosts;
 
     let monthlyIncome = rent * (1 - vacancyRate);
+
+
 
 
    this.scroll.props.scrollToPosition(0, 0)
