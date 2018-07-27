@@ -73,11 +73,61 @@ class SingleStep extends Component {
     this.setState({modalVisible: visible});
   }
 
+  clientSingleStepStateTransition = function(parent, responseJson) {
+        parent.setState({
+          client_id: responseJson.client_id,
+          id: responseJson.id,
+          name: responseJson.name,
+          name_copy: responseJson.name,
+          date: responseJson.date,
+          date_copy: responseJson.date,
+          complete: responseJson.complete
+        });
+  }
+
+  getSingleStepURL = ApiEndpoints.url + ApiEndpoints.singlestepPath;
+
+  pushStatetoWeb = async (url, bodyData, callback) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'POST',
+      'headers': headerData,
+      'body': JSON.stringify(bodyData)
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        //alert('Error in response')
+        //alert(response.status);
+        //alert(response.statusText)
+      } else {
+        response.json().then((data) => {
+            // Trigger refresh hook
+            //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
+            //hook();
+            this.props.navigation.state.params.refresh();
+            // Go to callback function
+            callback(this, data);
+        })
+      }
+    });
+  }
+
   componentDidMount(){
     // Prepare fetch call arguments
+    let clientSingleStepBody = {
+      id: this.props.navigation.getParam('id')
+    };
     let client_id = this.props.navigation.getParam('client_id');
     let id = this.props.navigation.getParam('id');
-    let url = ApiEndpoints.url + ApiEndpoints.singlestepPath;
+    //let id = this.props.navigation.getParam('id');
     const bearerToken = this.getTokenFromStorage();
 
     this.setState({
@@ -86,8 +136,10 @@ class SingleStep extends Component {
 
     console.log(this.state);
 
+    this.pushStatetoWeb(this.getSingleStepURL, clientSingleStepBody, this.clientSingleStepStateTransition);
+
     // Make fetch calls
-    fetch(url, 
+    /*fetch(url, 
       {
         method: 'POST',
         headers: {
@@ -114,7 +166,7 @@ class SingleStep extends Component {
     })
     .catch((error) => {
       console.error(error);
-    });
+    });*/
   }
 
 

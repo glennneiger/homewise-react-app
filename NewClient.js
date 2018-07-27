@@ -46,7 +46,9 @@ class NewClient extends Component {
       est_closing_date: '',
       listing_date: '',
       buyers_agreement: '',
-      offer_accepted: ''    }
+      offer_accepted: '',
+      vendor: '',
+      vendors: []   }
   }
 
   setClientType(text){
@@ -76,6 +78,36 @@ class NewClient extends Component {
   getTokenFromStorage = async () => {
     const token = await AsyncStorage.getItem(StorageKeys.authToken);
     return token;
+  }
+
+  componentDidMount(){
+    const bearerToken = this.getTokenFromStorage();
+
+    fetch('https://api.joinhomewise.com/agent/VendorRegions/', 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + 'kamJ89ZBmtp4nN0pl1AhsWg0rTj9HY'
+        },
+        body: JSON.stringify({
+
+        }),
+      })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.props.navigation.state.params.refresh();
+      let vendor_region = [];
+      for(i = 0; i < responseJson.length; i++){
+        var obj = responseJson[i];
+        let x = {label: obj.name, value: obj.name};
+        vendor_region.push(x);
+        this.state.vendors = vendor_region;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   // Async function to fetch web data and set state
@@ -401,7 +433,21 @@ class NewClient extends Component {
                     items={States}
                     onValueChange= {(text)=> this.setState({state: text})}
                     style={{ ...pickerSelectStyles }}
-                />
+                  />
+                </View>
+                <View style={styles.caption}>
+                  <Text style={styles.captionText}>Vendor Regions</Text>
+                </View>
+                <View>
+                  <RNPickerSelect
+                    placeholder={{
+                        label: 'Select the region closest to you',
+                    }}
+                    value={this.state.vendor}
+                    items={this.state.vendors}
+                    onValueChange= {(text)=> this.setState({vendor: text})}
+                    style={{ ...pickerSelectStyles }}
+                  />
                 </View>
                 <View style={styles.caption}>
                   <Text style={styles.captionText}>Zip Code</Text>
