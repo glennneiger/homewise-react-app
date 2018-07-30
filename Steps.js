@@ -148,7 +148,6 @@ export default class Steps extends Component{
   pushStatetoWeb = async (url, bodyData, callback) => {
     // Get Bearer Token
     const bearerToken = await this.getTokenFromStorage();
-    console.log(bearerToken)
     // Build fetch arguments
     let headerData = {
       'Content-Type': 'application/json',
@@ -194,9 +193,6 @@ export default class Steps extends Component{
             email: this.props.navigation.getParam('email'),
             client_type: this.props.navigation.getParam('client_type')
         };
-
-        const bearerToken = this.getTokenFromStorage();
-        console.log(bearerToken)
         //alert(this.props.navigation.getParam('client_type'))
 
         // Make async fetch calls

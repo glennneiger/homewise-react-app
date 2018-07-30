@@ -133,12 +133,13 @@ class SingleStep extends Component {
     let client_id = this.props.navigation.getParam('client_id');
     let id = this.props.navigation.getParam('id');
     let vendor_region = this.props.navigation.getParam('vendor_region');
-    let tags = this.props.navigation.getParam('tags')
+    let tags = this.props.navigation.getParam('tags');
     //let id = this.props.navigation.getParam('id');
     const bearerToken = this.getTokenFromStorage();
 
     this.setState({
       id:id,
+      client_id: client_id,
       vendor_region:vendor_region,
       tags:tags
     });
@@ -186,41 +187,101 @@ class SingleStep extends Component {
   }
 
 
+  backStatetoWeb = async (url, bodyData) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    console.log(bearerToken);
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'POST',
+      'headers': headerData,
+      'body': JSON.stringify(bodyData)
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        //alert('Error in response')
+        //alert(response.status);
+        //alert(response.statusText)
+        console.log('error')
+        console.log(response)
+      } else {
+        response.json().then((data) => {
+            // Trigger refresh hook
+            //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
+            //hook();
+            console.log('data')
+            console.log(data)
+            this.props.navigation.state.params.refresh();
+            this.props.navigation.navigate('Steps');
+        })
+      }
+    });
+  }
+
+  deleteStatetoWeb = async (url, bodyData) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'POST',
+      'headers': headerData,
+      'body': JSON.stringify(bodyData)
+    })
+    .then((response) => {
+      if (!response.ok) {
+        // Handle error
+        //alert('Error in response')
+        //alert(response.status);
+        //alert(response.statusText)
+        console.log('error')
+        console.log(response)
+      } else {
+        response.json().then((data) => {
+            // Trigger refresh hook
+            //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
+            //hook();
+            console.log('data')
+            console.log(data)
+            this.props.navigation.state.params.refresh();
+            this.props.navigation.navigate('Steps');
+        })
+      }
+    });
+  }
+
   back(){
     //api call for UpdateStep
     //post id, name, date, complete
     let url = ApiEndpoints.url + ApiEndpoints.updatestepPath;
-    const bearerToken = this.getTokenFromStorage();
-    let client_id = this.state.client_id;
-    let id = this.state.id;
+
+    let client_id = this.props.navigation.getParam('client_id');
+    console.log(client_id)
+    let id = this.props.navigation.getParam('id');
+    console.log(id)
     let name = this.state.name_copy;
     let complete = this.state.complete;
     let date = this.state.date;
 
-    fetch(url, 
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + bearerToken
-        },
-        body: JSON.stringify({
+    let backData = {
           client_id:client_id,
           id:id,
           name:name,
           complete:complete,
           date:date
-        }),
-      })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.props.navigation.state.params.refresh();
-      //alert('updated');
-      this.props.navigation.navigate('Steps');
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    }
+    this.backStatetoWeb(url, backData);
+
   }
 
   complete(){
@@ -278,31 +339,16 @@ class SingleStep extends Component {
 
   deleteStep(){
     let url = ApiEndpoints.url + ApiEndpoints.deletestepPath;
-    const bearerToken = this.getTokenFromStorage();
-    let client_id = this.state.client_id;
-    let id = this.state.id;
+    
+    let client_id = this.props.navigation.getParam('client_id');
+    let id = this.props.navigation.getParam('id');
 
-    fetch(url, 
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + bearerToken
-        },
-        body: JSON.stringify({
+    let deleteData = {
           client_id:client_id,
           id:id,
-        }),
-      })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      //alert('deleted');
-      this.props.navigation.state.params.refresh();
-      this.props.navigation.navigate('Steps');
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    }
+
+    this.deleteStatetoWeb(url, deleteData);
   }
 
 static navigationOptions = ({ navigation }) => {
