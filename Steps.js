@@ -148,6 +148,7 @@ export default class Steps extends Component{
   pushStatetoWeb = async (url, bodyData, callback) => {
     // Get Bearer Token
     const bearerToken = await this.getTokenFromStorage();
+    console.log(bearerToken)
     // Build fetch arguments
     let headerData = {
       'Content-Type': 'application/json',
@@ -193,6 +194,9 @@ export default class Steps extends Component{
             email: this.props.navigation.getParam('email'),
             client_type: this.props.navigation.getParam('client_type')
         };
+
+        const bearerToken = this.getTokenFromStorage();
+        console.log(bearerToken)
         //alert(this.props.navigation.getParam('client_type'))
 
         // Make async fetch calls
@@ -351,6 +355,11 @@ export default class Steps extends Component{
         let phone_number = this.state.phone_number;
         Communications.phonecall(phone_number, true);
     }
+
+    getEmail(){
+        let email = this.state.email;
+        Communications.email([email], null, null, null, null);
+    }
      
 
 
@@ -404,8 +413,9 @@ export default class Steps extends Component{
                         </View>
                     </TouchableOpacity>
                     <Text style={{color: '#0091FF', fontSize: 22, fontWeight: '600',}} >{this.state.first_name} {this.state.last_name}</Text>
-                    <Button onPress={() => Linking.openURL('mailto:example@gmail.com?subject=example&body=example') }
-                        title={this.state.email} />
+                    <TouchableOpacity onPress={() => this.getEmail()}>
+                        <Text style={{color: '#0091FF', fontSize: 18}}>{this.state.email}</Text>
+                    </TouchableOpacity>
                      <TouchableOpacity onPress={() => this.callPhoneNumber()}>
                       <Text style={{color: '#0091FF', fontSize: 18}}>{this.state.phone_number}</Text>
                     </TouchableOpacity>

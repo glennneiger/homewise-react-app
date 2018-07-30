@@ -27,6 +27,7 @@ export let ApiEndpoints = {
 	'addclientnewPath': '/agent/AddClientNew/',
 	'agentProfile': '/agent/AgentProfile/',
 	'getVendors': '/agent/GetVendors/',
+	'vendorRegions': '/agent/VendorRegions/',
 
 }
 

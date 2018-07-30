@@ -81,7 +81,11 @@ class NewClient extends Component {
   }
 
   componentDidMount(){
-    const bearerToken = this.getTokenFromStorage();
+    let url = ApiEndpoints.url + ApiEndpoints.vendorRegions;
+    this.pushVendorRegiontoWeb(url);
+    /*const bearerToken = this.getTokenFromStorage();
+    alert(bearerToken)
+    console.log(bearerToken)
 
     fetch('https://api.joinhomewise.com/agent/VendorRegions/', 
       {
@@ -107,7 +111,7 @@ class NewClient extends Component {
     })
     .catch((error) => {
       console.error(error);
-    });
+    });*/
   }
 
   // Async function to fetch web data and set state
@@ -175,6 +179,39 @@ class NewClient extends Component {
     })
     .catch((error) => {
       alert(error);
+    });
+  }
+
+  pushVendorRegiontoWeb = async (url) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, 
+      {
+        method: 'POST',
+        headers: headerData,
+        body: JSON.stringify({
+
+        }),
+      })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.props.navigation.state.params.refresh();
+      let vendor_region = [];
+      for(i = 0; i < responseJson.length; i++){
+        var obj = responseJson[i];
+        let x = {label: obj.name, value: obj.name};
+        vendor_region.push(x);
+        this.state.vendors = vendor_region;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
     });
   }
 
