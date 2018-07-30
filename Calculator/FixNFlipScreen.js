@@ -691,9 +691,11 @@ class FixNFlipScreen extends Component {
 
     //ROI
     let roi = (totalProjectedPreTaxProfits/Number.parseFloat(totalCashInvested)) * 100;
+    roi = roi || 0;
 
     //ROI Annualized 
     let roiAnnualized = roi * (365/Number.parseFloat(numberOfDaysHeld));
+    roiAnnualized = roiAnnualized || 0;
     console.log('test');
 
     // roi = roi * 100;
