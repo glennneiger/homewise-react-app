@@ -10,7 +10,9 @@ import {
   ScrollView,
   FlatList,
   Platform,
-  AsyncStorage
+  AsyncStorage,
+  Button,
+  Linking
 } from 'react-native';
 //import { Actions } from 'react-native-router-flux';
 //import Icon from 'react-native-vector-icons/FontAwesome';
@@ -21,6 +23,7 @@ import PercentageCircle from 'react-native-percentage-circle';
 import DatePicker from 'react-native-datepicker';
 import Numeral from 'numeral';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Communications from 'react-native-communications';
 
 import { ApiEndpoints, StorageKeys } from './AppConfig'
 
@@ -52,6 +55,8 @@ export default class Steps extends Component{
             editMode: false,
             addStep: false,
             addStepButton: true,
+            vendor_region: '',
+            tags: '',
 
 
             newStepName: '',
@@ -124,6 +129,7 @@ export default class Steps extends Component{
             commission_val: responseJson[0].commission_val,
             total_steps_copy: responseJson[0].total_steps,
             steps_complete_copy: responseJson[0].steps_complete,
+            vendor_region: responseJson[0].vendor_region,
         });
     }
 
@@ -255,7 +261,7 @@ export default class Steps extends Component{
         this.props.navigation.navigate('AllClients');
     }
 
-    changeCurrentChecked(id) {
+    changeCurrentChecked(id, tags) {
         // let stepscopy = JSON.parse(JSON.stringify(this.state.steps))
         // for (var i = 0; i < stepscopy.length; i++) {
         //     if(stepscopy[i].id == id){
@@ -291,6 +297,8 @@ export default class Steps extends Component{
         this.props.navigation.navigate('SingleStep', {
             id: id,
             client_id: this.state.id,
+            vendor_region: this.state.vendor_region, 
+            tags: tags,
             refresh: this.refreshData
         })
     }
@@ -337,6 +345,11 @@ export default class Steps extends Component{
         return {
            header: null
         }
+    }
+
+    callPhoneNumber(){
+        let phone_number = this.state.phone_number;
+        Communications.phonecall(phone_number, true);
     }
      
 
@@ -391,6 +404,11 @@ export default class Steps extends Component{
                         </View>
                     </TouchableOpacity>
                     <Text style={{color: '#0091FF', fontSize: 22, fontWeight: '600',}} >{this.state.first_name} {this.state.last_name}</Text>
+                    <Button onPress={() => Linking.openURL('mailto:example@gmail.com?subject=example&body=example') }
+                        title={this.state.email} />
+                     <TouchableOpacity onPress={() => this.callPhoneNumber()}>
+                      <Text style={{color: '#0091FF', fontSize: 18}}>{this.state.phone_number}</Text>
+                    </TouchableOpacity>
                 </View>
                 <KeyboardAwareScrollView style={{flex:1, width: '100%'}}>
                 {this.props.navigation.getParam('client_type') == 'S'?
@@ -421,7 +439,7 @@ export default class Steps extends Component{
                                 data={this.state.steps}
                                 extraData={this.state.refresh}
                                 renderItem={({item, index}) =>
-                                    <TouchableOpacity style={styles.dayLineButton} onPress={this.changeCurrentChecked.bind(this, item.id)} activeOpacity = { 1 }>
+                                    <TouchableOpacity style={styles.dayLineButton} onPress={this.changeCurrentChecked.bind(this, item.id, item.tags)} activeOpacity = { 1 }>
                                         <View style={{zIndex: 1, width: 50,alignItems: 'center', justifyContent: 'center', position: 'relative',}} >
                                             
                                             {index == 0 &&

@@ -41,23 +41,11 @@ class SingleStep extends Component {
       name_copy: '',
       date: '',
       date_copy: '',
+      tags: [],
       complete: false,
       modalVisible: false,
 
-      vendors: [
-      {
-        company_name: 'company1',
-        phone_number: '123-456-7890',
-        email: 'company1@gmail.com',
-        website_link: 'www.company1.com'
-      },
-      {
-        company_name: 'company2',
-        phone_number: '000-000-0000',
-        email: 'company2@gmail.com',
-        website_link: 'www.company2.com'
-      }
-      ],
+      vendors: [],
 
       editMode: false,
       updated: false
@@ -74,9 +62,11 @@ class SingleStep extends Component {
   }
 
   clientSingleStepStateTransition = function(parent, responseJson) {
+        //alert(responseJson);
         parent.setState({
           client_id: responseJson.client_id,
           id: responseJson.id,
+          tags: responseJson.tags,
           name: responseJson.name,
           name_copy: responseJson.name,
           date: responseJson.date,
@@ -85,7 +75,17 @@ class SingleStep extends Component {
         });
   }
 
+  vendorStateTransition = function(parent, responseJson) {
+        parent.setState({
+          vendors: responseJson,
+        });
+  }
+
+
+
+
   getSingleStepURL = ApiEndpoints.url + ApiEndpoints.singlestepPath;
+  getVendorsURL = ApiEndpoints.url + ApiEndpoints.getVendors;
 
   pushStatetoWeb = async (url, bodyData, callback) => {
     // Get Bearer Token
@@ -107,11 +107,15 @@ class SingleStep extends Component {
         //alert('Error in response')
         //alert(response.status);
         //alert(response.statusText)
+        console.log('error')
+        console.log(response)
       } else {
         response.json().then((data) => {
             // Trigger refresh hook
             //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
             //hook();
+            console.log('data')
+            console.log(data)
             this.props.navigation.state.params.refresh();
             // Go to callback function
             callback(this, data);
@@ -125,18 +129,30 @@ class SingleStep extends Component {
     let clientSingleStepBody = {
       id: this.props.navigation.getParam('id')
     };
+    
     let client_id = this.props.navigation.getParam('client_id');
     let id = this.props.navigation.getParam('id');
+    let vendor_region = this.props.navigation.getParam('vendor_region');
+    let tags = this.props.navigation.getParam('tags')
     //let id = this.props.navigation.getParam('id');
     const bearerToken = this.getTokenFromStorage();
 
     this.setState({
-      id:id
+      id:id,
+      vendor_region:vendor_region,
+      tags:tags
     });
 
-    console.log(this.state);
+    //console.log(this.state);
 
     this.pushStatetoWeb(this.getSingleStepURL, clientSingleStepBody, this.clientSingleStepStateTransition);
+
+    let vendorBody = {
+      vendor_region: vendor_region,
+      tags: tags
+    }
+    console.log(vendorBody)
+    this.pushStatetoWeb(this.getVendorsURL, vendorBody, this.vendorStateTransition);
 
     // Make fetch calls
     /*fetch(url, 
@@ -475,7 +491,8 @@ static navigationOptions = ({ navigation }) => {
                     </TextInput>
                   }
               </View>
-
+              {this.state.vendors.length > 0 &&
+              <View>
               <View style={styles.caption}>
                 <Text style={styles.captionText}>HomeWise Preferred Vendors</Text>
               </View>
@@ -501,6 +518,8 @@ static navigationOptions = ({ navigation }) => {
                   }
                    />
               </View>
+              </View>
+              }
               <TouchableOpacity
                  style = {this.state.complete? styles.submitButtonNotComplete : styles.submitButtonComplete}
                  onPress = {
