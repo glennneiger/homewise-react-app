@@ -41,6 +41,7 @@ class Registration extends Component {
       retypePass:'',
       mls_region: '',
       mls_id:'',
+      visible: false
     }
 
     // this.getTokenFromStorage = this.getTokenFromStorage.bind(this);
@@ -83,6 +84,10 @@ pushStatetoWeb = async (url, bodyData, callback) => {
 }
 
    signUp(){
+    this.setState({
+        visible: !this.state.visible,
+        //needToRefresh: false
+    })
         const {email, password, users, date, first_name, last_name, retypePass } = this.state
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
         
@@ -145,6 +150,9 @@ pushStatetoWeb = async (url, bodyData, callback) => {
             }).then((response) => response.json())
                 .then((responseJson) => {
                   // Navigate to login page
+                  this.setState({
+                    visible: false,
+                  })
                   this.props.navigation.navigate('Login')
                 })
                 .catch((error) => {
@@ -165,6 +173,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
     const { navigation } = this.props;
     return (
       <View style ={styles.header}>
+      <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <View style={{flex:1}}>
       <KeyboardAwareScrollView innerRef={ref => {this.scroll = ref}}>
         <View style={{flex:1, alignItems:'center'}}>
@@ -227,7 +236,7 @@ pushStatetoWeb = async (url, bodyData, callback) => {
                 </View>
                 <View style={styles.rowdate}>
                   <DatePicker
-                            style={{width: width, height: 25,borderRadius:7, marginTop:10}}
+                            style={{width: width, height: 25,borderRadius:7, marginTop:10, paddingBottom: 15}}
                             date={this.state.date}
                             showIcon= {false}
                             mode="date"
@@ -345,8 +354,15 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'row',
     marginBottom: 20,
-    paddingBottom: 0,
-    alignItems: 'center'
+    paddingBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    marginLeft: 35,
+    marginRight: 30,
+    //paddingRight: 10,
+    borderColor: '#D3D3D3',
+    marginRight: 20,
   },
   rowmls: {
     marginTop: 0,

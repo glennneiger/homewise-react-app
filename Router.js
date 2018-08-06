@@ -41,34 +41,56 @@ export const Clients = StackNavigator(
 {
   AllClients: {
     screen: AllClients,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   },
   Steps:{
-    screen: Steps
+    screen: Steps,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   },
   NewClient:{
     screen: NewClient,
     navigationOptions: {
-      headerTintColor: 'white'
+      headerTintColor: 'white',
+      gesturesEnabled: false,
     }
   },
   AddStep:{
-    screen: AddStep
+    screen: AddStep,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   },
   SingleStep:{
-    screen: SingleStep
+    screen: SingleStep,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   }
 });
 
 export const Calculators = StackNavigator(
 {
   ROIScreen: {
-    screen: ROIScreen
+    screen: ROIScreen,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   },
   MortgageScreen: {
-    screen: MortgageScreen
+    screen: MortgageScreen,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   },
   FixNFlipScreen: {
-    screen: FixNFlipScreen
+    screen: FixNFlipScreen,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   }
 });
 

@@ -20,7 +20,8 @@ import Numeral from 'numeral';
 import { TextInputMask } from 'react-native-masked-text';
 import Spinner from 'react-native-loading-spinner-overlay';
 import RNPickerSelect from 'react-native-picker-select';
-import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-datepicker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const {width, height} = Dimensions.get('window')
 
@@ -337,7 +338,7 @@ class NewClient extends Component {
       <View style ={styles.header}>
       <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <View style={{flex:1}}>
-      <KeyboardAvoidingView behavior="position" enabled>
+       <KeyboardAwareScrollView innerRef={ref => {this.scroll = ref}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
           <Image style={{width: 60, height: 70, marginTop: 30, paddingBottom: 0, backgroundColor: '#f6fbfc'}} 
@@ -816,7 +817,7 @@ class NewClient extends Component {
         </View> 
         </View>
         </ScrollView>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </View> 
       </View>   
     );
@@ -860,11 +861,23 @@ const styles = StyleSheet.create({
     marginRight: 35,
     height: 20,
     justifyContent: 'center',*/
-    flex:1,
+    /*flex:1,
     flexDirection: 'row',
     marginBottom: 20,
     paddingBottom: 0,
-    alignItems: 'center'
+    alignItems: 'center'*/
+    flex:1,
+    flexDirection: 'row',
+    marginBottom: 20,
+    paddingBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 1,
+    marginLeft: 35,
+    marginRight: 30,
+    paddingRight: 10,
+    borderColor: '#D3D3D3',
+    marginRight: 35,
 
 
   },

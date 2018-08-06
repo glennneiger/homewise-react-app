@@ -86,6 +86,12 @@ class ChangePassword extends Component {
       })
   }
 
+ static navigationOptions = ({ navigation }) => {
+    return {
+       header: null
+    }
+ }
+
   render() {
 
     if(this.state.refresh) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Platform, View, Text, TouchableOpacity, ScrollView, Image, TextInput, Button, StyleSheet, LoginRender, AsyncStorage } from 'react-native'
 import { StackNavigator } from 'react-navigation';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 import ForgotPassword from './ForgotPassword'
@@ -13,7 +14,8 @@ class Login extends Component {
       email: '',
       password: '',
       showPass: false,
-      auth: false
+      auth: false,
+      visible: false
    }
    handleEmail = (text) => {
       this.setState({ email: text })
@@ -22,6 +24,9 @@ class Login extends Component {
       this.setState({ password: text })
    }
    login(){
+      this.setState({
+        visible: false,
+       })
         const {email, password } = this.state
         if(email == '' || password == ''){
             alert('All Fields Required')
@@ -106,6 +111,7 @@ class Login extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style ={styles.header}>
+      <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
       <View style={{flex:1}}>
         <ScrollView>
         <View style={{flex:1, alignItems:'center'}}>
