@@ -5,7 +5,6 @@ import {
     TextInput,
     StyleSheet
 } from 'react-native';
-//import styles from './styles.js';
 
 
 const Row = ({caption, sign, update, value}) => (
@@ -50,7 +49,6 @@ const styles = StyleSheet.create({
     flex:3,
     flexDirection: 'row',
     paddingBottom: 0,
-    //alignItems: 'flex-end'
   },
   captionText: {
     fontSize: 16,
@@ -68,7 +66,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
 
     textAlign: 'right',
-    //backgroundColor: '#F7F7F5'
   },
   dollaSign: {
     marginLeft: 20,
@@ -82,7 +79,6 @@ const styles = StyleSheet.create({
 
     paddingLeft: 5,
     textAlign: 'left',
-    //backgroundColor: '#F7F7F5'
   },
   percentPlace: {
     flex: 2.5,

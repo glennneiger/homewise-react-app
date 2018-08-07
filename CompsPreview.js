@@ -10,10 +10,58 @@ import React, { Component } from 'react';
   Dimensions,
   AsyncStorage
 } from 'react-native'
+import { ApiEndpoints, StorageKeys } from './AppConfig';
 const {width, height} = Dimensions.get('window')
 
 
 export default class CompsPreview extends Component{
+   constructor(props) {
+    super(props);
+
+    this.state = {
+      complete: false,
+      requested: false, 
+    };
+  }
+
+   getTokenFromStorage = async () => {
+    const token = await AsyncStorage.getItem(StorageKeys.authToken);
+    return token;
+  }
+
+   pushStatetoWeb = async (url) => {
+    // Get Bearer Token
+    const bearerToken = await this.getTokenFromStorage();
+    // Build fetch arguments
+    let headerData = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + bearerToken 
+    };
+    // Fetch data
+    fetch(url, {
+      'method': 'POST',
+      'headers': headerData,
+      'body': JSON.stringify({
+  
+      }),
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        requested: true,
+        complete: true,
+      })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  requestCity(){
+    let url = ApiEndpoints.url + ApiEndpoints.requestcityPath;
+    const bearerToken = this.getTokenFromStorage();
+    this.pushStatetoWeb(url);
+  }
 
   static navigationOptions = {
         title: 'Comps',
@@ -21,7 +69,7 @@ export default class CompsPreview extends Component{
         headerStyle:{
             backgroundColor:'#0091FF',
         },
-    };
+  };
 
   render() {
     return (
@@ -46,15 +94,18 @@ export default class CompsPreview extends Component{
                
               
                   <Text style={styles.captionText}>Placeholder Text</Text>
-
-                <TouchableOpacity
-                   style = {styles.submitButton}
-                   onPress = {
-                      () => this.signUp()
+              <TouchableOpacity
+                 style = {this.state.complete? styles.submitButtonNotComplete : styles.submitButtonComplete}
+                 onPress = {
+                      () => this.requestCity()
                    }>
-                   <Text style = {styles.submitButtonText}> Request in my City </Text>
-                </TouchableOpacity>
-              </View>           
+                {this.state.complete?
+                  <Text style={styles.submitNotButtonText}>Requested</Text>
+                  :
+                  <Text style={styles.submitButtonText}>Request in my City</Text>
+                }
+              </TouchableOpacity> 
+              </View>         
             </View>
         </View> 
         </View>
@@ -78,7 +129,6 @@ const styles = StyleSheet.create({
   },
   body: {
     flex:8,
-    //backgroundColor: '#FFFBF8'
   },
   row: {
     flex:1,
@@ -106,7 +156,6 @@ const styles = StyleSheet.create({
     flex:3,
     flexDirection: 'row',
     paddingBottom: 0,
-    //alignItems: 'flex-end'
   },
   captionText: {
     fontSize: 32,
@@ -137,22 +186,41 @@ const styles = StyleSheet.create({
     paddingRight: 10,
 
     textAlign: 'right',
-    //backgroundColor: '#F7F7F5'
   },
-  submitButton: {
+   submitButtonComplete: {
     marginRight: 35,
     marginLeft: 35,
-    marginTop: 15,
-    marginBottom: 15,
-    borderColor: '#D3D3D3',
-    height: 40,
-    fontSize: 18,
+
+    height: 50,
+    
     paddingRight: 10,
-    backgroundColor: 'rgb(65,147,237)',
+    paddingLeft: 15,
+    backgroundColor: '#20BF55',
     justifyContent:'center', 
     alignItems:'center'
-   },
-   submitButtonText:{
-      color: 'white',
-   }
+  },
+  submitButtonNotComplete: {
+    marginRight: 35,
+    marginLeft: 35,
+
+    height: 50,
+    
+    paddingRight: 10,
+    backgroundColor: '#fff',
+    borderColor: '#20BF55',
+    borderRadius: 5,
+    borderWidth: 1,
+    justifyContent:'center', 
+    alignItems:'center',
+  },
+  submitButtonText:{
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  submitNotButtonText:{
+    color: '#20BF55',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
 });

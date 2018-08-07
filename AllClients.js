@@ -18,8 +18,6 @@ export default class AllClients extends Component {
   constructor(props){
     super(props);
 
-    //true = Buyer, false = Listings
-
     this.state = { 
       client_type: true,
       BuyingClients: [],
@@ -88,79 +86,13 @@ export default class AllClients extends Component {
       this.setState({
         visible: !this.state.visible,
         needToRefresh: false
-      })
-
-    /*fetch('http://127.0.0.1:8000/agent/Clients/?client_type=B', 
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        this.setState({
-          isLoading: false,
-          BuyingClients: responseJson,
-        })
-        console.log(this.state.BuyingClients)
-      })
-      .catch((error) =>{
-        console.error(error);
-    });
-
-    fetch('http://127.0.0.1:8000/agent/Clients/?client_type=S', 
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        this.setState({
-          isLoading: false,
-          SellingClients: responseJson,
-        })
-
-      })
-      .catch((error) =>{
-        console.error(error);
-    });
-
-    fetch('http://127.0.0.1:8000/agent/UpcomingSteps/', 
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        this.setState({
-          isLoading: false,
-          UpcomingTasks: responseJson.splice(0, 2),
-        })
-
-      })
-      .catch((error) =>{
-        console.error(error);
-    });  */
-
-    
+      })    
     return true;
   }
 
   refreshData () {
     this.setState({
       needToRefresh: true,
-      //visible: true
     });
   } 
 
@@ -234,7 +166,6 @@ export default class AllClients extends Component {
         data = { this.state.UpcomingTasks }
         ListEmptyComponent = { <Text style={{fontSize: 18}}> No tasks </Text> }
         renderItem={({item}) =>
-          //<View style={styles.GridViewBlockStyle}>
             <TouchableOpacity onPress={this.GetGridViewItem.bind(this, item.client.email, item.client.client_type)} style={styles.touchbutton1}>
                 <View style={{flex: 1, paddingRight: 30}}>
                     <Text style={{fontSize: 18}}>{item.name} ({item.client.first_name} {item.client.last_name})</Text>
@@ -283,7 +214,6 @@ export default class AllClients extends Component {
              data={ this.state.BuyingClients }
              ListEmptyComponent = { <Text style={{fontSize: 18}}>  </Text> }
              renderItem={({item}) =>
-              //<View style={styles.GridViewBlockStyle}>
                 <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)} activeOpacity = { 1 }>
                   <PercentageCircle radius={60} borderWidth={10} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={this.percentColor(item.steps_percentage)} innerColor={'#f6fbfc'}></PercentageCircle>  
                   <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>
@@ -300,8 +230,6 @@ export default class AllClients extends Component {
              data={ this.state.SellingClients }
              ListEmptyComponent = { <Text>  </Text> }
              renderItem={({item}) =>
-              //<View style={styles.GridViewBlockStyle}>
-
                 <TouchableOpacity style={styles.GridViewBlockStyle} onPress={this.GetGridViewItem.bind(this, item.email, item.client_type)}>
                   <PercentageCircle radius={60} borderWidth={10} percent={item.steps_percentage} textStyle={{fontSize: 18, color: '#000'}} color={this.percentColor(item.steps_percentage)}></PercentageCircle>  
                   <Text style={{marginTop: 5, fontSize: 18}} >{item.first_name} {item.last_name}</Text>

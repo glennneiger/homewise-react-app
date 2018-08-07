@@ -130,8 +130,6 @@ class NewClient extends Component {
       } else {
         response.json().then((data) => {
             // Trigger refresh hook
-            //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
-            //hook();
             this.props.navigation.state.params.refresh();
             this.setState({
               visible: !this.state.visible,
@@ -219,34 +217,6 @@ class NewClient extends Component {
 
           // Make fetch call
           this.pushStatetoWeb(addclientURL, addclientBody, stateTransition);
-
-
-          /*fetch('http://127.0.0.1:8000/agent/AddClient/', 
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer kXw1EblISCF5MAymCeg3HfuF68mPrh'
-            },
-            body: JSON.stringify({
-              email:email,
-              first_name:first_name,
-              last_name:last_name,
-              phone_number:phone_number,
-              address:address,
-              city:city,
-              state:state, 
-              zipcode:zipcode,
-              est_price: est_price,
-              commission: commission
-            }),
-          }).then((response) => response.json())
-              .then((responseJson) => {
-                this.props.navigation.navigate('AllClients');
-              })
-              .catch((error) => {
-                console.error(error);
-              });*/
       }
         
 
@@ -754,7 +724,6 @@ const styles = StyleSheet.create({
   },
   body: {
     flex:8,
-    //backgroundColor: '#FFFBF8'
   },
   row: {
     flex:1,
@@ -771,12 +740,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   rowdate: {
-    /*marginTop: 0,
-    marginBottom: 40,
-    marginLeft: 35,
-    marginRight: 35,
-    height: 20,
-    justifyContent: 'center',*/
     flex:1,
     flexDirection: 'row',
     marginBottom: 20,
@@ -790,7 +753,6 @@ const styles = StyleSheet.create({
     flex:3,
     flexDirection: 'row',
     paddingBottom: 0,
-    //alignItems: 'flex-end'
   },
   captionText: {
     fontSize: 16,
@@ -810,7 +772,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
 
     textAlign: 'right',
-    //backgroundColor: '#F7F7F5'
   },
   valuescom: {
     marginRight: 35,
@@ -824,7 +785,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
 
     textAlign: 'right',
-    //backgroundColor: '#F7F7F5'
   },
   dollaSign: {
     marginLeft: 35,
@@ -838,7 +798,6 @@ const styles = StyleSheet.create({
 
     paddingLeft: 5,
     textAlign: 'left',
-    //backgroundColor: '#F7F7F5'
   },
   percentSign: {
     marginLeft: 35,
@@ -878,15 +837,13 @@ const pickerSelectStyles = StyleSheet.create({
         paddingBottom: 12,
         borderBottomWidth: 1,
         borderColor: '#D3D3D3',
-        /*borderRadius: 4,
-        backgroundColor: 'white',*/
         color: 'black',
         marginTop: 0,
-    marginBottom: 30,
-    marginLeft: 35,
-    marginRight: 35,
-    height: 40,
-    justifyContent: 'center',
+        marginBottom: 30,
+        marginLeft: 35,
+        marginRight: 35,
+        height: 40,
+        justifyContent: 'center',
     },
 });
 

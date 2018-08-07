@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
   },
   body: {
     flex:8,
-    //backgroundColor: '#FFFBF8'
   },
   row: {
     flex:1,
@@ -117,7 +116,6 @@ const styles = StyleSheet.create({
     flex:3,
     flexDirection: 'row',
     paddingBottom: 0,
-    //alignItems: 'flex-end'
   },
   captionText: {
     fontSize: 16,
@@ -142,7 +140,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
 
     textAlign: 'right',
-    //backgroundColor: '#F7F7F5'
   },
   forgotpassword: {
     flex: 5,

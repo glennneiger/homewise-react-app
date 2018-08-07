@@ -161,7 +161,6 @@ class SingleStep extends Component {
     this.setState({
       complete: complete,
       updated: true
-      //w: this.state.w + 15, h: this.state.h + 15
     });
   }
 
@@ -228,7 +227,6 @@ class SingleStep extends Component {
       })
     .then((response) => response.json())
     .then((responseJson) => {
-      //alert('deleted');
       this.props.navigation.state.params.refresh();
       this.props.navigation.navigate('Steps');
     })
@@ -547,7 +545,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
 
-    //backgroundColor: '#F7F7F5'
+    
   },
   submitButtonComplete: {
     marginRight: 35,
@@ -558,7 +556,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 15,
     backgroundColor: '#20BF55',
-    //'#04E762',
     justifyContent:'center', 
     alignItems:'center'
   },
@@ -573,7 +570,6 @@ const styles = StyleSheet.create({
     borderColor: '#20BF55',
     borderRadius: 5,
     borderWidth: 1,
-    //'#04E762',
     justifyContent:'center', 
     alignItems:'center',
   },

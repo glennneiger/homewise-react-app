@@ -261,8 +261,6 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     marginBottom: 50,
     marginTop: 10
-
-    //backgroundColor: '#F7F7F5'
   },
 
 });

@@ -12,8 +12,6 @@ import {
   Platform,
   AsyncStorage
 } from 'react-native';
-//import { Actions } from 'react-native-router-flux';
-//import Icon from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/Ionicons';
@@ -90,8 +88,6 @@ export default class Steps extends Component{
     })
     .then((response) => {
       if (!response.ok) {
-        // Handle error
-        //alert('Error in response')
       } else {
         response.json().then((data) => {
           // Set corresponding state field
@@ -155,15 +151,9 @@ export default class Steps extends Component{
     })
     .then((response) => {
       if (!response.ok) {
-        // Handle error
-        //alert('Error in response')
-        //alert(response.status);
-        //alert(response.statusText)
+        
       } else {
         response.json().then((data) => {
-            // Trigger refresh hook
-            //hook = this.props.navigation.getParam('refresh_hook', () => {alert('No refresh hook found')});
-            //hook();
             this.props.navigation.state.params.refresh();
             // Go to callback function
             callback(this, data);
@@ -187,7 +177,6 @@ export default class Steps extends Component{
             email: this.props.navigation.getParam('email'),
             client_type: this.props.navigation.getParam('client_type')
         };
-        //alert(this.props.navigation.getParam('client_type'))
 
         // Make async fetch calls
         this.pushStatetoWeb(this.getClientURL, getClientBody, this.getClientStateTransition);
@@ -206,7 +195,6 @@ export default class Steps extends Component{
     refreshData () {
         this.setState({
           needToRefresh: true,
-          //visible: true
         });
     } 
 
@@ -231,23 +219,6 @@ export default class Steps extends Component{
 
     back(){
         // Save current completion state for tasks
-        // let postURL = ApiEndpoints.url + ApiEndpoints.updatestepsPath;
-        // let postBody = {
-        //     steps:this.state.steps,
-        //     id: this.state.id,
-        //     steps_complete: this.state.steps_complete,
-        //     steps_percentage: this.state.steps_percentage,
-        //     steps_deleted: this.state.steps_deleted,
-        //     total_steps: this.state.total_steps
-        // };
-        // let stateTransition = function(parent, data) {
-        //     parent.setState({
-        //         steps_deleted: []
-        //     })
-        // }
-        // this.pushStatetoWeb(postURL, postBody, stateTransition);
-
-
         this.setState({
             visible: !this.state.visible,
         })
@@ -256,38 +227,6 @@ export default class Steps extends Component{
     }
 
     changeCurrentChecked(id) {
-        // let stepscopy = JSON.parse(JSON.stringify(this.state.steps))
-        // for (var i = 0; i < stepscopy.length; i++) {
-        //     if(stepscopy[i].id == id){
-        //         let x = !stepscopy[i].complete; 
-        //         stepscopy[i].complete = x;
-        //         this.setState({
-        //             steps: stepscopy,
-        //             stepscopy: stepscopy
-        //         });
-        //         console.log(this.state.steps);
-        //         if(x){
-        //             steps_complete_updated = this.state.steps_complete + 1;
-        //             console.log('total steps ' + this.state.total_steps)
-        //             console.log(steps_complete_updated)
-        //             steps_percentage_updated = Math.round((steps_complete_updated / this.state.total_steps) * 100)
-        //             this.setState({
-        //                 steps_complete: steps_complete_updated,
-        //                 steps_percentage: steps_percentage_updated
-        //             })
-        //         }
-        //         else{
-        //             steps_complete_updated = this.state.steps_complete - 1;
-        //             console.log(steps_complete_updated)
-        //             steps_percentage_updated = Math.round((steps_complete_updated / this.state.total_steps) * 100)
-        //             this.setState({
-        //                 steps_complete: steps_complete_updated,
-        //                 steps_percentage: steps_percentage_updated
-        //             })
-        //         }
-
-        //     }
-        // }
         this.props.navigation.navigate('SingleStep', {
             id: id,
             client_id: this.state.id,
@@ -353,8 +292,6 @@ export default class Steps extends Component{
                 email: this.props.navigation.getParam('email'),
                 client_type: this.props.navigation.getParam('client_type')
             };
-            //alert(this.props.navigation.getParam('client_type'))
-
             // Make async fetch calls
             this.pushStatetoWeb(this.getClientURL, getClientBody, this.getClientStateTransition);
             this.pushStatetoWeb(this.clientStepsURL, clientStepsBody, this.clientStepsStateTransition);
